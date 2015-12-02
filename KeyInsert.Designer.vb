@@ -31,18 +31,16 @@ Partial Class KeyInsert
     ''' not be able to load this method if it was changed manually.
     ''' </summary>
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
         Me.lstKeyStrokes = New System.Windows.Forms.ListView()
         Me.colheadKeyStroke = New System.Windows.Forms.ColumnHeader()
         Me.colheadTime = New System.Windows.Forms.ColumnHeader()
         Me.btnAdd = New System.Windows.Forms.Button()
         Me.btnRemove = New System.Windows.Forms.Button()
-        Me.btnHotkey = New System.Windows.Forms.Button()
-        Me.timerKeyChecker = New System.Windows.Forms.Timer(Me.components)
         Me.lblStatus = New System.Windows.Forms.Label()
         Me.bwKeyInserter = New System.ComponentModel.BackgroundWorker()
         Me.lnkInfo = New System.Windows.Forms.LinkLabel()
         Me.btnStart = New System.Windows.Forms.Button()
+        Me.lblInfo = New System.Windows.Forms.Label()
         Me.SuspendLayout
         '
         'lstKeyStrokes
@@ -94,21 +92,11 @@ Partial Class KeyInsert
         Me.btnRemove.Text = "Remove"
         Me.btnRemove.UseVisualStyleBackColor = true
         '
-        'btnHotkey
-        '
-        Me.btnHotkey.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.btnHotkey.Location = New System.Drawing.Point(626, 99)
-        Me.btnHotkey.Name = "btnHotkey"
-        Me.btnHotkey.Size = New System.Drawing.Size(114, 23)
-        Me.btnHotkey.TabIndex = 36
-        Me.btnHotkey.Text = "Enable Hotkey (Ctrl)"
-        Me.btnHotkey.UseVisualStyleBackColor = true
-        '
         'lblStatus
         '
         Me.lblStatus.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.lblStatus.AutoSize = true
-        Me.lblStatus.Location = New System.Drawing.Point(626, 125)
+        Me.lblStatus.Location = New System.Drawing.Point(626, 96)
         Me.lblStatus.Name = "lblStatus"
         Me.lblStatus.Size = New System.Drawing.Size(67, 13)
         Me.lblStatus.TabIndex = 37
@@ -140,15 +128,25 @@ Partial Class KeyInsert
         Me.btnStart.Text = "Start"
         Me.btnStart.UseVisualStyleBackColor = true
         '
+        'lblInfo
+        '
+        Me.lblInfo.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.lblInfo.AutoSize = true
+        Me.lblInfo.Location = New System.Drawing.Point(626, 109)
+        Me.lblInfo.Name = "lblInfo"
+        Me.lblInfo.Size = New System.Drawing.Size(82, 13)
+        Me.lblInfo.TabIndex = 40
+        Me.lblInfo.Text = "Hold Ctrl to stop"
+        '
         'KeyInsert
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(752, 228)
+        Me.Controls.Add(Me.lblInfo)
         Me.Controls.Add(Me.btnStart)
         Me.Controls.Add(Me.lnkInfo)
         Me.Controls.Add(Me.lblStatus)
-        Me.Controls.Add(Me.btnHotkey)
         Me.Controls.Add(Me.btnRemove)
         Me.Controls.Add(Me.btnAdd)
         Me.Controls.Add(Me.lstKeyStrokes)
@@ -157,12 +155,11 @@ Partial Class KeyInsert
         Me.ResumeLayout(false)
         Me.PerformLayout
     End Sub
+    Private lblInfo As System.Windows.Forms.Label
     Private WithEvents btnStart As System.Windows.Forms.Button
     Private WithEvents lnkInfo As System.Windows.Forms.LinkLabel
     Private WithEvents bwKeyInserter As System.ComponentModel.BackgroundWorker
     Private lblStatus As System.Windows.Forms.Label
-    Private WithEvents timerKeyChecker As System.Windows.Forms.Timer
-    Private WithEvents btnHotkey As System.Windows.Forms.Button
     Private colheadTime As System.Windows.Forms.ColumnHeader
     Private WithEvents btnRemove As System.Windows.Forms.Button
     Private WithEvents btnAdd As System.Windows.Forms.Button

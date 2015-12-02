@@ -82,10 +82,5 @@
       <Generator>SettingsSingleFileGenerator</Generator>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="KeyInsert.resx">
-      <DependentUpon>KeyInsert.vb</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

@@ -95,47 +95,21 @@
         bwKeyInserter.RunWorkerAsync
     End Sub
     
-    Sub btnHotkey_Click() Handles btnHotkey.Click
-        If btnHotkey.Text = "Enable Hotkey (Ctrl)" Then
-            btnHotkey.Text = "Hotkey Enabled!"
-            timerKeyChecker.Interval = 1000
-            timerKeyChecker.Start()
-        ElseIf btnHotkey.Text = "Disable Hotkey (Ctrl)" Then
-            btnHotkey.Text = "Hotkey Disabled!"
-            timerKeyChecker.Interval = 1000
-        End If
-    End Sub
-    
-    Private Sub timerKeyChecker_Tick() Handles timerKeyChecker.Tick
-        If btnHotkey.Text = "Hotkey Enabled!" Then
-            btnHotkey.Text = "Disable Hotkey (Ctrl)"
-            timerKeyChecker.Interval = 100
-        ElseIf btnHotkey.Text = "Hotkey Disabled!" Then
-            btnHotkey.Text = "Enable Hotkey (Ctrl)"
-            timerKeyChecker.Stop()
-        End If
-        If My.Computer.Keyboard.CtrlKeyDown = True Then
-            If lblStatus.Text = "Not Running" Then
-                bwKeyInserter.RunWorkerAsync
-            Else
-                bwKeyInserter.CancelAsync
-            End If
-            MsgBox("Started")
-        End If
-    End Sub
-    
     Sub bwKeyInserter_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bwKeyInserter.DoWork
         If e.Cancel Then
             lblStatus.Text = "Cancelling..."
         Else
             lblStatus.Text = "Running..."
-            For Each item As ListViewItem In lstKeyStrokes.Items
-                If lblStatus.Text <> "Cancelling..." Then
-                    lblStatus.Text = "Running: " & item.Index
-                    bwKeyInserter.ReportProgress(item.Index) ' workaround for background workers not being able to interact with the UI
-                    Threading.Thread.Sleep(item.SubItems.Item(1).Text)
-                End If
-            Next
+            Do Until My.Computer.Keyboard.CtrlKeyDown
+                For Each item As ListViewItem In lstKeyStrokes.Items
+                    If Not My.Computer.Keyboard.CtrlKeyDown Then
+                        lblStatus.Text = "Running: " & item.Index
+                        bwKeyInserter.ReportProgress(item.Index) ' workaround for background workers not being able to interact with the UI
+                        lblStatus.Text = "Waiting: " & item.SubItems.Item(1).Text
+                        Threading.Thread.Sleep(item.SubItems.Item(1).Text)
+                    End If
+                Next
+            Loop
             lblStatus.Text = "Not Running"
         End If
     End Sub
