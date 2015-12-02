@@ -40,6 +40,8 @@ Partial Class KeyInsert
         Me.btnHotkey = New System.Windows.Forms.Button()
         Me.timerKeyChecker = New System.Windows.Forms.Timer(Me.components)
         Me.lblStatus = New System.Windows.Forms.Label()
+        Me.bwKeyInserter = New System.ComponentModel.BackgroundWorker()
+        Me.lnkInfo = New System.Windows.Forms.LinkLabel()
         Me.SuspendLayout
         '
         'lstKeyStrokes
@@ -64,11 +66,11 @@ Partial Class KeyInsert
         'colheadKeyStroke
         '
         Me.colheadKeyStroke.Text = "Keystroke"
-        Me.colheadKeyStroke.Width = 469
+        Me.colheadKeyStroke.Width = 474
         '
         'colheadTime
         '
-        Me.colheadTime.Text = "Wait Time"
+        Me.colheadTime.Text = "Wait Time (ms)"
         Me.colheadTime.Width = 110
         '
         'btnAdd
@@ -100,7 +102,6 @@ Partial Class KeyInsert
         Me.btnHotkey.TabIndex = 36
         Me.btnHotkey.Text = "Enable Hotkey (Ctrl)"
         Me.btnHotkey.UseVisualStyleBackColor = true
-        AddHandler Me.btnHotkey.Click, AddressOf Me.BtnHotkey_Click
         '
         'timerKeyChecker
         '
@@ -108,6 +109,7 @@ Partial Class KeyInsert
         '
         'lblStatus
         '
+        Me.lblStatus.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.lblStatus.AutoSize = true
         Me.lblStatus.Location = New System.Drawing.Point(626, 96)
         Me.lblStatus.Name = "lblStatus"
@@ -115,11 +117,28 @@ Partial Class KeyInsert
         Me.lblStatus.TabIndex = 37
         Me.lblStatus.Text = "Not Running"
         '
+        'bwKeyInserter
+        '
+        Me.bwKeyInserter.WorkerSupportsCancellation = true
+        AddHandler Me.bwKeyInserter.DoWork, AddressOf Me.BwKeyInserter_DoWork
+        '
+        'lnkInfo
+        '
+        Me.lnkInfo.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.lnkInfo.AutoSize = true
+        Me.lnkInfo.Location = New System.Drawing.Point(626, 206)
+        Me.lnkInfo.Name = "lnkInfo"
+        Me.lnkInfo.Size = New System.Drawing.Size(78, 13)
+        Me.lnkInfo.TabIndex = 38
+        Me.lnkInfo.TabStop = true
+        Me.lnkInfo.Text = "Key strings info"
+        '
         'KeyInsert
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(752, 228)
+        Me.Controls.Add(Me.lnkInfo)
         Me.Controls.Add(Me.lblStatus)
         Me.Controls.Add(Me.btnHotkey)
         Me.Controls.Add(Me.btnRemove)
@@ -130,6 +149,8 @@ Partial Class KeyInsert
         Me.ResumeLayout(false)
         Me.PerformLayout
     End Sub
+    Private WithEvents lnkInfo As System.Windows.Forms.LinkLabel
+    Private WithEvents bwKeyInserter As System.ComponentModel.BackgroundWorker
     Private lblStatus As System.Windows.Forms.Label
     Private WithEvents timerKeyChecker As System.Windows.Forms.Timer
     Private WithEvents btnHotkey As System.Windows.Forms.Button
