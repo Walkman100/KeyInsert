@@ -27,7 +27,7 @@
 '    End Sub
     
     Sub lstKeyStrokes_DragEnter(sender As Object, e As DragEventArgs) Handles lstKeyStrokes.DragEnter
-        If e.Data.GetDataPresent(DataFormats.Text) Then 'Or e.Data.GetDataPresent(DataFormats.FileDrop) Then
+        If e.Data.GetDataPresent(DataFormats.Text) Then
             e.Effect = DragDropEffects.All
         Else
             e.Effect = DragDropEffects.None
@@ -36,17 +36,8 @@
     
     Sub lstKeyStrokes_DragDrop(sender As Object, e As DragEventArgs) Handles lstKeyStrokes.DragDrop
         If e.Data.GetDataPresent(DataFormats.Text) Then
-            Dim tmpListViewItem As New ListViewItem(New String() {e.Data.GetData(DataFormats.Text).ToString, " ", "draggedFile"})
+            Dim tmpListViewItem As New ListViewItem(New String() {e.Data.GetData(DataFormats.Text).ToString, "100"})
             lstKeyStrokes.FocusedItem = lstKeyStrokes.Items.Add(tmpListViewItem)
-        ElseIf e.Data.GetDataPresent(DataFormats.FileDrop)
-            For i = 0 To Integer.MaxValue
-                If (e.Data.GetData(DataFormats.FileDrop)(i) <> Nothing) Then
-                    Dim tmpListViewItem As New ListViewItem(New String() {e.Data.GetData(DataFormats.FileDrop)(i), " ", "draggedFile"})
-                    lstKeyStrokes.FocusedItem = lstKeyStrokes.Items.Add(tmpListViewItem)
-                Else
-                    Exit For
-                End If
-            Next
         End If
     End Sub
     
@@ -76,7 +67,7 @@
     End Sub
     
     Sub btnAdd_Click() Handles btnAdd.Click
-        Dim tmpListViewItem As New ListViewItem(New String() {"{ENTER}", "1"})
+        Dim tmpListViewItem As New ListViewItem(New String() {"{ENTER}", "100"})
         lstKeyStrokes.FocusedItem = lstKeyStrokes.Items.Add(tmpListViewItem)
         CheckButtons
     End Sub
@@ -98,6 +89,10 @@
         Catch ex As Exception
             If MsgBox("Unable to launch URL, copy to clipboard instead?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then Clipboard.SetText("http://msdn.microsoft.com/en-us/library/system.windows.forms.sendkeys.send(v=vs.110).aspx?cs-lang=vb#remarksToggle")
         End Try
+    End Sub
+    
+    Sub btnStart_Click() Handles btnStart.Click
+        bwKeyInserter.RunWorkerAsync
     End Sub
     
     Sub btnHotkey_Click() Handles btnHotkey.Click
@@ -131,19 +126,23 @@
     
     Sub bwKeyInserter_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bwKeyInserter.DoWork
         If e.Cancel Then
-            lblStatus.Text = "Canceling..."
+            lblStatus.Text = "Cancelling..."
         Else
             lblStatus.Text = "Running..."
             For Each item As ListViewItem In lstKeyStrokes.Items
-                If lblStatus.Text <> "Canceling..." Then
+                If lblStatus.Text <> "Cancelling..." Then
                     lblStatus.Text = "Running: " & item.Index
-                    MsgBox(item.SubItems.Item(0).Text)
-                    SendKeys.Send(item.SubItems.Item(0).Text)
-                    MsgBox(item.SubItems.Item(1).Text)
+                    bwKeyInserter.ReportProgress(item.Index) ' workaround for background workers not being able to interact with the UI
                     Threading.Thread.Sleep(item.SubItems.Item(1).Text)
                 End If
             Next
             lblStatus.Text = "Not Running"
         End If
+    End Sub
+    
+    Sub BwKeyInserter_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bwKeyInserter.ProgressChanged
+        Dim keys As String
+        keys = lstKeyStrokes.Items.Item(e.ProgressPercentage).Text
+        SendKeys.Send(keys)
     End Sub
 End Class
