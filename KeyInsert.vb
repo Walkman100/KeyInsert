@@ -92,6 +92,7 @@
     End Sub
     
     Sub btnStart_Click() Handles btnStart.Click
+        WindowState = WindowState.Minimized
         bwKeyInserter.RunWorkerAsync
     End Sub
     
@@ -110,6 +111,8 @@
                     End If
                 Next
             Loop
+            Threading.Thread.Sleep(100)
+            WindowState = WindowState.Normal
             lblStatus.Text = "Not Running"
         End If
     End Sub

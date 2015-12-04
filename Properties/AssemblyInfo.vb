@@ -9,11 +9,11 @@ Imports System.Runtime.InteropServices
 ' you compile.
 
 <assembly: AssemblyTitle("KeyInsert")>
-<assembly: AssemblyDescription("")>
+<assembly: AssemblyDescription("A program to insert a set of keystrokes repeatedly")>
 <assembly: AssemblyConfiguration("")>
-<assembly: AssemblyCompany("")>
+<assembly: AssemblyCompany("Walkman100")>
 <assembly: AssemblyProduct("KeyInsert")>
-<assembly: AssemblyCopyright("Copyright 2015")>
+<assembly: AssemblyCopyright("FOSS from Walkman 2015")>
 <assembly: AssemblyTrademark("")>
 <assembly: AssemblyCulture("")>
 
@@ -28,4 +28,5 @@ Imports System.Runtime.InteropServices
 ' You can specify all values by your own or you can build default build and revision
 ' numbers with the '*' character (the default):
 
-<assembly: AssemblyVersion("1.0.*")>
+<Assembly: AssemblyVersion("1.0.0.0")>
+<Assembly: AssemblyFileVersion("1.0.0.0")>
