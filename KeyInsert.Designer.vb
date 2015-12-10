@@ -35,13 +35,6 @@ Partial Class KeyInsert
         Me.lstKeyStrokes = New System.Windows.Forms.ListView()
         Me.colheadKeyStroke = New System.Windows.Forms.ColumnHeader()
         Me.colheadTime = New System.Windows.Forms.ColumnHeader()
-        Me.btnAdd = New System.Windows.Forms.Button()
-        Me.btnRemove = New System.Windows.Forms.Button()
-        Me.lblStatus = New System.Windows.Forms.Label()
-        Me.bwKeyInserter = New System.ComponentModel.BackgroundWorker()
-        Me.lnkInfo = New System.Windows.Forms.LinkLabel()
-        Me.btnStart = New System.Windows.Forms.Button()
-        Me.lblInfo = New System.Windows.Forms.Label()
         Me.contextCommands = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.contextCommandsResizePathHeader = New System.Windows.Forms.ToolStripMenuItem()
         Me.contextCommandsResizePathContent = New System.Windows.Forms.ToolStripMenuItem()
@@ -51,7 +44,18 @@ Partial Class KeyInsert
         Me.contextCommandsSeperator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.contextCommandsResizeAllHeader = New System.Windows.Forms.ToolStripMenuItem()
         Me.contextCommandsResizeAllContent = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnAdd = New System.Windows.Forms.Button()
+        Me.btnRemove = New System.Windows.Forms.Button()
+        Me.lblStatus = New System.Windows.Forms.Label()
+        Me.bwKeyInserter = New System.ComponentModel.BackgroundWorker()
+        Me.lnkInfo = New System.Windows.Forms.LinkLabel()
+        Me.btnStart = New System.Windows.Forms.Button()
+        Me.grpStopKey = New System.Windows.Forms.GroupBox()
+        Me.optKeyShift = New System.Windows.Forms.RadioButton()
+        Me.optKeyAlt = New System.Windows.Forms.RadioButton()
+        Me.optKeyCtrl = New System.Windows.Forms.RadioButton()
         Me.contextCommands.SuspendLayout
+        Me.grpStopKey.SuspendLayout
         Me.SuspendLayout
         '
         'lstKeyStrokes
@@ -69,7 +73,7 @@ Partial Class KeyInsert
         Me.lstKeyStrokes.Location = New System.Drawing.Point(12, 12)
         Me.lstKeyStrokes.MultiSelect = false
         Me.lstKeyStrokes.Name = "lstKeyStrokes"
-        Me.lstKeyStrokes.Size = New System.Drawing.Size(608, 204)
+        Me.lstKeyStrokes.Size = New System.Drawing.Size(610, 270)
         Me.lstKeyStrokes.TabIndex = 22
         Me.lstKeyStrokes.UseCompatibleStateImageBehavior = false
         Me.lstKeyStrokes.View = System.Windows.Forms.View.Details
@@ -83,72 +87,6 @@ Partial Class KeyInsert
         '
         Me.colheadTime.Text = "Wait Time (ms)"
         Me.colheadTime.Width = 110
-        '
-        'btnAdd
-        '
-        Me.btnAdd.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.btnAdd.Location = New System.Drawing.Point(626, 12)
-        Me.btnAdd.Name = "btnAdd"
-        Me.btnAdd.Size = New System.Drawing.Size(114, 23)
-        Me.btnAdd.TabIndex = 23
-        Me.btnAdd.Text = "Add"
-        Me.btnAdd.UseVisualStyleBackColor = true
-        '
-        'btnRemove
-        '
-        Me.btnRemove.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.btnRemove.Location = New System.Drawing.Point(626, 41)
-        Me.btnRemove.Name = "btnRemove"
-        Me.btnRemove.Size = New System.Drawing.Size(114, 23)
-        Me.btnRemove.TabIndex = 24
-        Me.btnRemove.Text = "Remove"
-        Me.btnRemove.UseVisualStyleBackColor = true
-        '
-        'lblStatus
-        '
-        Me.lblStatus.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.lblStatus.AutoSize = true
-        Me.lblStatus.Location = New System.Drawing.Point(626, 96)
-        Me.lblStatus.Name = "lblStatus"
-        Me.lblStatus.Size = New System.Drawing.Size(67, 13)
-        Me.lblStatus.TabIndex = 37
-        Me.lblStatus.Text = "Not Running"
-        '
-        'bwKeyInserter
-        '
-        Me.bwKeyInserter.WorkerReportsProgress = true
-        Me.bwKeyInserter.WorkerSupportsCancellation = true
-        '
-        'lnkInfo
-        '
-        Me.lnkInfo.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.lnkInfo.AutoSize = true
-        Me.lnkInfo.Location = New System.Drawing.Point(626, 206)
-        Me.lnkInfo.Name = "lnkInfo"
-        Me.lnkInfo.Size = New System.Drawing.Size(78, 13)
-        Me.lnkInfo.TabIndex = 38
-        Me.lnkInfo.TabStop = true
-        Me.lnkInfo.Text = "Key strings info"
-        '
-        'btnStart
-        '
-        Me.btnStart.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.btnStart.Location = New System.Drawing.Point(626, 70)
-        Me.btnStart.Name = "btnStart"
-        Me.btnStart.Size = New System.Drawing.Size(114, 23)
-        Me.btnStart.TabIndex = 39
-        Me.btnStart.Text = "Start"
-        Me.btnStart.UseVisualStyleBackColor = true
-        '
-        'lblInfo
-        '
-        Me.lblInfo.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.lblInfo.AutoSize = true
-        Me.lblInfo.Location = New System.Drawing.Point(626, 109)
-        Me.lblInfo.Name = "lblInfo"
-        Me.lblInfo.Size = New System.Drawing.Size(82, 13)
-        Me.lblInfo.TabIndex = 40
-        Me.lblInfo.Text = "Hold Ctrl to stop"
         '
         'contextCommands
         '
@@ -175,7 +113,7 @@ Partial Class KeyInsert
         'contextCommandsSeperator1
         '
         Me.contextCommandsSeperator1.Name = "contextCommandsSeperator1"
-        Me.contextCommandsSeperator1.Size = New System.Drawing.Size(236, 6)
+        Me.contextCommandsSeperator1.Size = New System.Drawing.Size(263, 6)
         '
         'contextCommandsResizeArgsHeader
         '
@@ -196,28 +134,129 @@ Partial Class KeyInsert
         'contextCommandsSeperator2
         '
         Me.contextCommandsSeperator2.Name = "contextCommandsSeperator2"
-        Me.contextCommandsSeperator2.Size = New System.Drawing.Size(236, 6)
+        Me.contextCommandsSeperator2.Size = New System.Drawing.Size(263, 6)
         '
         'contextCommandsResizeAllHeader
         '
         Me.contextCommandsResizeAllHeader.AutoToolTip = true
         Me.contextCommandsResizeAllHeader.Name = "contextCommandsResizeAllHeader"
-        Me.contextCommandsResizeAllHeader.Size = New System.Drawing.Size(239, 22)
+        Me.contextCommandsResizeAllHeader.Size = New System.Drawing.Size(266, 22)
         Me.contextCommandsResizeAllHeader.Text = "Resize all by Column Header"
         '
         'contextCommandsResizeAllContent
         '
         Me.contextCommandsResizeAllContent.AutoToolTip = true
         Me.contextCommandsResizeAllContent.Name = "contextCommandsResizeAllContent"
-        Me.contextCommandsResizeAllContent.Size = New System.Drawing.Size(239, 22)
+        Me.contextCommandsResizeAllContent.Size = New System.Drawing.Size(266, 22)
         Me.contextCommandsResizeAllContent.Text = "Resize all by Column Content"
+        '
+        'btnAdd
+        '
+        Me.btnAdd.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.btnAdd.Location = New System.Drawing.Point(628, 12)
+        Me.btnAdd.Name = "btnAdd"
+        Me.btnAdd.Size = New System.Drawing.Size(118, 23)
+        Me.btnAdd.TabIndex = 23
+        Me.btnAdd.Text = "Add"
+        Me.btnAdd.UseVisualStyleBackColor = true
+        '
+        'btnRemove
+        '
+        Me.btnRemove.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.btnRemove.Location = New System.Drawing.Point(628, 41)
+        Me.btnRemove.Name = "btnRemove"
+        Me.btnRemove.Size = New System.Drawing.Size(118, 23)
+        Me.btnRemove.TabIndex = 24
+        Me.btnRemove.Text = "Remove"
+        Me.btnRemove.UseVisualStyleBackColor = true
+        '
+        'lblStatus
+        '
+        Me.lblStatus.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.lblStatus.AutoSize = true
+        Me.lblStatus.Location = New System.Drawing.Point(628, 259)
+        Me.lblStatus.Name = "lblStatus"
+        Me.lblStatus.Size = New System.Drawing.Size(67, 13)
+        Me.lblStatus.TabIndex = 37
+        Me.lblStatus.Text = "Not Running"
+        '
+        'bwKeyInserter
+        '
+        Me.bwKeyInserter.WorkerReportsProgress = true
+        Me.bwKeyInserter.WorkerSupportsCancellation = true
+        '
+        'lnkInfo
+        '
+        Me.lnkInfo.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.lnkInfo.AutoSize = true
+        Me.lnkInfo.Location = New System.Drawing.Point(628, 272)
+        Me.lnkInfo.Name = "lnkInfo"
+        Me.lnkInfo.Size = New System.Drawing.Size(78, 13)
+        Me.lnkInfo.TabIndex = 38
+        Me.lnkInfo.TabStop = true
+        Me.lnkInfo.Text = "Key strings info"
+        '
+        'btnStart
+        '
+        Me.btnStart.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.btnStart.Location = New System.Drawing.Point(628, 70)
+        Me.btnStart.Name = "btnStart"
+        Me.btnStart.Size = New System.Drawing.Size(118, 23)
+        Me.btnStart.TabIndex = 39
+        Me.btnStart.Text = "Start"
+        Me.btnStart.UseVisualStyleBackColor = true
+        '
+        'grpStopKey
+        '
+        Me.grpStopKey.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.grpStopKey.Controls.Add(Me.optKeyShift)
+        Me.grpStopKey.Controls.Add(Me.optKeyAlt)
+        Me.grpStopKey.Controls.Add(Me.optKeyCtrl)
+        Me.grpStopKey.Location = New System.Drawing.Point(628, 99)
+        Me.grpStopKey.Name = "grpStopKey"
+        Me.grpStopKey.Size = New System.Drawing.Size(118, 88)
+        Me.grpStopKey.TabIndex = 40
+        Me.grpStopKey.TabStop = false
+        Me.grpStopKey.Text = "Key to press to stop:"
+        '
+        'optKeyShift
+        '
+        Me.optKeyShift.AutoSize = true
+        Me.optKeyShift.Location = New System.Drawing.Point(6, 65)
+        Me.optKeyShift.Name = "optKeyShift"
+        Me.optKeyShift.Size = New System.Drawing.Size(46, 17)
+        Me.optKeyShift.TabIndex = 2
+        Me.optKeyShift.Text = "Shift"
+        Me.optKeyShift.UseVisualStyleBackColor = true
+        '
+        'optKeyAlt
+        '
+        Me.optKeyAlt.AutoSize = true
+        Me.optKeyAlt.Location = New System.Drawing.Point(6, 42)
+        Me.optKeyAlt.Name = "optKeyAlt"
+        Me.optKeyAlt.Size = New System.Drawing.Size(37, 17)
+        Me.optKeyAlt.TabIndex = 1
+        Me.optKeyAlt.Text = "Alt"
+        Me.optKeyAlt.UseVisualStyleBackColor = true
+        '
+        'optKeyCtrl
+        '
+        Me.optKeyCtrl.AutoSize = true
+        Me.optKeyCtrl.Checked = true
+        Me.optKeyCtrl.Location = New System.Drawing.Point(6, 19)
+        Me.optKeyCtrl.Name = "optKeyCtrl"
+        Me.optKeyCtrl.Size = New System.Drawing.Size(82, 17)
+        Me.optKeyCtrl.TabIndex = 0
+        Me.optKeyCtrl.TabStop = true
+        Me.optKeyCtrl.Text = "Ctrl (Control)"
+        Me.optKeyCtrl.UseVisualStyleBackColor = true
         '
         'KeyInsert
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(752, 228)
-        Me.Controls.Add(Me.lblInfo)
+        Me.ClientSize = New System.Drawing.Size(758, 294)
+        Me.Controls.Add(Me.grpStopKey)
         Me.Controls.Add(Me.btnStart)
         Me.Controls.Add(Me.lnkInfo)
         Me.Controls.Add(Me.lblStatus)
@@ -227,9 +266,15 @@ Partial Class KeyInsert
         Me.Name = "KeyInsert"
         Me.Text = "KeyInsert"
         Me.contextCommands.ResumeLayout(false)
+        Me.grpStopKey.ResumeLayout(false)
+        Me.grpStopKey.PerformLayout
         Me.ResumeLayout(false)
         Me.PerformLayout
     End Sub
+    Private optKeyCtrl As System.Windows.Forms.RadioButton
+    Private optKeyAlt As System.Windows.Forms.RadioButton
+    Private optKeyShift As System.Windows.Forms.RadioButton
+    Private grpStopKey As System.Windows.Forms.GroupBox
     Private WithEvents contextCommandsResizeAllContent As System.Windows.Forms.ToolStripMenuItem
     Private WithEvents contextCommandsResizeAllHeader As System.Windows.Forms.ToolStripMenuItem
     Private contextCommandsSeperator2 As System.Windows.Forms.ToolStripSeparator
@@ -239,7 +284,6 @@ Partial Class KeyInsert
     Private WithEvents contextCommandsResizePathContent As System.Windows.Forms.ToolStripMenuItem
     Private WithEvents contextCommandsResizePathHeader As System.Windows.Forms.ToolStripMenuItem
     Private contextCommands As System.Windows.Forms.ContextMenuStrip
-    Private lblInfo As System.Windows.Forms.Label
     Private WithEvents btnStart As System.Windows.Forms.Button
     Private WithEvents lnkInfo As System.Windows.Forms.LinkLabel
     Private WithEvents bwKeyInserter As System.ComponentModel.BackgroundWorker

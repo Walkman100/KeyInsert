@@ -106,13 +106,23 @@
         bwKeyInserter.RunWorkerAsync
     End Sub
     
+    Function DisableKeyPressed As Boolean
+        If optKeyCtrl.Checked Then
+            Return My.Computer.Keyboard.CtrlKeyDown
+        ElseIf optKeyAlt.Checked
+            Return My.Computer.Keyboard.AltKeyDown
+        ElseIf optKeyShift.Checked
+            Return My.Computer.Keyboard.ShiftKeyDown
+        End If
+    End Function
+    
     Sub bwKeyInserter_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bwKeyInserter.DoWork
         If e.Cancel Then
             lblStatus.Text = "Cancelling..."
         Else
             lblStatus.Text = "Running..."
             
-            Do Until My.Computer.Keyboard.CtrlKeyDown
+            Do Until DisableKeyPressed
                 For Each item As ListViewItem In lstKeyStrokes.Items
                     lblStatus.Text = "Running: " & item.Index
                     bwKeyInserter.ReportProgress(item.Index) ' workaround for background workers not being able to interact with the UI
@@ -121,7 +131,7 @@
                     For i = 0 To item.SubItems.Item(1).Text Step 10
                         lblStatus.Text = "Waiting: " & item.SubItems.Item(1).Text - i
                         Threading.Thread.Sleep(10)
-                        If My.Computer.Keyboard.CtrlKeyDown Then Exit Do
+                        If DisableKeyPressed Then Exit Do
                     Next
                 Next
             Loop
