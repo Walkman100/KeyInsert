@@ -36,8 +36,16 @@
     
     Sub lstKeyStrokes_DragDrop(sender As Object, e As DragEventArgs) Handles lstKeyStrokes.DragDrop
         If e.Data.GetDataPresent(DataFormats.Text) Then
-            Dim tmpListViewItem As New ListViewItem(New String() {e.Data.GetData(DataFormats.Text).ToString, "100"})
-            lstKeyStrokes.FocusedItem = lstKeyStrokes.Items.Add(tmpListViewItem)
+            Dim data = e.Data.GetData(DataFormats.Text).ToString
+            If data.Contains(vbNewLine) Then
+                For Each line As String In data.Split(vbNewLine)
+                    Dim tmpListViewItem As New ListViewItem(New String() {line, "100"})
+                    lstKeyStrokes.FocusedItem = lstKeyStrokes.Items.Add(tmpListViewItem)
+                Next
+            Else
+                Dim tmpListViewItem As New ListViewItem(New String() {data, "100"})
+                lstKeyStrokes.FocusedItem = lstKeyStrokes.Items.Add(tmpListViewItem)
+            End If
         End If
     End Sub
     
