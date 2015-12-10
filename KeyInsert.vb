@@ -105,10 +105,15 @@
             Do Until My.Computer.Keyboard.CtrlKeyDown
                 For Each item As ListViewItem In lstKeyStrokes.Items
                     If Not My.Computer.Keyboard.CtrlKeyDown Then
+                        
                         lblStatus.Text = "Running: " & item.Index
                         bwKeyInserter.ReportProgress(item.Index) ' workaround for background workers not being able to interact with the UI
-                        lblStatus.Text = "Waiting: " & item.SubItems.Item(1).Text
-                        Threading.Thread.Sleep(item.SubItems.Item(1).Text)
+                        
+                        Dim i As Integer
+                        For i = 0 To item.SubItems.Item(1).Text Step 10
+                            lblStatus.Text = "Waiting: " & item.SubItems.Item(1).Text - i
+                            Threading.Thread.Sleep(10)
+                        Next
                     End If
                 Next
             Loop
