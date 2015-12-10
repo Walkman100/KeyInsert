@@ -67,8 +67,11 @@
     End Sub
     
     Sub btnAdd_Click() Handles btnAdd.Click
-        Dim tmpListViewItem As New ListViewItem(New String() {"{ENTER}", "100"})
-        lstKeyStrokes.FocusedItem = lstKeyStrokes.Items.Add(tmpListViewItem)
+        Dim inputBoxText = InputBox("Enter Keystroke to add:", "", "{ENTER}")
+        If inputBoxText <> "" Then
+            Dim tmpListViewItem As New ListViewItem(New String() {inputBoxText, "100"})
+            lstKeyStrokes.FocusedItem = lstKeyStrokes.Items.Add(tmpListViewItem)
+        End If
         CheckButtons
     End Sub
     
