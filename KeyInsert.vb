@@ -8,23 +8,21 @@
         lstKeyStrokes.Sort
     End Sub
     
-'    Sub ResizeByHeader(sender As Object, e As EventArgs) Handles contextCommandsResizePathHeader.Click, _
-'            contextCommandsResizeArgsHeader.Click, contextCommandsResizeArgHeader.Click
-'        lstKeyStrokes.AutoResizeColumn(sender.Tag, ColumnHeaderAutoResizeStyle.HeaderSize)
-'    End Sub
-'    
-'    Sub ResizeByContent(sender As Object, e As EventArgs) Handles contextCommandsResizePathContent.Click, _
-'            contextCommandsResizeArgsContent.Click, contextCommandsResizeArgContent.Click
-'        lstKeyStrokes.AutoResizeColumn(sender.Tag, ColumnHeaderAutoResizeStyle.ColumnContent)
-'    End Sub
-'    
-'    Sub ResizeAllByHeader() Handles contextCommandsResizeAllHeader.Click
-'        lstKeyStrokes.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize)
-'    End Sub
-'    
-'    Sub ResizeAllByContent() Handles contextCommandsResizeAllContent.Click
-'        lstKeyStrokes.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent)
-'    End Sub
+    Sub ResizeByHeader(sender As Object, e As EventArgs) Handles contextCommandsResizePathHeader.Click, contextCommandsResizeArgsHeader.Click
+        lstKeyStrokes.AutoResizeColumn(sender.Tag, ColumnHeaderAutoResizeStyle.HeaderSize)
+    End Sub
+    
+    Sub ResizeByContent(sender As Object, e As EventArgs) Handles contextCommandsResizePathContent.Click, contextCommandsResizeArgsContent.Click
+        lstKeyStrokes.AutoResizeColumn(sender.Tag, ColumnHeaderAutoResizeStyle.ColumnContent)
+    End Sub
+    
+    Sub ResizeAllByHeader() Handles contextCommandsResizeAllHeader.Click
+        lstKeyStrokes.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize)
+    End Sub
+    
+    Sub ResizeAllByContent() Handles contextCommandsResizeAllContent.Click
+        lstKeyStrokes.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent)
+    End Sub
     
     Sub lstKeyStrokes_DragEnter(sender As Object, e As DragEventArgs) Handles lstKeyStrokes.DragEnter
         If e.Data.GetDataPresent(DataFormats.Text) Then
