@@ -263,6 +263,7 @@ Partial Class KeyInsert
         Me.Controls.Add(Me.btnRemove)
         Me.Controls.Add(Me.btnAdd)
         Me.Controls.Add(Me.lstKeyStrokes)
+        Me.Icon = Global.KeyInsert.Resources.key_presser_5
         Me.Name = "KeyInsert"
         Me.Text = "KeyInsert"
         Me.contextCommands.ResumeLayout(false)
