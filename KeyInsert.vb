@@ -170,9 +170,7 @@ Public Partial Class KeyInsert
     End Sub
     
     Sub bwKeyInserter_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bwKeyInserter.ProgressChanged
-        Dim keys As String
-        keys = lstKeyStrokes.Items.Item(e.ProgressPercentage).Text
-        SendKeys.Send(keys)
+        SendKeys.Send(lstKeyStrokes.Items.Item(e.ProgressPercentage).Text)
     End Sub
     
     Sub ReadConfig(path As String)
@@ -277,10 +275,14 @@ Public Partial Class KeyInsert
     End Sub
     
     Sub btnScriptSave_Click() Handles btnScriptSave.Click
-        
+        If sfdConfig.ShowDialog = DialogResult.OK Then
+            WriteConfig(sfdConfig.FileName)
+        End If
     End Sub
     
     Sub btnScriptLoad_Click() Handles btnScriptLoad.Click
-        
+        If ofdConfig.ShowDialog = DialogResult.OK Then
+            ReadConfig(ofdConfig.FileName)
+        End If
     End Sub
 End Class
