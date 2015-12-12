@@ -248,7 +248,7 @@ Public Partial Class KeyInsert
                         Case "EndActions"
                             chkEndRestore.Checked = reader("restore")
                             chkEndForeground.Checked = reader("foreground")
-                            chkEndRestore.Checked = reader("show")
+                            chkEndShow.Checked = reader("show")
                     End Select
                 Loop
             End If
