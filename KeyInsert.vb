@@ -102,7 +102,7 @@
     End Sub
     
     Sub btnStart_Click() Handles btnStart.Click
-        WindowState = WindowState.Minimized
+        WindowState = FormWindowState.Minimized
         bwKeyInserter.RunWorkerAsync
     End Sub
     
@@ -113,6 +113,8 @@
             Return My.Computer.Keyboard.AltKeyDown
         ElseIf optKeyShift.Checked
             Return My.Computer.Keyboard.ShiftKeyDown
+        Else
+            Return "Wtf"
         End If
     End Function
     
@@ -137,7 +139,7 @@
             Loop
             
             Threading.Thread.Sleep(100)
-            WindowState = WindowState.Normal
+            WindowState = FormWindowState.Normal
             lblStatus.Text = "Not Running"
         End If
     End Sub
