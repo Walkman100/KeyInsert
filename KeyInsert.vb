@@ -203,36 +203,36 @@ Public Partial Class KeyInsert
                     End If
                 End While
             End If
-'            If reader.Read AndAlso reader.IsStartElement() AndAlso reader.Name = "Settings" Then
-'                If reader.Read AndAlso reader.IsStartElement() AndAlso reader.Name = "ColumnSettings" Then
-'                    Dim attribute As String
-'                    While reader.IsStartElement
-'                        If reader.Read AndAlso reader.IsStartElement() Then
-'                            If reader.Name = "PathColumn" Then
-'                                attribute = reader("index")
-'                                If attribute IsNot Nothing Then
-'                                    colheadPath.DisplayIndex = attribute
-'                                End If
-'                                
-'                                attribute = reader("width")
-'                                If attribute IsNot Nothing Then
-'                                    colheadPath.Width = attribute
-'                                End If
-'                            ElseIf reader.Name = "ArgColumn"
-'                                attribute = reader("index")
-'                                If attribute IsNot Nothing Then
-'                                    colheadProgramArgs.DisplayIndex = attribute
-'                                End If
-'                                
-'                                attribute = reader("width")
-'                                If attribute IsNot Nothing Then
-'                                    colheadProgramArgs.Width = attribute
-'                                End If
-'                            End If
-'                        End If
-'                    End While
-'                End If
-'            End If
+            If reader.Read AndAlso reader.IsStartElement() AndAlso reader.Name = "Settings" Then
+                If reader.Read AndAlso reader.IsStartElement() AndAlso reader.Name = "ColumnSettings" Then
+                    Dim attribute As String
+                    While reader.IsStartElement
+                        If reader.Read AndAlso reader.IsStartElement() Then
+                            If reader.Name = "KeyStrings" Then
+                                attribute = reader("index")
+                                If attribute IsNot Nothing Then
+                                    colheadKeyStroke.DisplayIndex = attribute
+                                End If
+                                
+                                attribute = reader("width")
+                                If attribute IsNot Nothing Then
+                                    colheadKeyStroke.Width = attribute
+                                End If
+                            ElseIf reader.Name = "WaitTime"
+                                attribute = reader("index")
+                                If attribute IsNot Nothing Then
+                                    colheadTime.DisplayIndex = attribute
+                                End If
+                                
+                                attribute = reader("width")
+                                If attribute IsNot Nothing Then
+                                    colheadTime.Width = attribute
+                                End If
+                            End If
+                        End If
+                    End While
+                End If
+            End If
         End If
         
         reader.Close
@@ -255,18 +255,18 @@ Public Partial Class KeyInsert
         Next
         writer.WriteEndElement()
         
-'        writer.WriteStartElement("Settings")
-'            writer.WriteStartElement("ColumnSettings")
-'                writer.WriteStartElement("PathColumn")
-'                    writer.WriteAttributeString("index", colheadPath.DisplayIndex)
-'                    writer.WriteAttributeString("width", colheadPath.Width)
-'                writer.WriteEndElement()
-'                writer.WriteStartElement("ArgColumn")
-'                    writer.WriteAttributeString("index", colheadProgramArgs.DisplayIndex)
-'                    writer.WriteAttributeString("width", colheadProgramArgs.Width)
-'                writer.WriteEndElement()
-'            writer.WriteEndElement()
-'        writer.WriteEndElement()
+        writer.WriteStartElement("Settings")
+            writer.WriteStartElement("ColumnSettings")
+                writer.WriteStartElement("KeyStrings")
+                    writer.WriteAttributeString("index", colheadKeyStroke.DisplayIndex)
+                    writer.WriteAttributeString("width", colheadKeyStroke.Width)
+                writer.WriteEndElement()
+                writer.WriteStartElement("WaitTime")
+                    writer.WriteAttributeString("index", colheadTime.DisplayIndex)
+                    writer.WriteAttributeString("width", colheadTime.Width)
+                writer.WriteEndElement()
+            writer.WriteEndElement()
+        writer.WriteEndElement()
         
         writer.WriteEndElement()
         writer.WriteEndDocument()
