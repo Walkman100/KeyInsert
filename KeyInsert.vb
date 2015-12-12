@@ -136,37 +136,33 @@ Public Partial Class KeyInsert
     End Function
     
     Sub bwKeyInserter_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bwKeyInserter.DoWork
-        If e.Cancel Then
-            lblStatus.Text = "Cancelling..."
-        Else
-            lblStatus.Text = "Running..."
-            
-            Do Until DisableKeyPressed
-                For Each item As ListViewItem In lstKeyStrokes.Items
-                    lblStatus.Text = "Running: " & item.Index
-                    bwKeyInserter.ReportProgress(item.Index) ' workaround for background workers not being able to interact with the UI
-                    
-                    Dim i As Integer
-                    For i = 0 To item.SubItems.Item(1).Text Step 10
-                        lblStatus.Text = "Waiting: " & item.SubItems.Item(1).Text - i
-                        Threading.Thread.Sleep(10)
-                        If DisableKeyPressed Then Exit Do
-                    Next
+        lblStatus.Text = "Running..."
+        
+        Do Until DisableKeyPressed
+            For Each item As ListViewItem In lstKeyStrokes.Items
+                lblStatus.Text = "Running: " & item.Index
+                bwKeyInserter.ReportProgress(item.Index) ' workaround for background workers not being able to interact with the UI
+                
+                Dim i As Integer
+                For i = 0 To item.SubItems.Item(1).Text Step 10
+                    lblStatus.Text = "Waiting: " & item.SubItems.Item(1).Text - i
+                    Threading.Thread.Sleep(10)
+                    If DisableKeyPressed Then Exit Do
                 Next
-            Loop
-            
-            Threading.Thread.Sleep(100)
-            
-            If chkEndRestore.Checked Then WindowState = FormWindowState.Normal
-            If chkEndForeground.Checked Then
-                Me.BringToFront
-                Me.Focus
-                Me.Activate
-            End If
-            If chkEndShow.Checked Then Me.Show
-            
-            lblStatus.Text = "Not Running"
+            Next
+        Loop
+        
+        Threading.Thread.Sleep(100)
+        
+        If chkEndRestore.Checked Then WindowState = FormWindowState.Normal
+        If chkEndForeground.Checked Then
+            Me.BringToFront
+            Me.Focus
+            Me.Activate
         End If
+        If chkEndShow.Checked Then Me.Show
+        
+        lblStatus.Text = "Not Running"
     End Sub
     
     Sub bwKeyInserter_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bwKeyInserter.ProgressChanged
