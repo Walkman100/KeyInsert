@@ -62,6 +62,10 @@ Partial Class KeyInsert
         Me.chkEndShow = New System.Windows.Forms.CheckBox()
         Me.chkEndForeground = New System.Windows.Forms.CheckBox()
         Me.chkEndRestore = New System.Windows.Forms.CheckBox()
+        Me.btnScriptSave = New System.Windows.Forms.Button()
+        Me.btnScriptLoad = New System.Windows.Forms.Button()
+        Me.ofdConfig = New System.Windows.Forms.OpenFileDialog()
+        Me.sfdConfig = New System.Windows.Forms.SaveFileDialog()
         Me.contextCommands.SuspendLayout
         Me.grpStopKey.SuspendLayout
         Me.grpStart.SuspendLayout
@@ -184,7 +188,7 @@ Partial Class KeyInsert
         '
         Me.lblStatus.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.lblStatus.AutoSize = true
-        Me.lblStatus.Location = New System.Drawing.Point(420, 197)
+        Me.lblStatus.Location = New System.Drawing.Point(504, 228)
         Me.lblStatus.Name = "lblStatus"
         Me.lblStatus.Size = New System.Drawing.Size(67, 13)
         Me.lblStatus.TabIndex = 37
@@ -297,6 +301,8 @@ Partial Class KeyInsert
         'chkStartMinimise
         '
         Me.chkStartMinimise.AutoSize = true
+        Me.chkStartMinimise.Checked = true
+        Me.chkStartMinimise.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkStartMinimise.Location = New System.Drawing.Point(6, 19)
         Me.chkStartMinimise.Name = "chkStartMinimise"
         Me.chkStartMinimise.Size = New System.Drawing.Size(66, 17)
@@ -347,11 +353,45 @@ Partial Class KeyInsert
         Me.chkEndRestore.Text = "Restore"
         Me.chkEndRestore.UseVisualStyleBackColor = true
         '
+        'btnScriptSave
+        '
+        Me.btnScriptSave.AutoSize = true
+        Me.btnScriptSave.Location = New System.Drawing.Point(420, 200)
+        Me.btnScriptSave.Name = "btnScriptSave"
+        Me.btnScriptSave.Size = New System.Drawing.Size(132, 23)
+        Me.btnScriptSave.TabIndex = 43
+        Me.btnScriptSave.Text = "Save script..."
+        Me.btnScriptSave.UseVisualStyleBackColor = true
+        '
+        'btnScriptLoad
+        '
+        Me.btnScriptLoad.AutoSize = true
+        Me.btnScriptLoad.Location = New System.Drawing.Point(558, 200)
+        Me.btnScriptLoad.Name = "btnScriptLoad"
+        Me.btnScriptLoad.Size = New System.Drawing.Size(132, 23)
+        Me.btnScriptLoad.TabIndex = 44
+        Me.btnScriptLoad.Text = "Load script..."
+        Me.btnScriptLoad.UseVisualStyleBackColor = true
+        '
+        'ofdConfig
+        '
+        Me.ofdConfig.DefaultExt = "xml.KeyInsert"
+        Me.ofdConfig.Filter = "KeyInsert configs|*.xml.KeyInsert|All files|*.*"
+        Me.ofdConfig.SupportMultiDottedExtensions = true
+        '
+        'sfdConfig
+        '
+        Me.sfdConfig.DefaultExt = "xml.KeyInsert"
+        Me.sfdConfig.Filter = "KeyInsert configs|*.xml.KeyInsert|All files|*.*"
+        Me.sfdConfig.SupportMultiDottedExtensions = true
+        '
         'KeyInsert
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(702, 250)
+        Me.Controls.Add(Me.btnScriptLoad)
+        Me.Controls.Add(Me.btnScriptSave)
         Me.Controls.Add(Me.grpEnd)
         Me.Controls.Add(Me.grpStart)
         Me.Controls.Add(Me.grpStopKey)
@@ -374,6 +414,10 @@ Partial Class KeyInsert
         Me.ResumeLayout(false)
         Me.PerformLayout
     End Sub
+    Private WithEvents btnScriptSave As System.Windows.Forms.Button
+    Private WithEvents btnScriptLoad As System.Windows.Forms.Button
+    Private sfdConfig As System.Windows.Forms.SaveFileDialog
+    Private ofdConfig As System.Windows.Forms.OpenFileDialog
     Private grpStart As System.Windows.Forms.GroupBox
     Private WithEvents chkStartHide As System.Windows.Forms.CheckBox
     Private WithEvents chkStartBackground As System.Windows.Forms.CheckBox

@@ -1,4 +1,6 @@
-﻿Public Partial Class KeyInsert
+﻿Imports System.Xml
+
+Public Partial Class KeyInsert
     Public Sub New()
         Me.InitializeComponent()
     End Sub
@@ -167,9 +169,118 @@
         End If
     End Sub
     
-    Sub BwKeyInserter_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bwKeyInserter.ProgressChanged
+    Sub bwKeyInserter_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bwKeyInserter.ProgressChanged
         Dim keys As String
         keys = lstKeyStrokes.Items.Item(e.ProgressPercentage).Text
         SendKeys.Send(keys)
+    End Sub
+    
+    Sub ReadConfig(path As String)
+        Dim reader As XmlReader = XmlReader.Create(path)
+        Try
+            reader.Read()
+        Catch ex As XmlException
+            reader.Close
+            MsgBox("Reading config failed! The error was: " & ex.ToString, MsgBoxStyle.Critical)
+            Exit Sub
+        End Try
+        
+        If reader.IsStartElement() AndAlso reader.Name = "KeyInsert" Then
+            If reader.Read AndAlso reader.IsStartElement() AndAlso reader.Name = "KeyList" Then
+                While reader.IsStartElement
+                    If reader.Read AndAlso reader.IsStartElement() AndAlso reader.Name = "KeyString" Then
+                        Dim tmpListViewItem As New ListViewItem(New String() {"{ENTER}", "100"})
+                        
+                        Dim attribute As String = reader("keys")
+                        If attribute IsNot Nothing Then
+                            tmpListViewItem.Text = attribute
+                        End If
+                        
+                        attribute = reader("time")
+                        If attribute IsNot Nothing Then
+                            tmpListViewItem.SubItems.Item(1).Text = attribute
+                        End If
+                        
+                        lstKeyStrokes.Items.Add(tmpListViewItem)
+                    End If
+                End While
+            End If
+'            If reader.Read AndAlso reader.IsStartElement() AndAlso reader.Name = "Settings" Then
+'                If reader.Read AndAlso reader.IsStartElement() AndAlso reader.Name = "ColumnSettings" Then
+'                    Dim attribute As String
+'                    While reader.IsStartElement
+'                        If reader.Read AndAlso reader.IsStartElement() Then
+'                            If reader.Name = "PathColumn" Then
+'                                attribute = reader("index")
+'                                If attribute IsNot Nothing Then
+'                                    colheadPath.DisplayIndex = attribute
+'                                End If
+'                                
+'                                attribute = reader("width")
+'                                If attribute IsNot Nothing Then
+'                                    colheadPath.Width = attribute
+'                                End If
+'                            ElseIf reader.Name = "ArgColumn"
+'                                attribute = reader("index")
+'                                If attribute IsNot Nothing Then
+'                                    colheadProgramArgs.DisplayIndex = attribute
+'                                End If
+'                                
+'                                attribute = reader("width")
+'                                If attribute IsNot Nothing Then
+'                                    colheadProgramArgs.Width = attribute
+'                                End If
+'                            End If
+'                        End If
+'                    End While
+'                End If
+'            End If
+        End If
+        
+        reader.Close
+    End Sub
+    
+    Sub WriteConfig(path As String)
+        Dim XMLwSettings As New XmlWriterSettings()
+        XMLwSettings.Indent = True
+        Dim writer As XmlWriter = XmlWriter.Create(path, XMLwSettings)
+        
+        writer.WriteStartDocument()
+        writer.WriteStartElement("KeyInsert")
+        
+        writer.WriteStartElement("KeyList")
+        For Each item In lstKeyStrokes.Items
+            writer.WriteStartElement("KeyString")
+            writer.WriteAttributeString("keys", item.Text)
+            writer.WriteAttributeString("time", item.SubItems.Item(1).Text)
+            writer.WriteEndElement()
+        Next
+        writer.WriteEndElement()
+        
+'        writer.WriteStartElement("Settings")
+'            writer.WriteStartElement("ColumnSettings")
+'                writer.WriteStartElement("PathColumn")
+'                    writer.WriteAttributeString("index", colheadPath.DisplayIndex)
+'                    writer.WriteAttributeString("width", colheadPath.Width)
+'                writer.WriteEndElement()
+'                writer.WriteStartElement("ArgColumn")
+'                    writer.WriteAttributeString("index", colheadProgramArgs.DisplayIndex)
+'                    writer.WriteAttributeString("width", colheadProgramArgs.Width)
+'                writer.WriteEndElement()
+'            writer.WriteEndElement()
+'        writer.WriteEndElement()
+        
+        writer.WriteEndElement()
+        writer.WriteEndDocument()
+        
+        writer.Close
+    End Sub
+    
+    Sub btnScriptSave_Click() Handles btnScriptSave.Click
+        
+    End Sub
+    
+    Sub btnScriptLoad_Click() Handles btnScriptLoad.Click
+        
     End Sub
 End Class
