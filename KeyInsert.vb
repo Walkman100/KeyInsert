@@ -3,6 +3,25 @@
 Public Partial Class KeyInsert
     Public Sub New()
         Me.InitializeComponent()
+        Dim concatPath As String = ""
+        For Each s As String In My.Application.CommandLineArgs
+            If IO.File.Exists(s) Then
+                ReadConfig(s)
+            Else
+                If concatPath = "" Then
+                    MsgBox("""" & s & """ doesn't exist! checking for non-enclosed path...", MsgBoxStyle.Exclamation)
+                    concatPath = s
+                Else
+                    concatPath &= " " & s
+                    If IO.File.Exists(concatPath) Then
+                        MsgBox("Found """ & concatPath & """!", MsgBoxStyle.Information)
+                        ReadConfig(concatPath)
+                    Else
+                        MsgBox("""" & concatPath & """ doesn't exist!", MsgBoxStyle.Exclamation)
+                    End If
+                End If
+            End If
+        Next
     End Sub
     
     Sub lstKeyStrokes_ColumnClick() Handles lstKeyStrokes.ColumnClick
