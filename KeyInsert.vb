@@ -249,8 +249,8 @@ Public Partial Class KeyInsert
         writer.WriteStartElement("KeyList")
         For Each item In lstKeyStrokes.Items
             writer.WriteStartElement("KeyString")
-            writer.WriteAttributeString("keys", item.Text)
-            writer.WriteAttributeString("time", item.SubItems.Item(1).Text)
+                writer.WriteAttributeString("keys", item.Text)
+                writer.WriteAttributeString("time", item.SubItems.Item(1).Text)
             writer.WriteEndElement()
         Next
         writer.WriteEndElement()
@@ -266,6 +266,28 @@ Public Partial Class KeyInsert
                     writer.WriteAttributeString("width", colheadTime.Width)
                 writer.WriteEndElement()
             writer.WriteEndElement()
+            
+            writer.WriteStartElement("StopKey")
+                If optKeyCtrl.Checked Then
+                    writer.WriteAttributeString("key", "ctrl")
+                ElseIf optKeyAlt.Checked
+                    writer.WriteAttributeString("key", "alt")
+                ElseIf optKeyShift.Checked
+                    writer.WriteAttributeString("key", "shift")
+                End If
+            writer.WriteEndElement
+            
+            writer.WriteStartElement("StartActions")
+                writer.WriteAttributeString("minimise", chkStartMinimise.Checked)
+                writer.WriteAttributeString("background", chkStartBackground.Checked)
+                writer.WriteAttributeString("hide", chkStartHide.Checked)
+            writer.WriteEndElement
+            
+            writer.WriteStartElement("EndActions")
+                writer.WriteAttributeString("restore", chkEndRestore.Checked)
+                writer.WriteAttributeString("foreground", chkEndForeground.Checked)
+                writer.WriteAttributeString("show", chkEndShow.Checked)
+            writer.WriteEndElement
         writer.WriteEndElement()
         
         writer.WriteEndElement()
