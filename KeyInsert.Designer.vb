@@ -54,12 +54,23 @@ Partial Class KeyInsert
         Me.optKeyShift = New System.Windows.Forms.RadioButton()
         Me.optKeyAlt = New System.Windows.Forms.RadioButton()
         Me.optKeyCtrl = New System.Windows.Forms.RadioButton()
+        Me.grpStart = New System.Windows.Forms.GroupBox()
+        Me.chkStartHide = New System.Windows.Forms.CheckBox()
+        Me.chkStartBackground = New System.Windows.Forms.CheckBox()
+        Me.chkStartMinimise = New System.Windows.Forms.CheckBox()
+        Me.grpEnd = New System.Windows.Forms.GroupBox()
+        Me.chkEndShow = New System.Windows.Forms.CheckBox()
+        Me.chkEndForeground = New System.Windows.Forms.CheckBox()
+        Me.chkEndRestore = New System.Windows.Forms.CheckBox()
         Me.contextCommands.SuspendLayout
         Me.grpStopKey.SuspendLayout
+        Me.grpStart.SuspendLayout
+        Me.grpEnd.SuspendLayout
         Me.SuspendLayout
         '
         'lstKeyStrokes
         '
+        Me.lstKeyStrokes.AllowColumnReorder = true
         Me.lstKeyStrokes.AllowDrop = true
         Me.lstKeyStrokes.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom)  _
                         Or System.Windows.Forms.AnchorStyles.Left)  _
@@ -71,9 +82,8 @@ Partial Class KeyInsert
         Me.lstKeyStrokes.HideSelection = false
         Me.lstKeyStrokes.LabelEdit = true
         Me.lstKeyStrokes.Location = New System.Drawing.Point(12, 12)
-        Me.lstKeyStrokes.MultiSelect = false
         Me.lstKeyStrokes.Name = "lstKeyStrokes"
-        Me.lstKeyStrokes.Size = New System.Drawing.Size(610, 270)
+        Me.lstKeyStrokes.Size = New System.Drawing.Size(402, 226)
         Me.lstKeyStrokes.TabIndex = 22
         Me.lstKeyStrokes.UseCompatibleStateImageBehavior = false
         Me.lstKeyStrokes.View = System.Windows.Forms.View.Details
@@ -81,12 +91,12 @@ Partial Class KeyInsert
         'colheadKeyStroke
         '
         Me.colheadKeyStroke.Text = "Keystroke"
-        Me.colheadKeyStroke.Width = 474
+        Me.colheadKeyStroke.Width = 269
         '
         'colheadTime
         '
         Me.colheadTime.Text = "Wait Time (ms)"
-        Me.colheadTime.Width = 110
+        Me.colheadTime.Width = 112
         '
         'contextCommands
         '
@@ -153,9 +163,9 @@ Partial Class KeyInsert
         'btnAdd
         '
         Me.btnAdd.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.btnAdd.Location = New System.Drawing.Point(628, 12)
+        Me.btnAdd.Location = New System.Drawing.Point(420, 12)
         Me.btnAdd.Name = "btnAdd"
-        Me.btnAdd.Size = New System.Drawing.Size(118, 23)
+        Me.btnAdd.Size = New System.Drawing.Size(132, 23)
         Me.btnAdd.TabIndex = 23
         Me.btnAdd.Text = "Add"
         Me.btnAdd.UseVisualStyleBackColor = true
@@ -163,18 +173,18 @@ Partial Class KeyInsert
         'btnRemove
         '
         Me.btnRemove.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.btnRemove.Location = New System.Drawing.Point(628, 41)
+        Me.btnRemove.Location = New System.Drawing.Point(420, 41)
         Me.btnRemove.Name = "btnRemove"
-        Me.btnRemove.Size = New System.Drawing.Size(118, 23)
+        Me.btnRemove.Size = New System.Drawing.Size(132, 23)
         Me.btnRemove.TabIndex = 24
         Me.btnRemove.Text = "Remove"
         Me.btnRemove.UseVisualStyleBackColor = true
         '
         'lblStatus
         '
-        Me.lblStatus.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.lblStatus.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.lblStatus.AutoSize = true
-        Me.lblStatus.Location = New System.Drawing.Point(628, 259)
+        Me.lblStatus.Location = New System.Drawing.Point(420, 197)
         Me.lblStatus.Name = "lblStatus"
         Me.lblStatus.Size = New System.Drawing.Size(67, 13)
         Me.lblStatus.TabIndex = 37
@@ -189,7 +199,7 @@ Partial Class KeyInsert
         '
         Me.lnkInfo.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.lnkInfo.AutoSize = true
-        Me.lnkInfo.Location = New System.Drawing.Point(628, 272)
+        Me.lnkInfo.Location = New System.Drawing.Point(420, 228)
         Me.lnkInfo.Name = "lnkInfo"
         Me.lnkInfo.Size = New System.Drawing.Size(78, 13)
         Me.lnkInfo.TabIndex = 38
@@ -199,9 +209,9 @@ Partial Class KeyInsert
         'btnStart
         '
         Me.btnStart.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.btnStart.Location = New System.Drawing.Point(628, 70)
+        Me.btnStart.Location = New System.Drawing.Point(420, 70)
         Me.btnStart.Name = "btnStart"
-        Me.btnStart.Size = New System.Drawing.Size(118, 23)
+        Me.btnStart.Size = New System.Drawing.Size(132, 23)
         Me.btnStart.TabIndex = 39
         Me.btnStart.Text = "Start"
         Me.btnStart.UseVisualStyleBackColor = true
@@ -212,9 +222,9 @@ Partial Class KeyInsert
         Me.grpStopKey.Controls.Add(Me.optKeyShift)
         Me.grpStopKey.Controls.Add(Me.optKeyAlt)
         Me.grpStopKey.Controls.Add(Me.optKeyCtrl)
-        Me.grpStopKey.Location = New System.Drawing.Point(628, 99)
+        Me.grpStopKey.Location = New System.Drawing.Point(558, 12)
         Me.grpStopKey.Name = "grpStopKey"
-        Me.grpStopKey.Size = New System.Drawing.Size(118, 88)
+        Me.grpStopKey.Size = New System.Drawing.Size(132, 88)
         Me.grpStopKey.TabIndex = 40
         Me.grpStopKey.TabStop = false
         Me.grpStopKey.Text = "Key to press to stop:"
@@ -251,11 +261,99 @@ Partial Class KeyInsert
         Me.optKeyCtrl.Text = "Ctrl (Control)"
         Me.optKeyCtrl.UseVisualStyleBackColor = true
         '
+        'grpStart
+        '
+        Me.grpStart.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.grpStart.Controls.Add(Me.chkStartHide)
+        Me.grpStart.Controls.Add(Me.chkStartBackground)
+        Me.grpStart.Controls.Add(Me.chkStartMinimise)
+        Me.grpStart.Location = New System.Drawing.Point(420, 106)
+        Me.grpStart.Name = "grpStart"
+        Me.grpStart.Size = New System.Drawing.Size(132, 88)
+        Me.grpStart.TabIndex = 41
+        Me.grpStart.TabStop = false
+        Me.grpStart.Text = "Action on script start:"
+        '
+        'chkStartHide
+        '
+        Me.chkStartHide.AutoSize = true
+        Me.chkStartHide.Location = New System.Drawing.Point(6, 65)
+        Me.chkStartHide.Name = "chkStartHide"
+        Me.chkStartHide.Size = New System.Drawing.Size(87, 17)
+        Me.chkStartHide.TabIndex = 2
+        Me.chkStartHide.Text = "Hide window"
+        Me.chkStartHide.UseVisualStyleBackColor = true
+        '
+        'chkStartBackground
+        '
+        Me.chkStartBackground.AutoSize = true
+        Me.chkStartBackground.Location = New System.Drawing.Point(6, 42)
+        Me.chkStartBackground.Name = "chkStartBackground"
+        Me.chkStartBackground.Size = New System.Drawing.Size(123, 17)
+        Me.chkStartBackground.TabIndex = 1
+        Me.chkStartBackground.Text = "Send to background"
+        Me.chkStartBackground.UseVisualStyleBackColor = true
+        '
+        'chkStartMinimise
+        '
+        Me.chkStartMinimise.AutoSize = true
+        Me.chkStartMinimise.Location = New System.Drawing.Point(6, 19)
+        Me.chkStartMinimise.Name = "chkStartMinimise"
+        Me.chkStartMinimise.Size = New System.Drawing.Size(66, 17)
+        Me.chkStartMinimise.TabIndex = 0
+        Me.chkStartMinimise.Text = "Minimise"
+        Me.chkStartMinimise.UseVisualStyleBackColor = true
+        '
+        'grpEnd
+        '
+        Me.grpEnd.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.grpEnd.Controls.Add(Me.chkEndShow)
+        Me.grpEnd.Controls.Add(Me.chkEndForeground)
+        Me.grpEnd.Controls.Add(Me.chkEndRestore)
+        Me.grpEnd.Location = New System.Drawing.Point(558, 106)
+        Me.grpEnd.Name = "grpEnd"
+        Me.grpEnd.Size = New System.Drawing.Size(132, 88)
+        Me.grpEnd.TabIndex = 42
+        Me.grpEnd.TabStop = false
+        Me.grpEnd.Text = "Action on script end:"
+        '
+        'chkEndShow
+        '
+        Me.chkEndShow.AutoSize = true
+        Me.chkEndShow.Location = New System.Drawing.Point(6, 65)
+        Me.chkEndShow.Name = "chkEndShow"
+        Me.chkEndShow.Size = New System.Drawing.Size(92, 17)
+        Me.chkEndShow.TabIndex = 2
+        Me.chkEndShow.Text = "Show window"
+        Me.chkEndShow.UseVisualStyleBackColor = true
+        '
+        'chkEndForeground
+        '
+        Me.chkEndForeground.AutoSize = true
+        Me.chkEndForeground.Location = New System.Drawing.Point(6, 42)
+        Me.chkEndForeground.Name = "chkEndForeground"
+        Me.chkEndForeground.Size = New System.Drawing.Size(116, 17)
+        Me.chkEndForeground.TabIndex = 1
+        Me.chkEndForeground.Text = "Bring to foreground"
+        Me.chkEndForeground.UseVisualStyleBackColor = true
+        '
+        'chkEndRestore
+        '
+        Me.chkEndRestore.AutoSize = true
+        Me.chkEndRestore.Location = New System.Drawing.Point(6, 19)
+        Me.chkEndRestore.Name = "chkEndRestore"
+        Me.chkEndRestore.Size = New System.Drawing.Size(63, 17)
+        Me.chkEndRestore.TabIndex = 0
+        Me.chkEndRestore.Text = "Restore"
+        Me.chkEndRestore.UseVisualStyleBackColor = true
+        '
         'KeyInsert
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(758, 294)
+        Me.ClientSize = New System.Drawing.Size(702, 250)
+        Me.Controls.Add(Me.grpEnd)
+        Me.Controls.Add(Me.grpStart)
         Me.Controls.Add(Me.grpStopKey)
         Me.Controls.Add(Me.btnStart)
         Me.Controls.Add(Me.lnkInfo)
@@ -269,9 +367,21 @@ Partial Class KeyInsert
         Me.contextCommands.ResumeLayout(false)
         Me.grpStopKey.ResumeLayout(false)
         Me.grpStopKey.PerformLayout
+        Me.grpStart.ResumeLayout(false)
+        Me.grpStart.PerformLayout
+        Me.grpEnd.ResumeLayout(false)
+        Me.grpEnd.PerformLayout
         Me.ResumeLayout(false)
         Me.PerformLayout
     End Sub
+    Private grpStart As System.Windows.Forms.GroupBox
+    Private WithEvents chkStartHide As System.Windows.Forms.CheckBox
+    Private WithEvents chkStartBackground As System.Windows.Forms.CheckBox
+    Private WithEvents chkStartMinimise As System.Windows.Forms.CheckBox
+    Private grpEnd As System.Windows.Forms.GroupBox
+    Private chkEndShow As System.Windows.Forms.CheckBox
+    Private chkEndForeground As System.Windows.Forms.CheckBox
+    Private chkEndRestore As System.Windows.Forms.CheckBox
     Private optKeyCtrl As System.Windows.Forms.RadioButton
     Private optKeyAlt As System.Windows.Forms.RadioButton
     Private optKeyShift As System.Windows.Forms.RadioButton

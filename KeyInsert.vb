@@ -101,8 +101,23 @@
         End Try
     End Sub
     
+    Sub chkStartMinimise_CheckedChanged() Handles chkStartMinimise.CheckedChanged
+        chkEndRestore.Checked = chkStartMinimise.Checked
+    End Sub
+    
+    Sub chkStartBackground_CheckedChanged() Handles chkStartBackground.CheckedChanged
+        chkEndForeground.Checked = chkStartBackground.Checked
+    End Sub
+    
+    Sub chkStartHide_CheckedChanged() Handles chkStartHide.CheckedChanged
+        chkEndShow.Checked = chkStartHide.Checked
+        chkEndShow.Enabled = Not chkStartHide.Checked
+    End Sub
+    
     Sub btnStart_Click() Handles btnStart.Click
-        WindowState = FormWindowState.Minimized
+        If chkStartMinimise.Checked Then WindowState = FormWindowState.Minimized
+        If chkStartBackground.Checked Then Me.SendToBack
+        If chkStartHide.Checked Then Me.Hide
         bwKeyInserter.RunWorkerAsync
     End Sub
     
@@ -139,7 +154,15 @@
             Loop
             
             Threading.Thread.Sleep(100)
-            WindowState = FormWindowState.Normal
+            
+            If chkEndRestore.Checked Then WindowState = FormWindowState.Normal
+            If chkEndForeground.Checked Then
+                Me.BringToFront
+                Me.Focus
+                Me.Activate
+            End If
+            If chkEndShow.Checked Then Me.Show
+            
             lblStatus.Text = "Not Running"
         End If
     End Sub
