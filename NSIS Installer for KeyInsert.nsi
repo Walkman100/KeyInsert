@@ -50,6 +50,15 @@ Section "Quick Launch Shortcut"
   CreateShortCut "$QUICKLAUNCH\KeyInsert.lnk" "$INSTDIR\KeyInsert.exe" "" "$INSTDIR\KeyInsert.exe" "" "" "" "KeyInsert"
 SectionEnd
 
+Section "Associate with *.KeyInsert files"
+    WriteRegStr HKCR "Applications\KeyInsert.exe\shell\open\command" "" "$\"$INSTDIR\KeyInsert.exe$\" $\"%1$\""
+    WriteRegStr HKCR ".KeyInsert\OpenWithList\KeyInsert.exe" "" ""
+    WriteRegStr HKCR ".KeyInsert" "" "KeyInsert_auto_file"
+    WriteRegStr HKCR "KeyInsert_auto_file\shell\open\command" "" "$\"$INSTDIR\KeyInsert.exe$\" $\"%1$\""
+    WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.KeyInsert\OpenWithList" "j" "KeyInsert.exe"
+    WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.KeyInsert\UserChoice" "Progid" "Applications\KeyInsert.exe"
+SectionEnd
+
 ; Functions
 
 Function .onInit
