@@ -178,6 +178,7 @@ Public Partial Class KeyInsert
             MsgBox("Reading config failed! The error was: " & ex.ToString, MsgBoxStyle.Critical)
             Exit Sub
         End Try
+        Dim attribute As String
         
         If reader.IsStartElement() AndAlso reader.Name = "KeyInsert" Then
             If reader.Read AndAlso reader.IsStartElement() AndAlso reader.Name = "KeyList" Then
@@ -185,7 +186,7 @@ Public Partial Class KeyInsert
                     If reader.Read AndAlso reader.IsStartElement() AndAlso reader.Name = "KeyString" Then
                         Dim tmpListViewItem As New ListViewItem(New String() {"{ENTER}", "100"})
                         
-                        Dim attribute As String = reader("keys")
+                        attribute = reader("keys")
                         If attribute IsNot Nothing Then
                             tmpListViewItem.Text = attribute
                         End If
@@ -201,7 +202,6 @@ Public Partial Class KeyInsert
             End If
             If reader.Read AndAlso reader.IsStartElement() AndAlso reader.Name = "Settings" Then
                 If reader.Read AndAlso reader.IsStartElement() AndAlso reader.Name = "ColumnSettings" Then
-                    Dim attribute As String
                     While reader.IsStartElement
                         If reader.Read AndAlso reader.IsStartElement() Then
                             If reader.Name = "KeyStrings" Then
@@ -228,6 +228,29 @@ Public Partial Class KeyInsert
                         End If
                     End While
                 End If
+                
+                Do While reader.Read AndAlso reader.IsStartElement
+                    Select Case reader.Name
+                        Case "StopKey"
+                            attribute = reader("key")
+                            Select Case attribute
+                                Case "ctrl"
+                                    optKeyCtrl.Checked = True
+                                Case "alt"
+                                    optKeyAlt.Checked = True
+                                Case "shift"
+                                    optKeyShift.Checked = True
+                            End Select
+                        Case "StartActions"
+                            chkStartMinimise.Checked = reader("minimise")
+                            chkStartBackground.Checked = reader("background")
+                            chkStartHide.Checked = reader("hide")
+                        Case "EndActions"
+                            chkEndRestore.Checked = reader("restore")
+                            chkEndForeground.Checked = reader("foreground")
+                            chkEndRestore.Checked = reader("show")
+                    End Select
+                Loop
             End If
         End If
         
