@@ -177,6 +177,8 @@ Partial Class KeyInsert
         'btnRemove
         '
         Me.btnRemove.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.btnRemove.DialogResult = System.Windows.Forms.DialogResult.Cancel
+        Me.btnRemove.Enabled = false
         Me.btnRemove.Location = New System.Drawing.Point(420, 41)
         Me.btnRemove.Name = "btnRemove"
         Me.btnRemove.Size = New System.Drawing.Size(132, 23)
@@ -387,8 +389,10 @@ Partial Class KeyInsert
         '
         'KeyInsert
         '
+        Me.AcceptButton = Me.btnStart
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.CancelButton = Me.btnRemove
         Me.ClientSize = New System.Drawing.Size(702, 250)
         Me.Controls.Add(Me.btnScriptLoad)
         Me.Controls.Add(Me.btnScriptSave)
@@ -403,6 +407,7 @@ Partial Class KeyInsert
         Me.Controls.Add(Me.lstKeyStrokes)
         Me.Icon = Global.KeyInsert.Resources.key_presser_5
         Me.Name = "KeyInsert"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "KeyInsert"
         Me.contextCommands.ResumeLayout(false)
         Me.grpStopKey.ResumeLayout(false)
