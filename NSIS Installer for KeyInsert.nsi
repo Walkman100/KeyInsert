@@ -2,7 +2,7 @@
 ; get NSIS at http://nsis.sourceforge.net/Download
 ; As a program that all Power PC users should have, Notepad++ is recommended to edit this file
 
-;Icon "My Project\document-properties.ico"
+Icon "Properties\key_presser_5.ico"
 Caption "KeyInsert Installer"
 Name "KeyInsert"
 AutoCloseWindow true
