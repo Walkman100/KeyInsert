@@ -161,7 +161,7 @@ Public Partial Class KeyInsert
             For Each item As ListViewItem In lstKeyStrokes.Items
                 lblStatus.Text = "Running: " & item.Index & "/" & lstKeyStrokes.Items.Count & ", Inserting."
                 bwKeyInserter.ReportProgress(item.Index) ' workaround for background workers not being able to interact with the UI
-                progressBar.Value = (item.Index + 1) / lstKeyStrokes.Items.Count*100
+                progressBar.Value = item.Index / lstKeyStrokes.Items.Count*100
                 
                 Dim i As Integer
                 For i = 0 To item.SubItems.Item(1).Text Step 10
@@ -190,6 +190,10 @@ Public Partial Class KeyInsert
     
     Sub bwKeyInserter_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bwKeyInserter.ProgressChanged
         SendKeys.Send(lstKeyStrokes.Items.Item(e.ProgressPercentage).Text)
+    End Sub
+    
+    Sub chkTaskbar_CheckedChanged() Handles chkTaskbar.CheckedChanged
+        progressBar.ShowInTaskbar = chkTaskbar.Checked
     End Sub
     
     Sub ReadConfig(path As String)

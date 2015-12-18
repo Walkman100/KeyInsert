@@ -67,6 +67,7 @@ Partial Class KeyInsert
         Me.ofdConfig = New System.Windows.Forms.OpenFileDialog()
         Me.sfdConfig = New System.Windows.Forms.SaveFileDialog()
         Me.progressBar = New wyDay.Controls.Windows7ProgressBar()
+        Me.chkTaskbar = New System.Windows.Forms.CheckBox()
         Me.contextCommands.SuspendLayout
         Me.grpStopKey.SuspendLayout
         Me.grpStart.SuspendLayout
@@ -88,7 +89,7 @@ Partial Class KeyInsert
         Me.lstKeyStrokes.LabelEdit = true
         Me.lstKeyStrokes.Location = New System.Drawing.Point(12, 12)
         Me.lstKeyStrokes.Name = "lstKeyStrokes"
-        Me.lstKeyStrokes.Size = New System.Drawing.Size(402, 253)
+        Me.lstKeyStrokes.Size = New System.Drawing.Size(402, 272)
         Me.lstKeyStrokes.TabIndex = 22
         Me.lstKeyStrokes.UseCompatibleStateImageBehavior = false
         Me.lstKeyStrokes.View = System.Windows.Forms.View.Details
@@ -191,7 +192,7 @@ Partial Class KeyInsert
         '
         Me.lblStatus.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.lblStatus.AutoSize = true
-        Me.lblStatus.Location = New System.Drawing.Point(504, 255)
+        Me.lblStatus.Location = New System.Drawing.Point(420, 255)
         Me.lblStatus.Name = "lblStatus"
         Me.lblStatus.Size = New System.Drawing.Size(67, 13)
         Me.lblStatus.TabIndex = 37
@@ -206,7 +207,7 @@ Partial Class KeyInsert
         '
         Me.lnkInfo.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.lnkInfo.AutoSize = true
-        Me.lnkInfo.Location = New System.Drawing.Point(420, 255)
+        Me.lnkInfo.Location = New System.Drawing.Point(420, 268)
         Me.lnkInfo.Name = "lnkInfo"
         Me.lnkInfo.Size = New System.Drawing.Size(78, 13)
         Me.lnkInfo.TabIndex = 38
@@ -399,13 +400,25 @@ Partial Class KeyInsert
         Me.progressBar.Size = New System.Drawing.Size(270, 23)
         Me.progressBar.TabIndex = 45
         '
+        'chkTaskbar
+        '
+        Me.chkTaskbar.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.chkTaskbar.AutoSize = true
+        Me.chkTaskbar.Location = New System.Drawing.Point(545, 267)
+        Me.chkTaskbar.Name = "chkTaskbar"
+        Me.chkTaskbar.Size = New System.Drawing.Size(145, 17)
+        Me.chkTaskbar.TabIndex = 46
+        Me.chkTaskbar.Text = "Show progress in taskbar"
+        Me.chkTaskbar.UseVisualStyleBackColor = true
+        '
         'KeyInsert
         '
         Me.AcceptButton = Me.btnStart
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnRemove
-        Me.ClientSize = New System.Drawing.Size(702, 277)
+        Me.ClientSize = New System.Drawing.Size(702, 296)
+        Me.Controls.Add(Me.chkTaskbar)
         Me.Controls.Add(Me.progressBar)
         Me.Controls.Add(Me.btnScriptLoad)
         Me.Controls.Add(Me.btnScriptSave)
@@ -432,6 +445,7 @@ Partial Class KeyInsert
         Me.ResumeLayout(false)
         Me.PerformLayout
     End Sub
+    Private WithEvents chkTaskbar As System.Windows.Forms.CheckBox
     Private progressBar As wyDay.Controls.Windows7ProgressBar
     Private WithEvents btnScriptSave As System.Windows.Forms.Button
     Private WithEvents btnScriptLoad As System.Windows.Forms.Button
