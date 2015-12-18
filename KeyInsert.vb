@@ -91,6 +91,11 @@ Public Partial Class KeyInsert
         Else
             btnRemove.Enabled = True
         End If
+        If lstKeyStrokes.Items.Count = 0 Then
+            btnStart.Enabled = False
+        Else
+            btnStart.Enabled = True
+        End If
     End Sub
     
     Sub btnAdd_Click() Handles btnAdd.Click

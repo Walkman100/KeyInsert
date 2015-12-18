@@ -217,6 +217,7 @@ Partial Class KeyInsert
         'btnStart
         '
         Me.btnStart.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.btnStart.Enabled = false
         Me.btnStart.Location = New System.Drawing.Point(420, 70)
         Me.btnStart.Name = "btnStart"
         Me.btnStart.Size = New System.Drawing.Size(132, 23)
