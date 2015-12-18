@@ -66,6 +66,7 @@ Partial Class KeyInsert
         Me.btnScriptLoad = New System.Windows.Forms.Button()
         Me.ofdConfig = New System.Windows.Forms.OpenFileDialog()
         Me.sfdConfig = New System.Windows.Forms.SaveFileDialog()
+        Me.progressBar = New System.Windows.Forms.ProgressBar()
         Me.contextCommands.SuspendLayout
         Me.grpStopKey.SuspendLayout
         Me.grpStart.SuspendLayout
@@ -87,7 +88,7 @@ Partial Class KeyInsert
         Me.lstKeyStrokes.LabelEdit = true
         Me.lstKeyStrokes.Location = New System.Drawing.Point(12, 12)
         Me.lstKeyStrokes.Name = "lstKeyStrokes"
-        Me.lstKeyStrokes.Size = New System.Drawing.Size(402, 226)
+        Me.lstKeyStrokes.Size = New System.Drawing.Size(402, 253)
         Me.lstKeyStrokes.TabIndex = 22
         Me.lstKeyStrokes.UseCompatibleStateImageBehavior = false
         Me.lstKeyStrokes.View = System.Windows.Forms.View.Details
@@ -190,7 +191,7 @@ Partial Class KeyInsert
         '
         Me.lblStatus.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.lblStatus.AutoSize = true
-        Me.lblStatus.Location = New System.Drawing.Point(504, 228)
+        Me.lblStatus.Location = New System.Drawing.Point(504, 255)
         Me.lblStatus.Name = "lblStatus"
         Me.lblStatus.Size = New System.Drawing.Size(67, 13)
         Me.lblStatus.TabIndex = 37
@@ -203,9 +204,9 @@ Partial Class KeyInsert
         '
         'lnkInfo
         '
-        Me.lnkInfo.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.lnkInfo.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.lnkInfo.AutoSize = true
-        Me.lnkInfo.Location = New System.Drawing.Point(420, 228)
+        Me.lnkInfo.Location = New System.Drawing.Point(420, 255)
         Me.lnkInfo.Name = "lnkInfo"
         Me.lnkInfo.Size = New System.Drawing.Size(78, 13)
         Me.lnkInfo.TabIndex = 38
@@ -357,6 +358,7 @@ Partial Class KeyInsert
         '
         'btnScriptSave
         '
+        Me.btnScriptSave.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.btnScriptSave.AutoSize = true
         Me.btnScriptSave.Location = New System.Drawing.Point(420, 200)
         Me.btnScriptSave.Name = "btnScriptSave"
@@ -367,6 +369,7 @@ Partial Class KeyInsert
         '
         'btnScriptLoad
         '
+        Me.btnScriptLoad.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.btnScriptLoad.AutoSize = true
         Me.btnScriptLoad.Location = New System.Drawing.Point(558, 200)
         Me.btnScriptLoad.Name = "btnScriptLoad"
@@ -387,13 +390,22 @@ Partial Class KeyInsert
         Me.sfdConfig.Filter = "KeyInsert configs|*.xml.KeyInsert|All files|*.*"
         Me.sfdConfig.SupportMultiDottedExtensions = true
         '
+        'progressBar
+        '
+        Me.progressBar.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.progressBar.Location = New System.Drawing.Point(420, 229)
+        Me.progressBar.Name = "progressBar"
+        Me.progressBar.Size = New System.Drawing.Size(270, 23)
+        Me.progressBar.TabIndex = 45
+        '
         'KeyInsert
         '
         Me.AcceptButton = Me.btnStart
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnRemove
-        Me.ClientSize = New System.Drawing.Size(702, 250)
+        Me.ClientSize = New System.Drawing.Size(702, 277)
+        Me.Controls.Add(Me.progressBar)
         Me.Controls.Add(Me.btnScriptLoad)
         Me.Controls.Add(Me.btnScriptSave)
         Me.Controls.Add(Me.grpEnd)
@@ -419,6 +431,7 @@ Partial Class KeyInsert
         Me.ResumeLayout(false)
         Me.PerformLayout
     End Sub
+    Private progressBar As System.Windows.Forms.ProgressBar
     Private WithEvents btnScriptSave As System.Windows.Forms.Button
     Private WithEvents btnScriptLoad As System.Windows.Forms.Button
     Private sfdConfig As System.Windows.Forms.SaveFileDialog
