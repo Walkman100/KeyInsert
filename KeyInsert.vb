@@ -159,12 +159,15 @@ Public Partial Class KeyInsert
         
         Do Until DisableKeyPressed
             For Each item As ListViewItem In lstKeyStrokes.Items
-                lblStatus.Text = "Running: " & item.Index
+                lblStatus.Text = "Running: " & item.Index & "/" & lstKeyStrokes.Items.Count & ", Inserting."
                 bwKeyInserter.ReportProgress(item.Index) ' workaround for background workers not being able to interact with the UI
+                progressBar.Value = (item.Index + 1) / lstKeyStrokes.Items.Count*100
                 
                 Dim i As Integer
                 For i = 0 To item.SubItems.Item(1).Text Step 10
-                    lblStatus.Text = "Waiting: " & item.SubItems.Item(1).Text - i
+                    lblStatus.Text = "Running: " & item.Index + 1 & "/" & lstKeyStrokes.Items.Count & ", Waiting: " & item.SubItems.Item(1).Text - i
+                    progressBar.Value = (item.Index + (i / item.SubItems.Item(1).Text) ) / lstKeyStrokes.Items.Count*100
+                    
                     Threading.Thread.Sleep(10)
                     If DisableKeyPressed Then Exit Do
                 Next
@@ -182,6 +185,7 @@ Public Partial Class KeyInsert
         If chkEndShow.Checked Then Me.Show
         
         lblStatus.Text = "Not Running"
+        progressBar.Value = 0
     End Sub
     
     Sub bwKeyInserter_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bwKeyInserter.ProgressChanged
