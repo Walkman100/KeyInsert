@@ -66,7 +66,7 @@ Partial Class KeyInsert
         Me.btnScriptLoad = New System.Windows.Forms.Button()
         Me.ofdConfig = New System.Windows.Forms.OpenFileDialog()
         Me.sfdConfig = New System.Windows.Forms.SaveFileDialog()
-        Me.progressBar = New System.Windows.Forms.ProgressBar()
+        Me.progressBar = New wyDay.Controls.Windows7ProgressBar()
         Me.contextCommands.SuspendLayout
         Me.grpStopKey.SuspendLayout
         Me.grpStart.SuspendLayout
@@ -393,6 +393,7 @@ Partial Class KeyInsert
         'progressBar
         '
         Me.progressBar.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.progressBar.ContainerControl = Me
         Me.progressBar.Location = New System.Drawing.Point(420, 229)
         Me.progressBar.Name = "progressBar"
         Me.progressBar.Size = New System.Drawing.Size(270, 23)
@@ -431,7 +432,7 @@ Partial Class KeyInsert
         Me.ResumeLayout(false)
         Me.PerformLayout
     End Sub
-    Private progressBar As System.Windows.Forms.ProgressBar
+    Private progressBar As wyDay.Controls.Windows7ProgressBar
     Private WithEvents btnScriptSave As System.Windows.Forms.Button
     Private WithEvents btnScriptLoad As System.Windows.Forms.Button
     Private sfdConfig As System.Windows.Forms.SaveFileDialog

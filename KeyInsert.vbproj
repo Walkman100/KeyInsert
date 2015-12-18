@@ -81,6 +81,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Include="Windows7ProgressBar.vb" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\Settings.settings">
