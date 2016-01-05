@@ -77,7 +77,6 @@ FunctionEnd
 
 ; Uninstaller
 
-!include LogicLib.nsh ; For ${IF} logic
 Section "Uninstall"
   Delete "$INSTDIR\KeyInsert-Uninst.exe" ; Remove Application Files
   Delete "$INSTDIR\KeyInsert.exe"
