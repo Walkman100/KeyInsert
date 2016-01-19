@@ -5,6 +5,7 @@
 Icon "Properties\key_presser_5.ico"
 Caption "KeyInsert Installer"
 Name "KeyInsert"
+XPStyle on
 AutoCloseWindow true
 ShowInstDetails show
 
