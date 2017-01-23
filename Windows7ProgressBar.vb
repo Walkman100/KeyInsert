@@ -1,4 +1,4 @@
-﻿' Copyright (c) Microsoft Corporation.  All rights reserved.
+' Copyright (c) Microsoft Corporation.  All rights reserved.
 Imports System.ComponentModel
 Imports System.Runtime.InteropServices
 'Windows7ProgressBar v1.0, created by Wyatt O'Day

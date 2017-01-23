@@ -1,4 +1,4 @@
-﻿Imports System.Xml
+Imports System.Xml
 
 Public Partial Class KeyInsert
     Public Sub New()

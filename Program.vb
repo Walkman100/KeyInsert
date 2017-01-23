@@ -1,4 +1,4 @@
-﻿'
+'
 ' Created by SharpDevelop.
 ' User: Walkman
 ' Date: 2015/11/28
