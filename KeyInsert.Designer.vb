@@ -96,7 +96,7 @@ Partial Class KeyInsert
         Me.lstKeyStrokes.Location = New System.Drawing.Point(12, 12)
         Me.lstKeyStrokes.Name = "lstKeyStrokes"
         Me.lstKeyStrokes.Size = New System.Drawing.Size(402, 311)
-        Me.lstKeyStrokes.TabIndex = 22
+        Me.lstKeyStrokes.TabIndex = 0
         Me.lstKeyStrokes.UseCompatibleStateImageBehavior = false
         Me.lstKeyStrokes.View = System.Windows.Forms.View.Details
         '
@@ -178,7 +178,7 @@ Partial Class KeyInsert
         Me.btnAdd.Location = New System.Drawing.Point(420, 12)
         Me.btnAdd.Name = "btnAdd"
         Me.btnAdd.Size = New System.Drawing.Size(132, 23)
-        Me.btnAdd.TabIndex = 23
+        Me.btnAdd.TabIndex = 1
         Me.btnAdd.Text = "Add"
         Me.btnAdd.UseVisualStyleBackColor = true
         '
@@ -190,7 +190,7 @@ Partial Class KeyInsert
         Me.btnRemove.Location = New System.Drawing.Point(420, 41)
         Me.btnRemove.Name = "btnRemove"
         Me.btnRemove.Size = New System.Drawing.Size(132, 23)
-        Me.btnRemove.TabIndex = 24
+        Me.btnRemove.TabIndex = 2
         Me.btnRemove.Text = "Remove"
         Me.btnRemove.UseVisualStyleBackColor = true
         '
@@ -201,7 +201,7 @@ Partial Class KeyInsert
         Me.lblStatus.Location = New System.Drawing.Point(420, 294)
         Me.lblStatus.Name = "lblStatus"
         Me.lblStatus.Size = New System.Drawing.Size(67, 13)
-        Me.lblStatus.TabIndex = 37
+        Me.lblStatus.TabIndex = 14
         Me.lblStatus.Text = "Not Running"
         '
         'bwKeyInserter
@@ -216,7 +216,7 @@ Partial Class KeyInsert
         Me.lnkInfo.Location = New System.Drawing.Point(420, 307)
         Me.lnkInfo.Name = "lnkInfo"
         Me.lnkInfo.Size = New System.Drawing.Size(78, 13)
-        Me.lnkInfo.TabIndex = 38
+        Me.lnkInfo.TabIndex = 15
         Me.lnkInfo.TabStop = true
         Me.lnkInfo.Text = "Key strings info"
         '
@@ -227,7 +227,7 @@ Partial Class KeyInsert
         Me.btnStart.Location = New System.Drawing.Point(420, 70)
         Me.btnStart.Name = "btnStart"
         Me.btnStart.Size = New System.Drawing.Size(132, 23)
-        Me.btnStart.TabIndex = 39
+        Me.btnStart.TabIndex = 3
         Me.btnStart.Text = "Start"
         Me.btnStart.UseVisualStyleBackColor = true
         '
@@ -240,7 +240,7 @@ Partial Class KeyInsert
         Me.grpStopKey.Location = New System.Drawing.Point(558, 12)
         Me.grpStopKey.Name = "grpStopKey"
         Me.grpStopKey.Size = New System.Drawing.Size(132, 88)
-        Me.grpStopKey.TabIndex = 40
+        Me.grpStopKey.TabIndex = 4
         Me.grpStopKey.TabStop = false
         Me.grpStopKey.Text = "Key to press to stop:"
         '
@@ -285,7 +285,7 @@ Partial Class KeyInsert
         Me.grpStart.Location = New System.Drawing.Point(420, 106)
         Me.grpStart.Name = "grpStart"
         Me.grpStart.Size = New System.Drawing.Size(132, 88)
-        Me.grpStart.TabIndex = 41
+        Me.grpStart.TabIndex = 5
         Me.grpStart.TabStop = false
         Me.grpStart.Text = "Action on script start:"
         '
@@ -330,7 +330,7 @@ Partial Class KeyInsert
         Me.grpEnd.Location = New System.Drawing.Point(558, 106)
         Me.grpEnd.Name = "grpEnd"
         Me.grpEnd.Size = New System.Drawing.Size(132, 88)
-        Me.grpEnd.TabIndex = 42
+        Me.grpEnd.TabIndex = 6
         Me.grpEnd.TabStop = false
         Me.grpEnd.Text = "Action on script end:"
         '
@@ -371,7 +371,7 @@ Partial Class KeyInsert
         Me.btnScriptSave.Location = New System.Drawing.Point(420, 239)
         Me.btnScriptSave.Name = "btnScriptSave"
         Me.btnScriptSave.Size = New System.Drawing.Size(132, 23)
-        Me.btnScriptSave.TabIndex = 43
+        Me.btnScriptSave.TabIndex = 11
         Me.btnScriptSave.Text = "Save script..."
         Me.btnScriptSave.UseVisualStyleBackColor = true
         '
@@ -382,7 +382,7 @@ Partial Class KeyInsert
         Me.btnScriptLoad.Location = New System.Drawing.Point(558, 239)
         Me.btnScriptLoad.Name = "btnScriptLoad"
         Me.btnScriptLoad.Size = New System.Drawing.Size(132, 23)
-        Me.btnScriptLoad.TabIndex = 44
+        Me.btnScriptLoad.TabIndex = 12
         Me.btnScriptLoad.Text = "Load script..."
         Me.btnScriptLoad.UseVisualStyleBackColor = true
         '
@@ -405,7 +405,7 @@ Partial Class KeyInsert
         Me.progressBar.Location = New System.Drawing.Point(420, 268)
         Me.progressBar.Name = "progressBar"
         Me.progressBar.Size = New System.Drawing.Size(270, 23)
-        Me.progressBar.TabIndex = 45
+        Me.progressBar.TabIndex = 13
         '
         'chkTaskbar
         '
@@ -414,7 +414,7 @@ Partial Class KeyInsert
         Me.chkTaskbar.Location = New System.Drawing.Point(545, 306)
         Me.chkTaskbar.Name = "chkTaskbar"
         Me.chkTaskbar.Size = New System.Drawing.Size(145, 17)
-        Me.chkTaskbar.TabIndex = 46
+        Me.chkTaskbar.TabIndex = 16
         Me.chkTaskbar.Text = "Show progress in taskbar"
         Me.chkTaskbar.UseVisualStyleBackColor = true
         '
@@ -426,7 +426,7 @@ Partial Class KeyInsert
         Me.numStartupDelay.Maximum = New Decimal(New Integer() {-6, -1, -1, 0})
         Me.numStartupDelay.Name = "numStartupDelay"
         Me.numStartupDelay.Size = New System.Drawing.Size(130, 20)
-        Me.numStartupDelay.TabIndex = 47
+        Me.numStartupDelay.TabIndex = 9
         Me.numStartupDelay.Value = New Decimal(New Integer() {100, 0, 0, 0})
         '
         'numRunCountLimit
@@ -436,7 +436,7 @@ Partial Class KeyInsert
         Me.numRunCountLimit.Maximum = New Decimal(New Integer() {-1, -1, -1, 0})
         Me.numRunCountLimit.Name = "numRunCountLimit"
         Me.numRunCountLimit.Size = New System.Drawing.Size(130, 20)
-        Me.numRunCountLimit.TabIndex = 48
+        Me.numRunCountLimit.TabIndex = 10
         '
         'lblStartupDelay
         '
@@ -445,7 +445,7 @@ Partial Class KeyInsert
         Me.lblStartupDelay.Location = New System.Drawing.Point(420, 197)
         Me.lblStartupDelay.Name = "lblStartupDelay"
         Me.lblStartupDelay.Size = New System.Drawing.Size(62, 13)
-        Me.lblStartupDelay.TabIndex = 49
+        Me.lblStartupDelay.TabIndex = 7
         Me.lblStartupDelay.Text = "Start Delay:"
         '
         'lblRunCountLimit
@@ -455,7 +455,7 @@ Partial Class KeyInsert
         Me.lblRunCountLimit.Location = New System.Drawing.Point(558, 197)
         Me.lblRunCountLimit.Name = "lblRunCountLimit"
         Me.lblRunCountLimit.Size = New System.Drawing.Size(143, 13)
-        Me.lblRunCountLimit.TabIndex = 50
+        Me.lblRunCountLimit.TabIndex = 8
         Me.lblRunCountLimit.Text = "Run Count Limit: (0 is infinite)"
         '
         'KeyInsert

@@ -310,6 +310,7 @@ Public Partial Class KeyInsert
         End If
         
         reader.Close()
+        CheckButtons
     End Sub
     
     Sub WriteConfig(path As String)
@@ -380,6 +381,5 @@ Public Partial Class KeyInsert
         If ofdConfig.ShowDialog = DialogResult.OK Then
             ReadConfig(ofdConfig.FileName)
         End If
-        CheckButtons
     End Sub
 End Class
