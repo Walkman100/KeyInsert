@@ -46,7 +46,7 @@ Public Partial Class KeyInsert
     End Sub
     
     Sub lstKeyStrokes_DragEnter(sender As Object, e As DragEventArgs) Handles lstKeyStrokes.DragEnter
-        If e.Data.GetDataPresent(DataFormats.Text) Then
+        If e.Data.GetDataPresent(DataFormats.Text) Or e.Data.GetDataPresent(DataFormats.FileDrop) Then
             e.Effect = DragDropEffects.All
         Else
             e.Effect = DragDropEffects.None
@@ -65,6 +65,22 @@ Public Partial Class KeyInsert
                 Dim tmpListViewItem As New ListViewItem(New String() {data, "100"})
                 lstKeyStrokes.FocusedItem = lstKeyStrokes.Items.Add(tmpListViewItem)
             End If
+        ElseIf e.Data.GetDataPresent(DataFormats.FileDrop) Then
+            Dim DroppedPath = e.Data.GetData(DataFormats.FileDrop)(0)
+            
+            Dim reader As XmlReader = XmlReader.Create(DroppedPath)
+            Try
+                reader.Read()
+                ' File can be read as XML
+                ReadConfig(DroppedPath)
+            Catch ex As XmlException
+                reader.Close()
+                ' File can't be read as XML
+                For Each line In System.IO.File.ReadAllLines(DroppedPath)
+                    Dim tmpListViewItem As New ListViewItem(New String() {line, "100"})
+                    lstKeyStrokes.FocusedItem = lstKeyStrokes.Items.Add(tmpListViewItem)
+                Next
+            End Try
         End If
     End Sub
     
@@ -206,7 +222,7 @@ Public Partial Class KeyInsert
         Try
             reader.Read()
         Catch ex As XmlException
-            reader.Close
+            reader.Close()
             MsgBox("Reading config failed! The error was: " & ex.ToString, MsgBoxStyle.Critical)
             Exit Sub
         End Try
@@ -286,7 +302,7 @@ Public Partial Class KeyInsert
             End If
         End If
         
-        reader.Close
+        reader.Close()
     End Sub
     
     Sub WriteConfig(path As String)
