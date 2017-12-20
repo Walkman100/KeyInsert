@@ -357,5 +357,6 @@ Public Partial Class KeyInsert
         If ofdConfig.ShowDialog = DialogResult.OK Then
             ReadConfig(ofdConfig.FileName)
         End If
+        CheckButtons
     End Sub
 End Class
