@@ -434,9 +434,11 @@ Partial Class KeyInsert
         Me.numRunCountLimit.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.numRunCountLimit.Location = New System.Drawing.Point(559, 213)
         Me.numRunCountLimit.Maximum = New Decimal(New Integer() {-1, -1, -1, 0})
+        Me.numRunCountLimit.Minimum = New Decimal(New Integer() {1, 0, 0, -2147483648})
         Me.numRunCountLimit.Name = "numRunCountLimit"
         Me.numRunCountLimit.Size = New System.Drawing.Size(130, 20)
         Me.numRunCountLimit.TabIndex = 10
+        Me.numRunCountLimit.Value = New Decimal(New Integer() {1, 0, 0, -2147483648})
         '
         'lblStartupDelay
         '
@@ -452,11 +454,11 @@ Partial Class KeyInsert
         '
         Me.lblRunCountLimit.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.lblRunCountLimit.AutoSize = true
-        Me.lblRunCountLimit.Location = New System.Drawing.Point(558, 197)
+        Me.lblRunCountLimit.Location = New System.Drawing.Point(552, 197)
         Me.lblRunCountLimit.Name = "lblRunCountLimit"
-        Me.lblRunCountLimit.Size = New System.Drawing.Size(143, 13)
+        Me.lblRunCountLimit.Size = New System.Drawing.Size(146, 13)
         Me.lblRunCountLimit.TabIndex = 8
-        Me.lblRunCountLimit.Text = "Run Count Limit: (0 is infinite)"
+        Me.lblRunCountLimit.Text = "Run Count Limit: (-1 is infinite)"
         '
         'KeyInsert
         '
