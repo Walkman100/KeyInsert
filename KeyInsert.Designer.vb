@@ -68,10 +68,16 @@ Partial Class KeyInsert
         Me.sfdConfig = New System.Windows.Forms.SaveFileDialog()
         Me.progressBar = New wyDay.Controls.Windows7ProgressBar()
         Me.chkTaskbar = New System.Windows.Forms.CheckBox()
+        Me.numStartupDelay = New System.Windows.Forms.NumericUpDown()
+        Me.numRunCountLimit = New System.Windows.Forms.NumericUpDown()
+        Me.lblStartupDelay = New System.Windows.Forms.Label()
+        Me.lblRunCountLimit = New System.Windows.Forms.Label()
         Me.contextCommands.SuspendLayout
         Me.grpStopKey.SuspendLayout
         Me.grpStart.SuspendLayout
         Me.grpEnd.SuspendLayout
+        CType(Me.numStartupDelay,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.numRunCountLimit,System.ComponentModel.ISupportInitialize).BeginInit
         Me.SuspendLayout
         '
         'lstKeyStrokes
@@ -89,7 +95,7 @@ Partial Class KeyInsert
         Me.lstKeyStrokes.LabelEdit = true
         Me.lstKeyStrokes.Location = New System.Drawing.Point(12, 12)
         Me.lstKeyStrokes.Name = "lstKeyStrokes"
-        Me.lstKeyStrokes.Size = New System.Drawing.Size(402, 272)
+        Me.lstKeyStrokes.Size = New System.Drawing.Size(402, 311)
         Me.lstKeyStrokes.TabIndex = 22
         Me.lstKeyStrokes.UseCompatibleStateImageBehavior = false
         Me.lstKeyStrokes.View = System.Windows.Forms.View.Details
@@ -192,7 +198,7 @@ Partial Class KeyInsert
         '
         Me.lblStatus.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.lblStatus.AutoSize = true
-        Me.lblStatus.Location = New System.Drawing.Point(420, 255)
+        Me.lblStatus.Location = New System.Drawing.Point(420, 294)
         Me.lblStatus.Name = "lblStatus"
         Me.lblStatus.Size = New System.Drawing.Size(67, 13)
         Me.lblStatus.TabIndex = 37
@@ -207,7 +213,7 @@ Partial Class KeyInsert
         '
         Me.lnkInfo.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.lnkInfo.AutoSize = true
-        Me.lnkInfo.Location = New System.Drawing.Point(420, 268)
+        Me.lnkInfo.Location = New System.Drawing.Point(420, 307)
         Me.lnkInfo.Name = "lnkInfo"
         Me.lnkInfo.Size = New System.Drawing.Size(78, 13)
         Me.lnkInfo.TabIndex = 38
@@ -362,7 +368,7 @@ Partial Class KeyInsert
         '
         Me.btnScriptSave.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.btnScriptSave.AutoSize = true
-        Me.btnScriptSave.Location = New System.Drawing.Point(420, 200)
+        Me.btnScriptSave.Location = New System.Drawing.Point(420, 239)
         Me.btnScriptSave.Name = "btnScriptSave"
         Me.btnScriptSave.Size = New System.Drawing.Size(132, 23)
         Me.btnScriptSave.TabIndex = 43
@@ -373,7 +379,7 @@ Partial Class KeyInsert
         '
         Me.btnScriptLoad.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.btnScriptLoad.AutoSize = true
-        Me.btnScriptLoad.Location = New System.Drawing.Point(558, 200)
+        Me.btnScriptLoad.Location = New System.Drawing.Point(558, 239)
         Me.btnScriptLoad.Name = "btnScriptLoad"
         Me.btnScriptLoad.Size = New System.Drawing.Size(132, 23)
         Me.btnScriptLoad.TabIndex = 44
@@ -396,7 +402,7 @@ Partial Class KeyInsert
         '
         Me.progressBar.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.progressBar.ContainerControl = Me
-        Me.progressBar.Location = New System.Drawing.Point(420, 229)
+        Me.progressBar.Location = New System.Drawing.Point(420, 268)
         Me.progressBar.Name = "progressBar"
         Me.progressBar.Size = New System.Drawing.Size(270, 23)
         Me.progressBar.TabIndex = 45
@@ -405,12 +411,52 @@ Partial Class KeyInsert
         '
         Me.chkTaskbar.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.chkTaskbar.AutoSize = true
-        Me.chkTaskbar.Location = New System.Drawing.Point(545, 267)
+        Me.chkTaskbar.Location = New System.Drawing.Point(545, 306)
         Me.chkTaskbar.Name = "chkTaskbar"
         Me.chkTaskbar.Size = New System.Drawing.Size(145, 17)
         Me.chkTaskbar.TabIndex = 46
         Me.chkTaskbar.Text = "Show progress in taskbar"
         Me.chkTaskbar.UseVisualStyleBackColor = true
+        '
+        'numStartupDelay
+        '
+        Me.numStartupDelay.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.numStartupDelay.Increment = New Decimal(New Integer() {10, 0, 0, 0})
+        Me.numStartupDelay.Location = New System.Drawing.Point(421, 213)
+        Me.numStartupDelay.Maximum = New Decimal(New Integer() {-6, -1, -1, 0})
+        Me.numStartupDelay.Name = "numStartupDelay"
+        Me.numStartupDelay.Size = New System.Drawing.Size(130, 20)
+        Me.numStartupDelay.TabIndex = 47
+        Me.numStartupDelay.Value = New Decimal(New Integer() {100, 0, 0, 0})
+        '
+        'numRunCountLimit
+        '
+        Me.numRunCountLimit.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.numRunCountLimit.Location = New System.Drawing.Point(559, 213)
+        Me.numRunCountLimit.Maximum = New Decimal(New Integer() {-1, -1, -1, 0})
+        Me.numRunCountLimit.Name = "numRunCountLimit"
+        Me.numRunCountLimit.Size = New System.Drawing.Size(130, 20)
+        Me.numRunCountLimit.TabIndex = 48
+        '
+        'lblStartupDelay
+        '
+        Me.lblStartupDelay.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.lblStartupDelay.AutoSize = true
+        Me.lblStartupDelay.Location = New System.Drawing.Point(420, 197)
+        Me.lblStartupDelay.Name = "lblStartupDelay"
+        Me.lblStartupDelay.Size = New System.Drawing.Size(62, 13)
+        Me.lblStartupDelay.TabIndex = 49
+        Me.lblStartupDelay.Text = "Start Delay:"
+        '
+        'lblRunCountLimit
+        '
+        Me.lblRunCountLimit.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.lblRunCountLimit.AutoSize = true
+        Me.lblRunCountLimit.Location = New System.Drawing.Point(558, 197)
+        Me.lblRunCountLimit.Name = "lblRunCountLimit"
+        Me.lblRunCountLimit.Size = New System.Drawing.Size(143, 13)
+        Me.lblRunCountLimit.TabIndex = 50
+        Me.lblRunCountLimit.Text = "Run Count Limit: (0 is infinite)"
         '
         'KeyInsert
         '
@@ -418,7 +464,11 @@ Partial Class KeyInsert
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnRemove
-        Me.ClientSize = New System.Drawing.Size(702, 296)
+        Me.ClientSize = New System.Drawing.Size(702, 335)
+        Me.Controls.Add(Me.lblRunCountLimit)
+        Me.Controls.Add(Me.lblStartupDelay)
+        Me.Controls.Add(Me.numRunCountLimit)
+        Me.Controls.Add(Me.numStartupDelay)
         Me.Controls.Add(Me.chkTaskbar)
         Me.Controls.Add(Me.progressBar)
         Me.Controls.Add(Me.btnScriptLoad)
@@ -443,9 +493,15 @@ Partial Class KeyInsert
         Me.grpStart.PerformLayout
         Me.grpEnd.ResumeLayout(false)
         Me.grpEnd.PerformLayout
+        CType(Me.numStartupDelay,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.numRunCountLimit,System.ComponentModel.ISupportInitialize).EndInit
         Me.ResumeLayout(false)
         Me.PerformLayout
     End Sub
+    Private lblRunCountLimit As System.Windows.Forms.Label
+    Private lblStartupDelay As System.Windows.Forms.Label
+    Private numRunCountLimit As System.Windows.Forms.NumericUpDown
+    Private numStartupDelay As System.Windows.Forms.NumericUpDown
     Private WithEvents chkTaskbar As System.Windows.Forms.CheckBox
     Private progressBar As wyDay.Controls.Windows7ProgressBar
     Private WithEvents btnScriptSave As System.Windows.Forms.Button

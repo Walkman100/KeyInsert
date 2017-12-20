@@ -178,6 +178,13 @@ Public Partial Class KeyInsert
     Sub bwKeyInserter_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bwKeyInserter.DoWork
         lblStatus.Text = "Running..."
         
+        For i = 0 To numStartupDelay.Value Step 10
+            lblStatus.Text = "Waiting (StartupDelay): " & numStartupDelay.Value - i
+            
+            Threading.Thread.Sleep(10)
+            If DisableKeyPressed Then Exit For
+        Next
+        
         Do Until DisableKeyPressed
             For Each item As ListViewItem In lstKeyStrokes.Items
                 lblStatus.Text = "Running: " & item.Index & "/" & lstKeyStrokes.Items.Count & ", Inserting."
