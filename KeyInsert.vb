@@ -170,6 +170,12 @@ Public Partial Class KeyInsert
             Return My.Computer.Keyboard.AltKeyDown
         ElseIf optKeyShift.Checked
             Return My.Computer.Keyboard.ShiftKeyDown
+        ElseIf optKeyNumLock.Checked
+            Return My.Computer.Keyboard.NumLock
+        ElseIf optKeyCapsLock.Checked
+            Return My.Computer.Keyboard.CapsLock
+        ElseIf optKeyScrollLock.Checked
+            Return My.Computer.Keyboard.ScrollLock
         Else
             Return "Wtf"
         End If
