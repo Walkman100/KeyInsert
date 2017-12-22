@@ -243,10 +243,10 @@ Public Partial Class KeyInsert
         End Try
         Dim attribute As String
         
-        If reader.IsStartElement() AndAlso reader.Name = "KeyInsert" Then
-            If reader.Read AndAlso reader.IsStartElement() AndAlso reader.Name = "KeyList" Then
+        If reader.IsStartElement() AndAlso reader.Name.ToLower = "keyinsert" Then
+            If reader.Read AndAlso reader.IsStartElement() AndAlso reader.Name.ToLower = "keylist" Then
                 While reader.IsStartElement
-                    If reader.Read AndAlso reader.IsStartElement() AndAlso reader.Name = "KeyString" Then
+                    If reader.Read AndAlso reader.IsStartElement() AndAlso reader.Name.ToLower = "keystring" Then
                         Dim tmpListViewItem As New ListViewItem(New String() {"{ENTER}", "100"})
                         
                         attribute = reader("keys")
@@ -263,11 +263,11 @@ Public Partial Class KeyInsert
                     End If
                 End While
             End If
-            If reader.Read AndAlso reader.IsStartElement() AndAlso reader.Name = "Settings" Then
-                If reader.Read AndAlso reader.IsStartElement() AndAlso reader.Name = "ColumnSettings" Then
+            If reader.Read AndAlso reader.IsStartElement() AndAlso reader.Name.ToLower = "settings" Then
+                If reader.Read AndAlso reader.IsStartElement() AndAlso reader.Name.ToLower = "columnsettings" Then
                     While reader.IsStartElement
                         If reader.Read AndAlso reader.IsStartElement() Then
-                            If reader.Name = "KeyStrings" Then
+                            If reader.Name.ToLower = "keystrings" Then
                                 attribute = reader("index")
                                 If attribute IsNot Nothing Then
                                     colheadKeyStroke.DisplayIndex = attribute
@@ -277,7 +277,7 @@ Public Partial Class KeyInsert
                                 If attribute IsNot Nothing Then
                                     colheadKeyStroke.Width = attribute
                                 End If
-                            ElseIf reader.Name = "WaitTime"
+                            ElseIf reader.Name.ToLower = "waittime"
                                 attribute = reader("index")
                                 If attribute IsNot Nothing Then
                                     colheadTime.DisplayIndex = attribute
@@ -293,10 +293,10 @@ Public Partial Class KeyInsert
                 End If
                 
                 Do While reader.Read AndAlso reader.IsStartElement
-                    Select Case reader.Name
-                        Case "StopKey"
+                    Select Case reader.Name.ToLower
+                        Case "stopkey"
                             attribute = reader("key")
-                            Select Case attribute
+                            Select Case attribute.ToLower
                                 Case "ctrl"
                                     optKeyCtrl.Checked = True
                                 Case "alt"
@@ -310,19 +310,19 @@ Public Partial Class KeyInsert
                                 Case "scrolllock"
                                     optKeyScrollLock.Checked = True
                             End Select
-                        Case "StartActions"
+                        Case "startactions"
                             chkStartMinimise.Checked = reader("minimise")
                             chkStartBackground.Checked = reader("background")
                             chkStartHide.Checked = reader("hide")
-                        Case "EndActions"
+                        Case "endactions"
                             chkEndRestore.Checked = reader("restore")
                             chkEndForeground.Checked = reader("foreground")
                             chkEndShow.Checked = reader("show")
-                        Case "StartDelay"
+                        Case "startdelay"
                             numStartupDelay.Value = reader("value")
-                        Case "RunCountLimit"
+                        Case "runcountlimit"
                             numRunCountLimit.Value = reader("value")
-                        Case "TaskbarProgress"
+                        Case "taskbarprogress"
                             chkTaskbar.Checked = reader("value")
                     End Select
                 Loop
