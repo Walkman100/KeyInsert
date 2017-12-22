@@ -303,6 +303,12 @@ Public Partial Class KeyInsert
                                     optKeyAlt.Checked = True
                                 Case "shift"
                                     optKeyShift.Checked = True
+                                Case "numlock"
+                                    optKeyNumLock.Checked = True
+                                Case "capslock"
+                                    optKeyCapsLock.Checked = True
+                                Case "scrolllock"
+                                    optKeyScrollLock.Checked = True
                             End Select
                         Case "StartActions"
                             chkStartMinimise.Checked = reader("minimise")
@@ -312,6 +318,12 @@ Public Partial Class KeyInsert
                             chkEndRestore.Checked = reader("restore")
                             chkEndForeground.Checked = reader("foreground")
                             chkEndShow.Checked = reader("show")
+                        Case "StartDelay"
+                            numStartupDelay.Value = reader("value")
+                        Case "RunCountLimit"
+                            numRunCountLimit.Value = reader("value")
+                        Case "TaskbarProgress"
+                            chkTaskbar.Checked = reader("value")
                     End Select
                 Loop
             End If
@@ -357,6 +369,12 @@ Public Partial Class KeyInsert
                     writer.WriteAttributeString("key", "alt")
                 ElseIf optKeyShift.Checked
                     writer.WriteAttributeString("key", "shift")
+                ElseIf optKeyNumLock.Checked
+                    writer.WriteAttributeString("key", "numlock")
+                ElseIf optKeyCapsLock.Checked
+                    writer.WriteAttributeString("key", "capslock")
+                ElseIf optKeyScrollLock.Checked
+                    writer.WriteAttributeString("key", "scrolllock")
                 End If
             writer.WriteEndElement
             
@@ -370,6 +388,16 @@ Public Partial Class KeyInsert
                 writer.WriteAttributeString("restore", chkEndRestore.Checked)
                 writer.WriteAttributeString("foreground", chkEndForeground.Checked)
                 writer.WriteAttributeString("show", chkEndShow.Checked)
+            writer.WriteEndElement
+                
+            writer.WriteStartElement("StartDelay")
+                writer.WriteAttributeString("value", numStartupDelay.Value)
+            writer.WriteEndElement
+            writer.WriteStartElement("RunCountLimit")
+                writer.WriteAttributeString("value", numRunCountLimit.Value)
+            writer.WriteEndElement
+            writer.WriteStartElement("TaskbarProgress")
+                writer.WriteAttributeString("value", chkTaskbar.Checked)
             writer.WriteEndElement
         writer.WriteEndElement()
         
