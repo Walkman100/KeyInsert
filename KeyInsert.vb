@@ -232,6 +232,10 @@ Public Partial Class KeyInsert
         progressBar.ShowInTaskbar = chkTaskbar.Checked
     End Sub
     
+    Sub chkKeepOnTop_CheckedChanged() Handles chkKeepOnTop.CheckedChanged
+        Me.TopMost = chkKeepOnTop.Checked
+    End Sub
+    
     Sub ReadConfig(path As String)
         Dim reader As XmlReader = XmlReader.Create(path)
         Try

@@ -75,6 +75,7 @@ Partial Class KeyInsert
         Me.numRunCountLimit = New System.Windows.Forms.NumericUpDown()
         Me.lblStartupDelay = New System.Windows.Forms.Label()
         Me.lblRunCountLimit = New System.Windows.Forms.Label()
+        Me.chkKeepOnTop = New System.Windows.Forms.CheckBox()
         Me.contextCommands.SuspendLayout
         Me.grpStopKey.SuspendLayout
         Me.grpStart.SuspendLayout
@@ -450,7 +451,7 @@ Partial Class KeyInsert
         '
         Me.chkTaskbar.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.chkTaskbar.AutoSize = true
-        Me.chkTaskbar.Location = New System.Drawing.Point(577, 306)
+        Me.chkTaskbar.Location = New System.Drawing.Point(577, 295)
         Me.chkTaskbar.Name = "chkTaskbar"
         Me.chkTaskbar.Size = New System.Drawing.Size(145, 17)
         Me.chkTaskbar.TabIndex = 16
@@ -499,6 +500,16 @@ Partial Class KeyInsert
         Me.lblRunCountLimit.TabIndex = 8
         Me.lblRunCountLimit.Text = "Run Count Limit: (-1 is infinite)"
         '
+        'chkKeepOnTop
+        '
+        Me.chkKeepOnTop.AutoSize = true
+        Me.chkKeepOnTop.Location = New System.Drawing.Point(577, 314)
+        Me.chkKeepOnTop.Name = "chkKeepOnTop"
+        Me.chkKeepOnTop.Size = New System.Drawing.Size(123, 17)
+        Me.chkKeepOnTop.TabIndex = 17
+        Me.chkKeepOnTop.Text = "Keep on window top"
+        Me.chkKeepOnTop.UseVisualStyleBackColor = true
+        '
         'KeyInsert
         '
         Me.AcceptButton = Me.btnStart
@@ -506,6 +517,7 @@ Partial Class KeyInsert
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnRemove
         Me.ClientSize = New System.Drawing.Size(739, 335)
+        Me.Controls.Add(Me.chkKeepOnTop)
         Me.Controls.Add(Me.lblRunCountLimit)
         Me.Controls.Add(Me.lblStartupDelay)
         Me.Controls.Add(Me.numRunCountLimit)
@@ -539,6 +551,7 @@ Partial Class KeyInsert
         Me.ResumeLayout(false)
         Me.PerformLayout
     End Sub
+    Private WithEvents chkKeepOnTop As System.Windows.Forms.CheckBox
     Private optKeyNumLock As System.Windows.Forms.RadioButton
     Private optKeyScrollLock As System.Windows.Forms.RadioButton
     Private optKeyCapsLock As System.Windows.Forms.RadioButton
