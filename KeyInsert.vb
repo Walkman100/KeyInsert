@@ -3,6 +3,7 @@ Imports System.Xml
 Public Partial Class KeyInsert
     Public Sub New()
         Me.InitializeComponent()
+        lblVersion.Text = My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor & "." & My.Application.Info.Version.Build
         Dim concatPath As String = ""
         For Each s As String In My.Application.CommandLineArgs
             If IO.File.Exists(s) Then

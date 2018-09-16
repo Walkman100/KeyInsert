@@ -76,6 +76,7 @@ Partial Class KeyInsert
         Me.lblStartupDelay = New System.Windows.Forms.Label()
         Me.lblRunCountLimit = New System.Windows.Forms.Label()
         Me.chkKeepOnTop = New System.Windows.Forms.CheckBox()
+        Me.lblVersion = New System.Windows.Forms.Label()
         Me.contextCommands.SuspendLayout
         Me.grpStopKey.SuspendLayout
         Me.grpStart.SuspendLayout
@@ -510,6 +511,17 @@ Partial Class KeyInsert
         Me.chkKeepOnTop.Text = "Keep on window top"
         Me.chkKeepOnTop.UseVisualStyleBackColor = true
         '
+        'lblVersion
+        '
+        Me.lblVersion.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.lblVersion.AutoSize = true
+        Me.lblVersion.Font = New System.Drawing.Font("Microsoft Sans Serif", 6!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.lblVersion.Location = New System.Drawing.Point(718, 325)
+        Me.lblVersion.Name = "lblVersion"
+        Me.lblVersion.Size = New System.Drawing.Size(21, 9)
+        Me.lblVersion.TabIndex = 18
+        Me.lblVersion.Text = "1.0.0"
+        '
         'KeyInsert
         '
         Me.AcceptButton = Me.btnStart
@@ -517,6 +529,7 @@ Partial Class KeyInsert
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnRemove
         Me.ClientSize = New System.Drawing.Size(739, 335)
+        Me.Controls.Add(Me.lblVersion)
         Me.Controls.Add(Me.chkKeepOnTop)
         Me.Controls.Add(Me.lblRunCountLimit)
         Me.Controls.Add(Me.lblStartupDelay)
@@ -551,6 +564,7 @@ Partial Class KeyInsert
         Me.ResumeLayout(false)
         Me.PerformLayout
     End Sub
+    Private lblVersion As System.Windows.Forms.Label
     Private WithEvents chkKeepOnTop As System.Windows.Forms.CheckBox
     Private optKeyNumLock As System.Windows.Forms.RadioButton
     Private optKeyScrollLock As System.Windows.Forms.RadioButton
