@@ -467,7 +467,7 @@ Partial Class KeyInsert
         Me.numStartupDelay.Maximum = New Decimal(New Integer() {-6, -1, -1, 0})
         Me.numStartupDelay.Name = "numStartupDelay"
         Me.numStartupDelay.Size = New System.Drawing.Size(148, 20)
-        Me.numStartupDelay.TabIndex = 9
+        Me.numStartupDelay.TabIndex = 8
         Me.numStartupDelay.Value = New Decimal(New Integer() {100, 0, 0, 0})
         '
         'numRunCountLimit
@@ -498,7 +498,7 @@ Partial Class KeyInsert
         Me.lblRunCountLimit.Location = New System.Drawing.Point(577, 197)
         Me.lblRunCountLimit.Name = "lblRunCountLimit"
         Me.lblRunCountLimit.Size = New System.Drawing.Size(146, 13)
-        Me.lblRunCountLimit.TabIndex = 8
+        Me.lblRunCountLimit.TabIndex = 9
         Me.lblRunCountLimit.Text = "Run Count Limit: (-1 is infinite)"
         '
         'chkKeepOnTop
