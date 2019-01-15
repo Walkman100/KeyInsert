@@ -182,7 +182,7 @@ Public Partial Class KeyInsert
     
     Sub btnMouseInfo_Click() Handles btnMouseInfo.Click
         Dim tmpString As String = "To move the mouse and click:" & vbNewLine & vbNewLine
-        tmpString &= "$MOVETO(x, y) to move" & vbNewLine & vbNewLine
+        tmpString &= "$MOVETO(x, y) to set mouse position" & vbNewLine & vbNewLine
         tmpString &= "$CLICK(LeftClick) to click" & vbNewLine & vbNewLine
         tmpString &= "Available CLICK arguments:" & vbNewLine
         tmpString &= "LeftClick, LeftDown, LeftUp" & vbNewLine
@@ -272,7 +272,35 @@ Public Partial Class KeyInsert
         Dim itemText As String = lstKeyStrokes.Items.Item(e.ProgressPercentage).Text
         
         If itemText.StartsWith("$MOVETO(", True, Nothing) Then '$MOVE(x, y) To move
+            ' remove $MOVETO(
+            itemText = itemText.Substring(8)
+            ' remove the ) at the end
+            itemText = itemText.Remove(itemText.Length -1)
             
+            If itemText.Contains(",") Then
+                Dim pointX As Integer
+                Try
+                    pointX = Integer.Parse(itemText.Split(",")(0))
+                Catch ex As System.FormatException
+                    bwKeyInserter.CancelAsync()
+                    MsgBox("Error parsing $MOVETO at index " & e.ProgressPercentage & vbNewLine & vbNewLine & "Invalid integer: " & itemText.Split(",")(0), MsgBoxStyle.Critical, "Error")
+                    Exit Sub
+                End Try
+                
+                Dim pointY As Integer
+                Try
+                    pointY = Integer.Parse(itemText.Split(",")(1))
+                Catch ex As System.FormatException
+                    bwKeyInserter.CancelAsync()
+                    MsgBox("Error parsing $MOVETO at index " & e.ProgressPercentage & vbNewLine & vbNewLine & "Invalid integer: " & itemText.Split(",")(1), MsgBoxStyle.Critical, "Error")
+                    Exit Sub
+                End Try
+                
+                Cursor.Position = New Point(pointX, pointY)
+            Else
+                bwKeyInserter.CancelAsync()
+                MsgBox("Error parsing $MOVETO at index " & e.ProgressPercentage & vbNewLine & vbNewLine & ""","" seperator not found in " & itemText, MsgBoxStyle.Critical, "Error")
+            End If
             
         ElseIf itemText.StartsWith("$CLICK(", True, Nothing) Then '$CLICK(LeftClick) to click
             ' remove $CLICK(
