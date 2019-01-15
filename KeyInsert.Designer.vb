@@ -72,6 +72,7 @@ Partial Class KeyInsert
         Me.chkKeepOnTop = New System.Windows.Forms.CheckBox()
         Me.lblVersion = New System.Windows.Forms.Label()
         Me.btnMouseInfo = New System.Windows.Forms.Button()
+        Me.btnGetMouse = New System.Windows.Forms.Button()
         Me.contextCommands.SuspendLayout
         Me.grpStopKey.SuspendLayout
         Me.grpStart.SuspendLayout
@@ -95,7 +96,7 @@ Partial Class KeyInsert
         Me.lstKeyStrokes.LabelEdit = true
         Me.lstKeyStrokes.Location = New System.Drawing.Point(12, 12)
         Me.lstKeyStrokes.Name = "lstKeyStrokes"
-        Me.lstKeyStrokes.Size = New System.Drawing.Size(403, 311)
+        Me.lstKeyStrokes.Size = New System.Drawing.Size(403, 336)
         Me.lstKeyStrokes.TabIndex = 0
         Me.lstKeyStrokes.UseCompatibleStateImageBehavior = false
         Me.lstKeyStrokes.View = System.Windows.Forms.View.Details
@@ -198,10 +199,10 @@ Partial Class KeyInsert
         '
         Me.lblStatus.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.lblStatus.AutoSize = true
-        Me.lblStatus.Location = New System.Drawing.Point(421, 294)
+        Me.lblStatus.Location = New System.Drawing.Point(422, 332)
         Me.lblStatus.Name = "lblStatus"
         Me.lblStatus.Size = New System.Drawing.Size(67, 13)
-        Me.lblStatus.TabIndex = 14
+        Me.lblStatus.TabIndex = 17
         Me.lblStatus.Text = "Not Running"
         '
         'bwKeyInserter
@@ -213,10 +214,10 @@ Partial Class KeyInsert
         '
         Me.lnkInfo.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.lnkInfo.AutoSize = true
-        Me.lnkInfo.Location = New System.Drawing.Point(421, 307)
+        Me.lnkInfo.Location = New System.Drawing.Point(577, 15)
         Me.lnkInfo.Name = "lnkInfo"
         Me.lnkInfo.Size = New System.Drawing.Size(78, 13)
-        Me.lnkInfo.TabIndex = 15
+        Me.lnkInfo.TabIndex = 5
         Me.lnkInfo.TabStop = true
         Me.lnkInfo.Text = "Key strings info"
         '
@@ -240,10 +241,10 @@ Partial Class KeyInsert
         Me.grpStopKey.Controls.Add(Me.optKeyAlt)
         Me.grpStopKey.Controls.Add(Me.optKeyNumLock)
         Me.grpStopKey.Controls.Add(Me.optKeyCtrl)
-        Me.grpStopKey.Location = New System.Drawing.Point(577, 12)
+        Me.grpStopKey.Location = New System.Drawing.Point(577, 38)
         Me.grpStopKey.Name = "grpStopKey"
         Me.grpStopKey.Size = New System.Drawing.Size(150, 88)
-        Me.grpStopKey.TabIndex = 4
+        Me.grpStopKey.TabIndex = 7
         Me.grpStopKey.TabStop = false
         Me.grpStopKey.Text = "Key to press to stop:"
         '
@@ -318,10 +319,10 @@ Partial Class KeyInsert
         Me.grpStart.Controls.Add(Me.chkStartHide)
         Me.grpStart.Controls.Add(Me.chkStartBackground)
         Me.grpStart.Controls.Add(Me.chkStartMinimise)
-        Me.grpStart.Location = New System.Drawing.Point(421, 106)
+        Me.grpStart.Location = New System.Drawing.Point(421, 132)
         Me.grpStart.Name = "grpStart"
         Me.grpStart.Size = New System.Drawing.Size(150, 88)
-        Me.grpStart.TabIndex = 5
+        Me.grpStart.TabIndex = 8
         Me.grpStart.TabStop = false
         Me.grpStart.Text = "Action on script start:"
         '
@@ -363,10 +364,10 @@ Partial Class KeyInsert
         Me.grpEnd.Controls.Add(Me.chkEndShow)
         Me.grpEnd.Controls.Add(Me.chkEndForeground)
         Me.grpEnd.Controls.Add(Me.chkEndRestore)
-        Me.grpEnd.Location = New System.Drawing.Point(577, 106)
+        Me.grpEnd.Location = New System.Drawing.Point(577, 132)
         Me.grpEnd.Name = "grpEnd"
         Me.grpEnd.Size = New System.Drawing.Size(150, 88)
-        Me.grpEnd.TabIndex = 6
+        Me.grpEnd.TabIndex = 9
         Me.grpEnd.TabStop = false
         Me.grpEnd.Text = "Action on script end:"
         '
@@ -404,10 +405,10 @@ Partial Class KeyInsert
         '
         Me.btnScriptSave.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.btnScriptSave.AutoSize = true
-        Me.btnScriptSave.Location = New System.Drawing.Point(421, 239)
+        Me.btnScriptSave.Location = New System.Drawing.Point(421, 265)
         Me.btnScriptSave.Name = "btnScriptSave"
         Me.btnScriptSave.Size = New System.Drawing.Size(150, 23)
-        Me.btnScriptSave.TabIndex = 11
+        Me.btnScriptSave.TabIndex = 14
         Me.btnScriptSave.Text = "Save script..."
         Me.btnScriptSave.UseVisualStyleBackColor = true
         '
@@ -415,10 +416,10 @@ Partial Class KeyInsert
         '
         Me.btnScriptLoad.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.btnScriptLoad.AutoSize = true
-        Me.btnScriptLoad.Location = New System.Drawing.Point(577, 239)
+        Me.btnScriptLoad.Location = New System.Drawing.Point(577, 265)
         Me.btnScriptLoad.Name = "btnScriptLoad"
         Me.btnScriptLoad.Size = New System.Drawing.Size(150, 23)
-        Me.btnScriptLoad.TabIndex = 12
+        Me.btnScriptLoad.TabIndex = 15
         Me.btnScriptLoad.Text = "Load script..."
         Me.btnScriptLoad.UseVisualStyleBackColor = true
         '
@@ -434,23 +435,14 @@ Partial Class KeyInsert
         Me.sfdConfig.Filter = "KeyInsert configs|*.xml.KeyInsert|All files|*.*"
         Me.sfdConfig.SupportMultiDottedExtensions = true
         '
-        'progressBar
-        '
-        Me.progressBar.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.progressBar.ContainerControl = Me
-        Me.progressBar.Location = New System.Drawing.Point(421, 268)
-        Me.progressBar.Name = "progressBar"
-        Me.progressBar.Size = New System.Drawing.Size(306, 23)
-        Me.progressBar.TabIndex = 13
-        '
         'chkTaskbar
         '
         Me.chkTaskbar.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.chkTaskbar.AutoSize = true
-        Me.chkTaskbar.Location = New System.Drawing.Point(577, 295)
+        Me.chkTaskbar.Location = New System.Drawing.Point(577, 321)
         Me.chkTaskbar.Name = "chkTaskbar"
         Me.chkTaskbar.Size = New System.Drawing.Size(145, 17)
-        Me.chkTaskbar.TabIndex = 16
+        Me.chkTaskbar.TabIndex = 18
         Me.chkTaskbar.Text = "Show progress in taskbar"
         Me.chkTaskbar.UseVisualStyleBackColor = true
         '
@@ -458,52 +450,52 @@ Partial Class KeyInsert
         '
         Me.numStartupDelay.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.numStartupDelay.Increment = New Decimal(New Integer() {10, 0, 0, 0})
-        Me.numStartupDelay.Location = New System.Drawing.Point(422, 213)
+        Me.numStartupDelay.Location = New System.Drawing.Point(422, 239)
         Me.numStartupDelay.Maximum = New Decimal(New Integer() {-6, -1, -1, 0})
         Me.numStartupDelay.Name = "numStartupDelay"
         Me.numStartupDelay.Size = New System.Drawing.Size(148, 20)
-        Me.numStartupDelay.TabIndex = 8
+        Me.numStartupDelay.TabIndex = 11
         Me.numStartupDelay.Value = New Decimal(New Integer() {100, 0, 0, 0})
         '
         'numRunCountLimit
         '
         Me.numRunCountLimit.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.numRunCountLimit.Location = New System.Drawing.Point(578, 213)
+        Me.numRunCountLimit.Location = New System.Drawing.Point(578, 239)
         Me.numRunCountLimit.Maximum = New Decimal(New Integer() {-1, -1, -1, 0})
         Me.numRunCountLimit.Minimum = New Decimal(New Integer() {1, 0, 0, -2147483648})
         Me.numRunCountLimit.Name = "numRunCountLimit"
         Me.numRunCountLimit.Size = New System.Drawing.Size(148, 20)
-        Me.numRunCountLimit.TabIndex = 10
+        Me.numRunCountLimit.TabIndex = 13
         Me.numRunCountLimit.Value = New Decimal(New Integer() {1, 0, 0, -2147483648})
         '
         'lblStartupDelay
         '
         Me.lblStartupDelay.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.lblStartupDelay.AutoSize = true
-        Me.lblStartupDelay.Location = New System.Drawing.Point(421, 197)
+        Me.lblStartupDelay.Location = New System.Drawing.Point(421, 223)
         Me.lblStartupDelay.Name = "lblStartupDelay"
         Me.lblStartupDelay.Size = New System.Drawing.Size(62, 13)
-        Me.lblStartupDelay.TabIndex = 7
+        Me.lblStartupDelay.TabIndex = 10
         Me.lblStartupDelay.Text = "Start Delay:"
         '
         'lblRunCountLimit
         '
         Me.lblRunCountLimit.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.lblRunCountLimit.AutoSize = true
-        Me.lblRunCountLimit.Location = New System.Drawing.Point(577, 197)
+        Me.lblRunCountLimit.Location = New System.Drawing.Point(577, 223)
         Me.lblRunCountLimit.Name = "lblRunCountLimit"
         Me.lblRunCountLimit.Size = New System.Drawing.Size(146, 13)
-        Me.lblRunCountLimit.TabIndex = 9
+        Me.lblRunCountLimit.TabIndex = 12
         Me.lblRunCountLimit.Text = "Run Count Limit: (-1 is infinite)"
         '
         'chkKeepOnTop
         '
         Me.chkKeepOnTop.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.chkKeepOnTop.AutoSize = true
-        Me.chkKeepOnTop.Location = New System.Drawing.Point(577, 314)
+        Me.chkKeepOnTop.Location = New System.Drawing.Point(577, 340)
         Me.chkKeepOnTop.Name = "chkKeepOnTop"
         Me.chkKeepOnTop.Size = New System.Drawing.Size(123, 17)
-        Me.chkKeepOnTop.TabIndex = 17
+        Me.chkKeepOnTop.TabIndex = 19
         Me.chkKeepOnTop.Text = "Keep window on top"
         Me.chkKeepOnTop.UseVisualStyleBackColor = true
         '
@@ -512,21 +504,40 @@ Partial Class KeyInsert
         Me.lblVersion.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.lblVersion.AutoSize = true
         Me.lblVersion.Font = New System.Drawing.Font("Microsoft Sans Serif", 6!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.lblVersion.Location = New System.Drawing.Point(718, 325)
+        Me.lblVersion.Location = New System.Drawing.Point(718, 350)
         Me.lblVersion.Name = "lblVersion"
         Me.lblVersion.Size = New System.Drawing.Size(21, 9)
-        Me.lblVersion.TabIndex = 18
+        Me.lblVersion.TabIndex = 20
         Me.lblVersion.Text = "1.0.0"
+        '
+        'progressBar
+        '
+        Me.progressBar.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.progressBar.ContainerControl = Me
+        Me.progressBar.Location = New System.Drawing.Point(421, 294)
+        Me.progressBar.Name = "progressBar"
+        Me.progressBar.Size = New System.Drawing.Size(306, 23)
+        Me.progressBar.TabIndex = 16
         '
         'btnMouseInfo
         '
         Me.btnMouseInfo.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
-        Me.btnMouseInfo.Location = New System.Drawing.Point(503, 309)
+        Me.btnMouseInfo.Location = New System.Drawing.Point(659, 10)
         Me.btnMouseInfo.Name = "btnMouseInfo"
-        Me.btnMouseInfo.Size = New System.Drawing.Size(68, 21)
-        Me.btnMouseInfo.TabIndex = 19
+        Me.btnMouseInfo.Size = New System.Drawing.Size(68, 23)
+        Me.btnMouseInfo.TabIndex = 6
         Me.btnMouseInfo.Text = "Mouse Info"
         Me.btnMouseInfo.UseVisualStyleBackColor = true
+        '
+        'btnGetMouse
+        '
+        Me.btnGetMouse.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.btnGetMouse.Location = New System.Drawing.Point(421, 103)
+        Me.btnGetMouse.Name = "btnGetMouse"
+        Me.btnGetMouse.Size = New System.Drawing.Size(150, 23)
+        Me.btnGetMouse.TabIndex = 4
+        Me.btnGetMouse.Text = "Get Mouse Pos (waits 1s)"
+        Me.btnGetMouse.UseVisualStyleBackColor = true
         '
         'KeyInsert
         '
@@ -534,7 +545,8 @@ Partial Class KeyInsert
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnRemove
-        Me.ClientSize = New System.Drawing.Size(739, 335)
+        Me.ClientSize = New System.Drawing.Size(739, 360)
+        Me.Controls.Add(Me.btnGetMouse)
         Me.Controls.Add(Me.btnMouseInfo)
         Me.Controls.Add(Me.progressBar)
         Me.Controls.Add(Me.lblVersion)
@@ -571,6 +583,7 @@ Partial Class KeyInsert
         Me.ResumeLayout(false)
         Me.PerformLayout
     End Sub
+    Private WithEvents btnGetMouse As System.Windows.Forms.Button
     Private WithEvents btnMouseInfo As System.Windows.Forms.Button
     Private lblVersion As System.Windows.Forms.Label
     Private WithEvents chkKeepOnTop As System.Windows.Forms.CheckBox

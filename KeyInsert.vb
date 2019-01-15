@@ -146,29 +146,8 @@ Public Partial Class KeyInsert
         bwKeyInserter.RunWorkerAsync
     End Sub
     
-    Sub chkStartMinimise_CheckedChanged() Handles chkStartMinimise.CheckedChanged
-        chkEndRestore.Checked = chkStartMinimise.Checked
-    End Sub
-    
-    Sub chkStartBackground_CheckedChanged() Handles chkStartBackground.CheckedChanged
-        chkEndForeground.Checked = chkStartBackground.Checked
-    End Sub
-    
-    Sub chkStartHide_CheckedChanged() Handles chkStartHide.CheckedChanged
-        chkEndShow.Checked = chkStartHide.Checked
-        chkEndShow.Enabled = Not chkStartHide.Checked
-    End Sub
-    
-    Sub btnScriptSave_Click() Handles btnScriptSave.Click
-        If sfdConfig.ShowDialog = DialogResult.OK Then
-            WriteConfig(sfdConfig.FileName)
-        End If
-    End Sub
-    
-    Sub btnScriptLoad_Click() Handles btnScriptLoad.Click
-        If ofdConfig.ShowDialog = DialogResult.OK Then
-            ReadConfig(ofdConfig.FileName)
-        End If
+    Sub btnGetMouse_Click() Handles btnGetMouse.Click
+        
     End Sub
     
     Sub lnkInfo_LinkClicked() Handles lnkInfo.LinkClicked
@@ -195,8 +174,33 @@ Public Partial Class KeyInsert
         MsgBox(tmpString, MsgBoxStyle.Information, "Mouse Info")
     End Sub
     
+    Sub chkStartMinimise_CheckedChanged() Handles chkStartMinimise.CheckedChanged
+        chkEndRestore.Checked = chkStartMinimise.Checked
+    End Sub
+    
+    Sub chkStartBackground_CheckedChanged() Handles chkStartBackground.CheckedChanged
+        chkEndForeground.Checked = chkStartBackground.Checked
+    End Sub
+    
+    Sub chkStartHide_CheckedChanged() Handles chkStartHide.CheckedChanged
+        chkEndShow.Checked = chkStartHide.Checked
+        chkEndShow.Enabled = Not chkStartHide.Checked
+    End Sub
+    
+    Sub btnScriptSave_Click() Handles btnScriptSave.Click
+        If sfdConfig.ShowDialog = DialogResult.OK Then
+            WriteConfig(sfdConfig.FileName)
+        End If
+    End Sub
+    
+    Sub btnScriptLoad_Click() Handles btnScriptLoad.Click
+        If ofdConfig.ShowDialog = DialogResult.OK Then
+            ReadConfig(ofdConfig.FileName)
+        End If
+    End Sub
+    
     Sub chkTaskbar_CheckedChanged() Handles chkTaskbar.CheckedChanged
-        'progressBar.ShowInTaskbar = chkTaskbar.Checked
+        progressBar.ShowInTaskbar = chkTaskbar.Checked
     End Sub
     
     Sub chkKeepOnTop_CheckedChanged() Handles chkKeepOnTop.CheckedChanged
