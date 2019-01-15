@@ -182,7 +182,8 @@ Public Partial Class KeyInsert
     
     Sub btnMouseInfo_Click() Handles btnMouseInfo.Click
         Dim tmpString As String = "To move the mouse and click:" & vbNewLine & vbNewLine
-        tmpString &= "$MOVETO(x, y) to set mouse position" & vbNewLine & vbNewLine
+        tmpString &= "$MOVETO(x, y) to set mouse position" & vbNewLine
+        tmpString &= "$MOVE(x, y) to move mouse relative to current position" & vbNewLine & vbNewLine
         tmpString &= "$CLICK(LeftClick) to click" & vbNewLine & vbNewLine
         tmpString &= "Available CLICK arguments:" & vbNewLine
         tmpString &= "LeftClick, LeftDown, LeftUp" & vbNewLine
@@ -268,10 +269,12 @@ Public Partial Class KeyInsert
         progressBar.Value = 0
     End Sub
     
+    ' cursor moving thanks to https://stackoverflow.com/a/8050847/2999220
+    ' mouse click credits in WalkmanLib
     Sub bwKeyInserter_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bwKeyInserter.ProgressChanged
         Dim itemText As String = lstKeyStrokes.Items.Item(e.ProgressPercentage).Text
         
-        If itemText.StartsWith("$MOVETO(", True, Nothing) Then '$MOVE(x, y) To move
+        If itemText.StartsWith("$MOVETO(", True, Nothing) Then '$MOVETO(x, y) to set mouse position
             ' remove $MOVETO(
             itemText = itemText.Substring(8)
             ' remove the ) at the end
@@ -300,6 +303,37 @@ Public Partial Class KeyInsert
             Else
                 bwKeyInserter.CancelAsync()
                 MsgBox("Error parsing $MOVETO at index " & e.ProgressPercentage & vbNewLine & vbNewLine & ""","" seperator not found in " & itemText, MsgBoxStyle.Critical, "Error")
+            End If
+            
+        ElseIf itemText.StartsWith("$MOVE(", True, Nothing) Then '$MOVE(x, y) to move mouse relative to current position
+            ' remove $MOVE(
+            itemText = itemText.Substring(6)
+            ' remove the ) at the end
+            itemText = itemText.Remove(itemText.Length -1)
+            
+            If itemText.Contains(",") Then
+                Dim pointX As Integer
+                Try
+                    pointX = Integer.Parse(itemText.Split(",")(0))
+                Catch ex As System.FormatException
+                    bwKeyInserter.CancelAsync()
+                    MsgBox("Error parsing $MOVE at index " & e.ProgressPercentage & vbNewLine & vbNewLine & "Invalid integer: " & itemText.Split(",")(0), MsgBoxStyle.Critical, "Error")
+                    Exit Sub
+                End Try
+                
+                Dim pointY As Integer
+                Try
+                    pointY = Integer.Parse(itemText.Split(",")(1))
+                Catch ex As System.FormatException
+                    bwKeyInserter.CancelAsync()
+                    MsgBox("Error parsing $MOVE at index " & e.ProgressPercentage & vbNewLine & vbNewLine & "Invalid integer: " & itemText.Split(",")(1), MsgBoxStyle.Critical, "Error")
+                    Exit Sub
+                End Try
+                
+                Cursor.Position = New Point(Cursor.Position.X + pointX, Cursor.Position.Y + pointY)
+            Else
+                bwKeyInserter.CancelAsync()
+                MsgBox("Error parsing $MOVE at index " & e.ProgressPercentage & vbNewLine & vbNewLine & ""","" seperator not found in " & itemText, MsgBoxStyle.Critical, "Error")
             End If
             
         ElseIf itemText.StartsWith("$CLICK(", True, Nothing) Then '$CLICK(LeftClick) to click
