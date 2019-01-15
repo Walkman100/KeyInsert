@@ -25,6 +25,8 @@ Public Partial Class KeyInsert
         Next
     End Sub
     
+    ' ==================== lstKeyStrokes ====================
+    
     Sub lstKeyStrokes_ColumnClick() Handles lstKeyStrokes.ColumnClick
         lstKeyStrokes.Sorting = IIf(lstKeyStrokes.Sorting = SortOrder.Ascending, SortOrder.Descending, SortOrder.Ascending)
         lstKeyStrokes.Sort
@@ -115,6 +117,8 @@ Public Partial Class KeyInsert
         End If
     End Sub
     
+    ' ==================== Right Panel ====================
+    
     Sub btnAdd_Click() Handles btnAdd.Click
         Dim inputBoxText = InputBox("Enter Keystroke to add:", "", "{ENTER}")
         If inputBoxText <> "" Then
@@ -135,13 +139,11 @@ Public Partial Class KeyInsert
         CheckButtons
     End Sub
     
-    Sub lnkInfo_LinkClicked() Handles lnkInfo.LinkClicked
-        Try
-            Process.Start("https://msdn.microsoft.com/en-us/library/system.windows.forms.sendkeys.send(v=vs.110).aspx?cs-lang=vb#Anchor_2")
-        Catch ex As Exception
-            If MsgBox("Unable to launch URL, copy to clipboard instead?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then _
-                Clipboard.SetText("https://msdn.microsoft.com/en-us/library/system.windows.forms.sendkeys.send(v=vs.110).aspx?cs-lang=vb#Anchor_2")
-        End Try
+    Sub btnStart_Click() Handles btnStart.Click
+        If chkStartMinimise.Checked Then WindowState = FormWindowState.Minimized
+        If chkStartBackground.Checked Then Me.SendToBack
+        If chkStartHide.Checked Then Me.Hide
+        bwKeyInserter.RunWorkerAsync
     End Sub
     
     Sub chkStartMinimise_CheckedChanged() Handles chkStartMinimise.CheckedChanged
@@ -157,12 +159,36 @@ Public Partial Class KeyInsert
         chkEndShow.Enabled = Not chkStartHide.Checked
     End Sub
     
-    Sub btnStart_Click() Handles btnStart.Click
-        If chkStartMinimise.Checked Then WindowState = FormWindowState.Minimized
-        If chkStartBackground.Checked Then Me.SendToBack
-        If chkStartHide.Checked Then Me.Hide
-        bwKeyInserter.RunWorkerAsync
+    Sub btnScriptSave_Click() Handles btnScriptSave.Click
+        If sfdConfig.ShowDialog = DialogResult.OK Then
+            WriteConfig(sfdConfig.FileName)
+        End If
     End Sub
+    
+    Sub btnScriptLoad_Click() Handles btnScriptLoad.Click
+        If ofdConfig.ShowDialog = DialogResult.OK Then
+            ReadConfig(ofdConfig.FileName)
+        End If
+    End Sub
+    
+    Sub lnkInfo_LinkClicked() Handles lnkInfo.LinkClicked
+        Try
+            Process.Start("https://msdn.microsoft.com/en-us/library/system.windows.forms.sendkeys.send(v=vs.110).aspx?cs-lang=vb#Anchor_2")
+        Catch ex As Exception
+            If MsgBox("Unable to launch URL, copy to clipboard instead?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then _
+                Clipboard.SetText("https://msdn.microsoft.com/en-us/library/system.windows.forms.sendkeys.send(v=vs.110).aspx?cs-lang=vb#Anchor_2")
+        End Try
+    End Sub
+    
+    Sub chkTaskbar_CheckedChanged() Handles chkTaskbar.CheckedChanged
+        'progressBar.ShowInTaskbar = chkTaskbar.Checked
+    End Sub
+    
+    Sub chkKeepOnTop_CheckedChanged() Handles chkKeepOnTop.CheckedChanged
+        Me.TopMost = chkKeepOnTop.Checked
+    End Sub
+    
+    ' ==================== BackgroundWorker methods ====================
     
     Function DisableKeyPressed As Boolean
         If optKeyCtrl.Checked Then
@@ -178,7 +204,7 @@ Public Partial Class KeyInsert
         ElseIf optKeyScrollLock.Checked
             Return My.Computer.Keyboard.ScrollLock
         Else
-            Return "Wtf"
+            Throw New ApplicationException("No key selected to check!")
         End If
     End Function
     
@@ -229,13 +255,7 @@ Public Partial Class KeyInsert
         SendKeys.Send(lstKeyStrokes.Items.Item(e.ProgressPercentage).Text)
     End Sub
     
-    Sub chkTaskbar_CheckedChanged() Handles chkTaskbar.CheckedChanged
-        progressBar.ShowInTaskbar = chkTaskbar.Checked
-    End Sub
-    
-    Sub chkKeepOnTop_CheckedChanged() Handles chkKeepOnTop.CheckedChanged
-        Me.TopMost = chkKeepOnTop.Checked
-    End Sub
+    ' ==================== Config reading & saving ====================
     
     Sub ReadConfig(path As String)
         Dim reader As XmlReader = XmlReader.Create(path)
@@ -410,17 +430,5 @@ Public Partial Class KeyInsert
         writer.WriteEndDocument()
         
         writer.Close
-    End Sub
-    
-    Sub btnScriptSave_Click() Handles btnScriptSave.Click
-        If sfdConfig.ShowDialog = DialogResult.OK Then
-            WriteConfig(sfdConfig.FileName)
-        End If
-    End Sub
-    
-    Sub btnScriptLoad_Click() Handles btnScriptLoad.Click
-        If ofdConfig.ShowDialog = DialogResult.OK Then
-            ReadConfig(ofdConfig.FileName)
-        End If
     End Sub
 End Class
