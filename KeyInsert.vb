@@ -233,11 +233,14 @@ Public Partial Class KeyInsert
         Next
         
         Dim runCount As Integer = 0
-        Do Until DisableKeyPressed Or runCount = numRunCountLimit.Value
+        Do Until DisableKeyPressed Or runCount = numRunCountLimit.Value Or bwKeyInserter.CancellationPending
             For Each item As ListViewItem In lstKeyStrokes.Items
                 lblStatus.Text = "Running: " & item.Index & "/" & lstKeyStrokes.Items.Count & ", Inserting."
+                
+                ' this does the actual interaction
                 bwKeyInserter.ReportProgress(item.Index) ' workaround for background workers not being able to interact with the UI
-                progressBar.Value = item.Index / lstKeyStrokes.Items.Count*100
+                
+                progressBar.Value = item.Index / lstKeyStrokes.Items.Count *100
                 
                 Dim i As Integer
                 For i = 0 To item.SubItems.Item(1).Text Step 10
@@ -266,7 +269,27 @@ Public Partial Class KeyInsert
     End Sub
     
     Sub bwKeyInserter_ProgressChanged(sender As Object, e As System.ComponentModel.ProgressChangedEventArgs) Handles bwKeyInserter.ProgressChanged
-        SendKeys.Send(lstKeyStrokes.Items.Item(e.ProgressPercentage).Text)
+        Dim itemText As String = lstKeyStrokes.Items.Item(e.ProgressPercentage).Text
+        
+        If itemText.StartsWith("$MOVETO(", True, Nothing) Then '$MOVE(x, y) To move
+            
+            
+        ElseIf itemText.StartsWith("$CLICK(", True, Nothing) Then '$CLICK(LeftClick) to click
+            ' remove $CLICK(
+            itemText = itemText.Substring(7)
+            ' remove the ) at the end
+            itemText = itemText.Remove(itemText.Length -1)
+            
+            Dim resultMouseButton As MouseButton
+            If MouseButton.TryParse(itemText, resultMouseButton) Then
+                WalkmanLib.MouseClick(resultMouseButton)
+            Else
+                bwKeyInserter.CancelAsync()
+                MsgBox("Error parsing $CLICK at index " & e.ProgressPercentage & vbNewLine & vbNewLine & "Invalid text: " & itemText, MsgBoxStyle.Critical, "Error")
+            End If
+        Else
+            SendKeys.Send(itemText)
+        End If
     End Sub
     
     ' ==================== Config reading & saving ====================
