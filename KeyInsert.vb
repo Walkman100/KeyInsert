@@ -182,7 +182,7 @@ Public Partial Class KeyInsert
     
     Sub btnMouseInfo_Click() Handles btnMouseInfo.Click
         Dim tmpString As String = "To move the mouse and click:" & vbNewLine & vbNewLine
-        tmpString &= "$MOVE(x, y) to move" & vbNewLine & vbNewLine
+        tmpString &= "$MOVETO(x, y) to move" & vbNewLine & vbNewLine
         tmpString &= "$CLICK(LeftClick) to click" & vbNewLine & vbNewLine
         tmpString &= "Available CLICK arguments:" & vbNewLine
         tmpString &= "LeftClick, LeftDown, LeftUp" & vbNewLine

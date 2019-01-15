@@ -86,6 +86,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Include="WalkmanLib\WalkmanLibWin32.vb">
+      <Link>WalkmanLibWin32.vb</Link>
+    </Compile>
     <Compile Include="Windows7ProgressBar.vb" />
   </ItemGroup>
   <ItemGroup>
