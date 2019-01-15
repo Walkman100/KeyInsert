@@ -1,9 +1,3 @@
-'
-' Created by SharpDevelop.
-' User: Walkman
-' Date: 2015/11/28
-' Time: 04:26 PM
-'
 Imports Microsoft.VisualBasic.ApplicationServices
 
 Namespace My

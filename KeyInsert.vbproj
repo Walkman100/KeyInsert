@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
   <PropertyGroup>
     <ProjectGuid>{8DFE4FDE-2F56-48D8-A9CB-0B1ED35933A3}</ProjectGuid>
@@ -80,7 +80,7 @@
       <DependentUpon>KeyInsert.vb</DependentUpon>
     </Compile>
     <Compile Include="KeyInsert.vb" />
-    <Compile Include="Program.vb" />
+    <Compile Include="Properties\Application.vb" />
     <Compile Include="Properties\AssemblyInfo.vb" />
     <Compile Include="Properties\Resources.Designer.vb">
       <DependentUpon>Resources.resx</DependentUpon>

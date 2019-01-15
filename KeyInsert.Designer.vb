@@ -1,9 +1,3 @@
-'
-' Created by SharpDevelop.
-' User: Walkman
-' Date: 2015/11/28
-' Time: 04:26 PM
-'
 Partial Class KeyInsert
     Inherits System.Windows.Forms.Form
     
