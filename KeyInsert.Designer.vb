@@ -532,11 +532,12 @@ Partial Class KeyInsert
         'btnGetMouse
         '
         Me.btnGetMouse.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.btnGetMouse.Enabled = false
         Me.btnGetMouse.Location = New System.Drawing.Point(421, 103)
         Me.btnGetMouse.Name = "btnGetMouse"
         Me.btnGetMouse.Size = New System.Drawing.Size(150, 23)
         Me.btnGetMouse.TabIndex = 4
-        Me.btnGetMouse.Text = "Get Mouse Pos (waits 1s)"
+        Me.btnGetMouse.Text = "Get Mouse Pos (waits 2s)"
         Me.btnGetMouse.UseVisualStyleBackColor = true
         '
         'KeyInsert

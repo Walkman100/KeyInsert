@@ -107,8 +107,10 @@ Public Partial Class KeyInsert
     Sub CheckButtons() Handles lstKeyStrokes.Click, lstKeyStrokes.SelectedIndexChanged, lstKeyStrokes.AfterLabelEdit, lstKeyStrokes.ColumnReordered
         If IsNothing(lstKeyStrokes.FocusedItem) Then
             btnRemove.Enabled = False
+            btnGetMouse.Enabled = False
         Else
             btnRemove.Enabled = True
+            btnGetMouse.Enabled = True
         End If
         If lstKeyStrokes.Items.Count = 0 Then
             btnStart.Enabled = False
@@ -147,7 +149,11 @@ Public Partial Class KeyInsert
     End Sub
     
     Sub btnGetMouse_Click() Handles btnGetMouse.Click
+        Me.SendToBack
+        Threading.Thread.Sleep(2000)
         
+        lstKeyStrokes.FocusedItem.SubItems.Item(0).Text = "$MOVETO(" & Cursor.Position.X & ", " & Cursor.Position.Y & ")"
+        Me.BringToFront
     End Sub
     
     Sub lnkInfo_LinkClicked() Handles lnkInfo.LinkClicked
