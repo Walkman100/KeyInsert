@@ -77,6 +77,7 @@ Partial Class KeyInsert
         Me.lblRunCountLimit = New System.Windows.Forms.Label()
         Me.chkKeepOnTop = New System.Windows.Forms.CheckBox()
         Me.lblVersion = New System.Windows.Forms.Label()
+        Me.btnMouseInfo = New System.Windows.Forms.Button()
         Me.contextCommands.SuspendLayout
         Me.grpStopKey.SuspendLayout
         Me.grpStart.SuspendLayout
@@ -503,12 +504,13 @@ Partial Class KeyInsert
         '
         'chkKeepOnTop
         '
+        Me.chkKeepOnTop.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
         Me.chkKeepOnTop.AutoSize = true
         Me.chkKeepOnTop.Location = New System.Drawing.Point(577, 314)
         Me.chkKeepOnTop.Name = "chkKeepOnTop"
         Me.chkKeepOnTop.Size = New System.Drawing.Size(123, 17)
         Me.chkKeepOnTop.TabIndex = 17
-        Me.chkKeepOnTop.Text = "Keep on window top"
+        Me.chkKeepOnTop.Text = "Keep window on top"
         Me.chkKeepOnTop.UseVisualStyleBackColor = true
         '
         'lblVersion
@@ -522,6 +524,16 @@ Partial Class KeyInsert
         Me.lblVersion.TabIndex = 18
         Me.lblVersion.Text = "1.0.0"
         '
+        'btnMouseInfo
+        '
+        Me.btnMouseInfo.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right),System.Windows.Forms.AnchorStyles)
+        Me.btnMouseInfo.Location = New System.Drawing.Point(503, 303)
+        Me.btnMouseInfo.Name = "btnMouseInfo"
+        Me.btnMouseInfo.Size = New System.Drawing.Size(68, 21)
+        Me.btnMouseInfo.TabIndex = 19
+        Me.btnMouseInfo.Text = "Mouse Info"
+        Me.btnMouseInfo.UseVisualStyleBackColor = true
+        '
         'KeyInsert
         '
         Me.AcceptButton = Me.btnStart
@@ -529,6 +541,8 @@ Partial Class KeyInsert
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnRemove
         Me.ClientSize = New System.Drawing.Size(739, 335)
+        Me.Controls.Add(Me.btnMouseInfo)
+        Me.Controls.Add(Me.progressBar)
         Me.Controls.Add(Me.lblVersion)
         Me.Controls.Add(Me.chkKeepOnTop)
         Me.Controls.Add(Me.lblRunCountLimit)
@@ -536,7 +550,6 @@ Partial Class KeyInsert
         Me.Controls.Add(Me.numRunCountLimit)
         Me.Controls.Add(Me.numStartupDelay)
         Me.Controls.Add(Me.chkTaskbar)
-        Me.Controls.Add(Me.progressBar)
         Me.Controls.Add(Me.btnScriptLoad)
         Me.Controls.Add(Me.btnScriptSave)
         Me.Controls.Add(Me.grpEnd)
@@ -564,6 +577,7 @@ Partial Class KeyInsert
         Me.ResumeLayout(false)
         Me.PerformLayout
     End Sub
+    Private WithEvents btnMouseInfo As System.Windows.Forms.Button
     Private lblVersion As System.Windows.Forms.Label
     Private WithEvents chkKeepOnTop As System.Windows.Forms.CheckBox
     Private optKeyNumLock As System.Windows.Forms.RadioButton

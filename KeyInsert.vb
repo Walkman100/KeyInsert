@@ -173,11 +173,25 @@ Public Partial Class KeyInsert
     
     Sub lnkInfo_LinkClicked() Handles lnkInfo.LinkClicked
         Try
-            Process.Start("https://msdn.microsoft.com/en-us/library/system.windows.forms.sendkeys.send(v=vs.110).aspx?cs-lang=vb#Anchor_2")
+            Process.Start("https://docs.microsoft.com/en-us/dotnet/api/system.windows.forms.sendkeys.send?view=netframework-4.5#remarks")
         Catch ex As Exception
             If MsgBox("Unable to launch URL, copy to clipboard instead?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then _
-                Clipboard.SetText("https://msdn.microsoft.com/en-us/library/system.windows.forms.sendkeys.send(v=vs.110).aspx?cs-lang=vb#Anchor_2")
+                Clipboard.SetText("https://docs.microsoft.com/en-us/dotnet/api/system.windows.forms.sendkeys.send?view=netframework-4.5#remarks")
         End Try
+    End Sub
+    
+    Sub btnMouseInfo_Click() Handles btnMouseInfo.Click
+        Dim tmpString As String = "To move the mouse and click:" & vbNewLine & vbNewLine
+        tmpString &= "$MOVE(x, y) to move" & vbNewLine & vbNewLine
+        tmpString &= "$CLICK(LeftClick) to click" & vbNewLine & vbNewLine
+        tmpString &= "Available CLICK arguments:" & vbNewLine
+        tmpString &= "LeftClick, LeftDown, LeftUp" & vbNewLine
+        tmpString &= "MiddleClick, MiddleDown, MiddleUp" & vbNewLine
+        tmpString &= "RightClick, RightDown, RightUp" & vbNewLine
+        tmpString &= "XClick, XDown, XUp" & vbNewLine & vbNewLine
+        tmpString &= "<Button>Down and <Button>Up are used to click-and-drag"
+        
+        MsgBox(tmpString, MsgBoxStyle.Information, "Mouse Info")
     End Sub
     
     Sub chkTaskbar_CheckedChanged() Handles chkTaskbar.CheckedChanged
