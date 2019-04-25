@@ -32,7 +32,7 @@
     <RegisterForComInterop>False</RegisterForComInterop>
     <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
     <FileAlignment>4096</FileAlignment>
-    <Prefer32Bit>True</Prefer32Bit>
+    <Prefer32Bit>False</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <OutputPath>bin\Debug\</OutputPath>
@@ -85,6 +85,9 @@
     <Compile Include="Properties\Resources.Designer.vb">
       <DependentUpon>Resources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="WalkmanLib\WalkmanLibDotNet.vb">
+      <Link>WalkmanLibDotNet.vb</Link>
     </Compile>
     <Compile Include="WalkmanLib\WalkmanLibWin32.vb">
       <Link>WalkmanLibWin32.vb</Link>
