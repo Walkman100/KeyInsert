@@ -4,23 +4,14 @@ Public Partial Class KeyInsert
     Public Sub New()
         Me.InitializeComponent()
         lblVersion.Text = My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor & "." & My.Application.Info.Version.Build
-        Dim concatPath As String = ""
+        
         For Each s As String In My.Application.CommandLineArgs
             If IO.File.Exists(s) Then
                 ReadConfig(s)
+            ElseIf s = "start"
+                btnStart_Click()
             Else
-                If concatPath = "" Then
-                    MsgBox("""" & s & """ doesn't exist! checking for non-enclosed path...", MsgBoxStyle.Exclamation)
-                    concatPath = s
-                Else
-                    concatPath &= " " & s
-                    If IO.File.Exists(concatPath) Then
-                        MsgBox("Found """ & concatPath & """!", MsgBoxStyle.Information)
-                        ReadConfig(concatPath)
-                    Else
-                        MsgBox("""" & concatPath & """ doesn't exist!", MsgBoxStyle.Exclamation)
-                    End If
-                End If
+                MsgBox("""" & s & """ doesn't exist!", MsgBoxStyle.Exclamation)
             End If
         Next
     End Sub
@@ -353,7 +344,7 @@ Public Partial Class KeyInsert
             itemText = itemText.Remove(itemText.Length -1)
             
             Dim resultMouseButton As MouseButton
-            If MouseButton.TryParse(itemText, resultMouseButton) Then
+            If MouseButton.TryParse(itemText, True, resultMouseButton) Then
                 WalkmanLib.MouseClick(resultMouseButton)
             Else
                 bwKeyInserter.CancelAsync()
