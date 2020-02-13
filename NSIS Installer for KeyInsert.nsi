@@ -42,14 +42,14 @@ SectionEnd
 Section "Add to Windows Programs & Features"
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${ProgramName}" "DisplayName" "${ProgramName}"
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${ProgramName}" "Publisher" "WalkmanOSS"
-  
+
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${ProgramName}" "DisplayIcon" "$INSTDIR\${ProgramName}.exe"
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${ProgramName}" "InstallLocation" "$INSTDIR\"
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${ProgramName}" "UninstallString" "$INSTDIR\${ProgramName}-Uninst.exe"
-  
+
   WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${ProgramName}" "NoModify" 1
   WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${ProgramName}" "NoRepair" 1
-  
+
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${ProgramName}" "HelpLink" "https://github.com/Walkman100/${ProgramName}/issues/new"
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${ProgramName}" "URLInfoAbout" "https://github.com/Walkman100/${ProgramName}" ; Support Link
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${ProgramName}" "URLUpdateInfo" "https://github.com/Walkman100/${ProgramName}/releases" ; Update Info Link
@@ -103,22 +103,22 @@ Function postInstallShow
   ${If} $Dialog == error
     Abort
   ${EndIf}
-  
+
   ${NSD_CreateLabel} 0 0 100% 12u "Setup will launch these tasks when you click close:"
   Pop $Label
-  
+
   ${NSD_CreateCheckbox} 10u 30u 100% 10u "&Open Readme"
   Pop $CheckboxReadme
   ${If} $CheckboxReadme_State == ${BST_CHECKED}
     ${NSD_Check} $CheckboxReadme
   ${EndIf}
-  
+
   ${NSD_CreateCheckbox} 10u 50u 100% 10u "&Launch ${ProgramName}"
   Pop $CheckboxRunProgram
   ${If} $CheckboxRunProgram_State == ${BST_CHECKED}
     ${NSD_Check} $CheckboxRunProgram
   ${EndIf}
-  
+
   # alternative for the above ${If}:
   #${NSD_SetState} $Checkbox_State
   nsDialogs::Show
@@ -127,7 +127,7 @@ FunctionEnd
 Function postInstallFinish
   ${NSD_GetState} $CheckboxReadme $CheckboxReadme_State
   ${NSD_GetState} $CheckboxRunProgram $CheckboxRunProgram_State
-  
+
   ${If} $CheckboxReadme_State == ${BST_CHECKED}
     ExecShell "open" "https://github.com/Walkman100/${ProgramName}/blob/master/README.md#keyinsert-"
   ${EndIf}
@@ -143,15 +143,20 @@ Section "Uninstall"
   Delete "$INSTDIR\${ProgramName}.exe"
   Delete "$INSTDIR\${ProgramName}.exe.config"
   RMDir "$INSTDIR"
-  
+
   DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${ProgramName}" ; Remove Windows Programs & Features integration (uninstall info)
-  
+
   Delete "$SMPROGRAMS\WalkmanOSS\${ProgramName}.lnk" ; Remove Start Menu Shortcuts & Folder
   Delete "$SMPROGRAMS\WalkmanOSS\Uninstall ${ProgramName}.lnk"
   RMDir "$SMPROGRAMS\WalkmanOSS"
-  
+
   Delete "$DESKTOP\${ProgramName}.lnk"     ; Remove Desktop      Shortcut
   Delete "$QUICKLAUNCH\${ProgramName}.lnk" ; Remove Quick Launch Shortcut
+
+  DeleteRegKey HKCR "Applications\${ProgramName}.exe"
+  DeleteRegKey HKCR ".${ProgramName}"
+  DeleteRegKey HKCR "${ProgramName}_auto_file"
+  DeleteRegKey HKCR "Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.${ProgramName}"
 SectionEnd
 
 ; Uninstaller Functions
