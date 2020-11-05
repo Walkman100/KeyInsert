@@ -86,13 +86,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
     </Compile>
-    <Compile Include="WalkmanLib\WalkmanLibDotNet.vb">
-      <Link>WalkmanLibDotNet.vb</Link>
-    </Compile>
-    <Compile Include="WalkmanLib\WalkmanLibWin32.vb">
-      <Link>WalkmanLibWin32.vb</Link>
-    </Compile>
-    <Compile Include="Windows7ProgressBar.vb" />
+    <Compile Include="WalkmanLib\WalkmanLibDotNet.vb" />
+    <Compile Include="WalkmanLib\WalkmanLibWin32.vb" />
+    <Compile Include="WalkmanLib\Windows7ProgressBar.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -103,6 +99,9 @@
   <ItemGroup>
     <None Include="Properties\App.config" />
     <None Include="Properties\App.manifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="WalkmanLib" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
