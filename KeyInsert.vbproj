@@ -9,6 +9,7 @@
     <RootNamespace>KeyInsert</RootNamespace>
     <AssemblyName>KeyInsert</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <LangVersion>11</LangVersion>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <OptionInfer>On</OptionInfer>
     <NoWin32Manifest>False</NoWin32Manifest>

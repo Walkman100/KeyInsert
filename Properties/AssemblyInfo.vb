@@ -13,7 +13,7 @@ Imports System.Runtime.InteropServices
 <assembly: AssemblyConfiguration("")>
 <assembly: AssemblyCompany("Walkman100")>
 <assembly: AssemblyProduct("KeyInsert")>
-<assembly: AssemblyCopyright("FOSS from Walkman 2015-20")>
+<assembly: AssemblyCopyright("FOSS from Walkman 2015-21")>
 <assembly: AssemblyTrademark("")>
 <assembly: AssemblyCulture("")>
 
