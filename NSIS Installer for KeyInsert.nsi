@@ -2,7 +2,7 @@
 ; get NSIS at http://nsis.sourceforge.net/Download
 
 !define ProgramName "KeyInsert"
-!define ProgramVersion 1.5.0.0
+!define ProgramVersion 1.5.1.0
 Icon "Properties\key_presser_5.ico"
 
 Name "${ProgramName}"
