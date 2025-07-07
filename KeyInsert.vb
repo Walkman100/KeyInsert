@@ -3,6 +3,8 @@ Imports System.Xml
 Partial Public Class KeyInsert
     Public Sub New()
         Me.InitializeComponent()
+        lstKeyStrokes.DoubleBuffered(True)
+
         lblVersion.Text = My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor & "." & My.Application.Info.Version.Build
         If WalkmanLib.IsAdmin Then
             Me.Text = "[Admin] KeyInsert"
@@ -21,7 +23,7 @@ Partial Public Class KeyInsert
 
     ' ==================== lstKeyStrokes ====================
     Sub lstKeyStrokes_ColumnClick() Handles lstKeyStrokes.ColumnClick
-        lstKeyStrokes.Sorting = IIf(lstKeyStrokes.Sorting = SortOrder.Ascending, SortOrder.Descending, SortOrder.Ascending)
+        lstKeyStrokes.Sorting = If(lstKeyStrokes.Sorting = SortOrder.Ascending, SortOrder.Descending, SortOrder.Ascending)
         lstKeyStrokes.Sort()
     End Sub
     Sub ResizeByHeader(sender As Object, e As EventArgs) Handles contextCommandsResizePathHeader.Click, contextCommandsResizeArgsHeader.Click
@@ -106,6 +108,7 @@ Partial Public Class KeyInsert
             btnStart.Enabled = True
         End If
     End Sub
+
 
     ' ==================== Right Panel ====================
 
@@ -495,19 +498,19 @@ Partial Public Class KeyInsert
                     writer.WriteAttributeString("key", "scrolllock")
                 End If
             writer.WriteEndElement()
-            
+
             writer.WriteStartElement("StartActions")
                 writer.WriteAttributeString("minimise", chkStartMinimise.Checked)
                 writer.WriteAttributeString("background", chkStartBackground.Checked)
                 writer.WriteAttributeString("hide", chkStartHide.Checked)
             writer.WriteEndElement()
-            
+
             writer.WriteStartElement("EndActions")
                 writer.WriteAttributeString("restore", chkEndRestore.Checked)
                 writer.WriteAttributeString("foreground", chkEndForeground.Checked)
                 writer.WriteAttributeString("show", chkEndShow.Checked)
             writer.WriteEndElement()
-                
+
             writer.WriteStartElement("StartDelay")
                 writer.WriteAttributeString("value", numStartupDelay.Value)
             writer.WriteEndElement()
@@ -518,7 +521,6 @@ Partial Public Class KeyInsert
                 writer.WriteAttributeString("value", chkTaskbar.Checked)
             writer.WriteEndElement()
         writer.WriteEndElement()
-        writer.WriteEndElement()
 
         writer.WriteEndElement()
         writer.WriteEndDocument()
@@ -526,3 +528,11 @@ Partial Public Class KeyInsert
         writer.Close()
     End Sub
 End Class
+
+Module Extensions
+    <Runtime.CompilerServices.Extension()>
+    Public Sub DoubleBuffered(control As Control, enable As Boolean) ' thanks to https://stackoverflow.com/a/15268338/2999220
+        Dim doubleBufferPropertyInfo = control.[GetType]().GetProperty("DoubleBuffered", Reflection.BindingFlags.Instance Or Reflection.BindingFlags.NonPublic)
+        doubleBufferPropertyInfo.SetValue(control, enable, Nothing)
+    End Sub
+End Module
