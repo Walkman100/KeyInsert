@@ -61,6 +61,7 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq">
@@ -88,6 +89,7 @@
       <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="WalkmanLib\WalkmanLibDotNet.vb" />
+    <Compile Include="WalkmanLib\WalkmanLibTheming.vb" />
     <Compile Include="WalkmanLib\WalkmanLibWin32.vb" />
     <Compile Include="WalkmanLib\Windows7ProgressBar.vb" />
   </ItemGroup>
