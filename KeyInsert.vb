@@ -250,10 +250,11 @@ Partial Public Class KeyInsert
         Next
 
         Dim runCount As Integer = 0
-        Do Until DisableKeyPressed() Or runCount = numRunCountLimit.Value Or bwKeyInserter.CancellationPending
+        Do Until DisableKeyPressed() Or runCount = numRunCountLimit.Value Or bwKeyInserter.CancellationPending Or e.Cancel
             For Each item As ListViewItem In lstKeyStrokes.Items
                 lblStatus.Text = "Running: " & item.Index & "/" & lstKeyStrokes.Items.Count & ", Inserting."
 
+                If bwKeyInserter.CancellationPending Or e.Cancel Then Exit For
                 ' this does the actual interaction
                 bwKeyInserter.ReportProgress(item.Index) ' workaround for background workers not being able to interact with the UI
 
