@@ -1,9 +1,29 @@
 Imports System.Xml
 
 Partial Public Class KeyInsert
+    ReadOnly theme As WalkmanLib.Theme = WalkmanLib.Theme.Default
+    Function MessageBox(text As String, Optional buttons As MessageBoxButtons = 0, Optional icon As MessageBoxIcon = 0, Optional title As String = Nothing) As DialogResult
+        If title Is Nothing Then title = Application.ProductName
+        Return WalkmanLib.CustomMsgBox(text, theme, title, buttons, icon, WinVersionStyle.Win10, Me)
+    End Function
+    Function GetInput(ByRef input As String, Optional header As String = Nothing, Optional windowTitle As String = Nothing, Optional content As String = Nothing) As DialogResult
+        Return WalkmanLib.InputDialog(input, theme, header, windowTitle, content, ownerForm:=Me)
+    End Function
+
     Public Sub New()
         Me.InitializeComponent()
         lstKeyStrokes.DoubleBuffered(True)
+
+        If WalkmanLib.GetDarkThemeEnabled() Then
+            theme = WalkmanLib.Theme.Dark
+        End If
+        AddHandler lstKeyStrokes.DrawItem, AddressOf WalkmanLib.CustomPaint.ListView_DrawDefaultItem
+        AddHandler lstKeyStrokes.DrawSubItem, AddressOf WalkmanLib.CustomPaint.ListView_DrawDefaultSubItem
+        AddHandler lstKeyStrokes.DrawColumnHeader, AddressOf WalkmanLib.CustomPaint.ListView_DrawCustomColumnHeader
+        lstKeyStrokes.Tag = theme.ListViewColumnColors
+        WalkmanLib.ApplyTheme(theme, Me, True)
+        WalkmanLib.ApplyTheme(theme, Me.components.Components, True)
+        If theme = WalkmanLib.Theme.Dark Then ToolStripManager.Renderer = New WalkmanLib.CustomPaint.ToolStripSystemRendererWithDisabled(theme.ToolStripItemDisabledText)
 
         lblVersion.Text = My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor & "." & My.Application.Info.Version.Build
         If WalkmanLib.IsAdmin Then
@@ -15,7 +35,7 @@ Partial Public Class KeyInsert
             ElseIf s = "start" Then
                 btnStart_Click()
             Else
-                MsgBox("""" & s & """ doesn't exist!", MsgBoxStyle.Exclamation)
+                MessageBox("""" & s & """ doesn't exist!", icon:=MessageBoxIcon.Exclamation)
             End If
         Next
     End Sub
@@ -81,16 +101,16 @@ Partial Public Class KeyInsert
         Dim inputBoxText As String
         If lstKeyStrokes.SelectedItems.Count > 1 Then
             For Each item As ListViewItem In lstKeyStrokes.SelectedItems
-                inputBoxText = InputBox("Enter Keystroke:", "", item.SubItems.Item(0).Text)
-                If inputBoxText <> "" Then item.SubItems.Item(0).Text = inputBoxText
-                inputBoxText = InputBox("Enter the time to wait after """ & item.Text & """ has been inserted:", "", item.SubItems.Item(1).Text)
-                If inputBoxText <> "" Then item.SubItems.Item(1).Text = inputBoxText
+                inputBoxText = item.SubItems.Item(0).Text
+                If GetInput(inputBoxText, "Enter Keystroke:") = DialogResult.OK Then item.SubItems.Item(0).Text = inputBoxText
+                inputBoxText = item.SubItems.Item(1).Text
+                If GetInput(inputBoxText, "Enter the time to wait after """ & item.Text & """ has been inserted:") = DialogResult.OK Then item.SubItems.Item(1).Text = inputBoxText
             Next
         Else
-            inputBoxText = InputBox("Enter Keystroke:", "", lstKeyStrokes.FocusedItem.SubItems.Item(0).Text)
-            If inputBoxText <> "" Then lstKeyStrokes.FocusedItem.SubItems.Item(0).Text = inputBoxText
-            inputBoxText = InputBox("Enter the time to wait after """ & lstKeyStrokes.FocusedItem.Text & """ has been inserted:", "", lstKeyStrokes.FocusedItem.SubItems.Item(1).Text)
-            If inputBoxText <> "" Then lstKeyStrokes.FocusedItem.SubItems.Item(1).Text = inputBoxText
+            inputBoxText = lstKeyStrokes.FocusedItem.SubItems.Item(0).Text
+            If GetInput(inputBoxText, "Enter Keystroke:") = DialogResult.OK Then lstKeyStrokes.FocusedItem.SubItems.Item(0).Text = inputBoxText
+            inputBoxText = lstKeyStrokes.FocusedItem.SubItems.Item(1).Text
+            If GetInput(inputBoxText, "Wait Time", content:="Enter the time to wait after """ & lstKeyStrokes.FocusedItem.Text & """ has been inserted:") = DialogResult.OK Then lstKeyStrokes.FocusedItem.SubItems.Item(1).Text = inputBoxText
         End If
     End Sub
 
@@ -113,8 +133,8 @@ Partial Public Class KeyInsert
     ' ==================== Right Panel ====================
 
     Sub btnAdd_Click() Handles btnAdd.Click
-        Dim inputBoxText = InputBox("Enter Keystroke to add:", "", "{ENTER}")
-        If inputBoxText <> "" Then
+        Dim inputBoxText = "{ENTER}"
+        If GetInput(inputBoxText, "Enter Keystroke to add:") = DialogResult.OK Then
             Dim tmpListViewItem As New ListViewItem(New String() {inputBoxText, "100"})
             lstKeyStrokes.FocusedItem = lstKeyStrokes.Items.Add(tmpListViewItem)
         End If
@@ -151,7 +171,7 @@ Partial Public Class KeyInsert
         Try
             Process.Start("https://docs.microsoft.com/en-us/dotnet/api/system.windows.forms.sendkeys.send?view=netframework-4.5#remarks")
         Catch ex As Exception
-            If MsgBox("Unable to launch URL, copy to clipboard instead?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then _
+            If MessageBox("Unable to launch URL, copy to clipboard instead?", MessageBoxButtons.YesNo) = DialogResult.Yes Then _
                 Clipboard.SetText("https://docs.microsoft.com/en-us/dotnet/api/system.windows.forms.sendkeys.send?view=netframework-4.5#remarks")
         End Try
     End Sub
@@ -168,7 +188,7 @@ Partial Public Class KeyInsert
         tmpString &= "XClick, XDown, XUp" & vbNewLine & vbNewLine
         tmpString &= "<Button>Down and <Button>Up are used to click-and-drag"
 
-        MsgBox(tmpString, MsgBoxStyle.Information, "Mouse Info")
+        MessageBox(tmpString, icon:=MessageBoxIcon.Information, title:="Mouse Info")
     End Sub
 
     Sub chkStartMinimise_CheckedChanged() Handles chkStartMinimise.CheckedChanged
@@ -282,7 +302,7 @@ Partial Public Class KeyInsert
                     pointX = Integer.Parse(itemText.Split(",")(0))
                 Catch ex As System.FormatException
                     bwKeyInserter.CancelAsync()
-                    MsgBox("Error parsing $MOVETO at index " & e.ProgressPercentage & vbNewLine & vbNewLine & "Invalid integer: " & itemText.Split(",")(0), MsgBoxStyle.Critical, "Error")
+                    MessageBox("Error parsing $MOVETO at index " & e.ProgressPercentage & vbNewLine & vbNewLine & "Invalid integer: " & itemText.Split(",")(0), icon:=MessageBoxIcon.Error, title:="Error")
                     Exit Sub
                 End Try
 
@@ -291,14 +311,14 @@ Partial Public Class KeyInsert
                     pointY = Integer.Parse(itemText.Split(",")(1))
                 Catch ex As System.FormatException
                     bwKeyInserter.CancelAsync()
-                    MsgBox("Error parsing $MOVETO at index " & e.ProgressPercentage & vbNewLine & vbNewLine & "Invalid integer: " & itemText.Split(",")(1), MsgBoxStyle.Critical, "Error")
+                    MessageBox("Error parsing $MOVETO at index " & e.ProgressPercentage & vbNewLine & vbNewLine & "Invalid integer: " & itemText.Split(",")(1), icon:=MessageBoxIcon.Error, title:="Error")
                     Exit Sub
                 End Try
 
                 Cursor.Position = New Point(pointX, pointY)
             Else
                 bwKeyInserter.CancelAsync()
-                MsgBox("Error parsing $MOVETO at index " & e.ProgressPercentage & vbNewLine & vbNewLine & ""","" seperator not found in " & itemText, MsgBoxStyle.Critical, "Error")
+                MessageBox("Error parsing $MOVETO at index " & e.ProgressPercentage & vbNewLine & vbNewLine & ""","" seperator not found in " & itemText, icon:=MessageBoxIcon.Error, title:="Error")
             End If
 
         ElseIf itemText.StartsWith("$MOVE(", True, Nothing) Then '$MOVE(x, y) to move mouse relative to current position
@@ -313,7 +333,7 @@ Partial Public Class KeyInsert
                     pointX = Integer.Parse(itemText.Split(",")(0))
                 Catch ex As System.FormatException
                     bwKeyInserter.CancelAsync()
-                    MsgBox("Error parsing $MOVE at index " & e.ProgressPercentage & vbNewLine & vbNewLine & "Invalid integer: " & itemText.Split(",")(0), MsgBoxStyle.Critical, "Error")
+                    MessageBox("Error parsing $MOVE at index " & e.ProgressPercentage & vbNewLine & vbNewLine & "Invalid integer: " & itemText.Split(",")(0), icon:=MessageBoxIcon.Error, title:="Error")
                     Exit Sub
                 End Try
 
@@ -322,14 +342,14 @@ Partial Public Class KeyInsert
                     pointY = Integer.Parse(itemText.Split(",")(1))
                 Catch ex As System.FormatException
                     bwKeyInserter.CancelAsync()
-                    MsgBox("Error parsing $MOVE at index " & e.ProgressPercentage & vbNewLine & vbNewLine & "Invalid integer: " & itemText.Split(",")(1), MsgBoxStyle.Critical, "Error")
+                    MessageBox("Error parsing $MOVE at index " & e.ProgressPercentage & vbNewLine & vbNewLine & "Invalid integer: " & itemText.Split(",")(1), icon:=MessageBoxIcon.Error, title:="Error")
                     Exit Sub
                 End Try
 
                 Cursor.Position = New Point(Cursor.Position.X + pointX, Cursor.Position.Y + pointY)
             Else
                 bwKeyInserter.CancelAsync()
-                MsgBox("Error parsing $MOVE at index " & e.ProgressPercentage & vbNewLine & vbNewLine & ""","" seperator not found in " & itemText, MsgBoxStyle.Critical, "Error")
+                MessageBox("Error parsing $MOVE at index " & e.ProgressPercentage & vbNewLine & vbNewLine & ""","" seperator not found in " & itemText, icon:=MessageBoxIcon.Error, title:="Error")
             End If
 
         ElseIf itemText.StartsWith("$CLICK(", True, Nothing) Then '$CLICK(LeftClick) to click
@@ -343,7 +363,7 @@ Partial Public Class KeyInsert
                 WalkmanLib.MouseClick(resultMouseButton)
             Else
                 bwKeyInserter.CancelAsync()
-                MsgBox("Error parsing $CLICK at index " & e.ProgressPercentage & vbNewLine & vbNewLine & "Invalid text: " & itemText, MsgBoxStyle.Critical, "Error")
+                MessageBox("Error parsing $CLICK at index " & e.ProgressPercentage & vbNewLine & vbNewLine & "Invalid text: " & itemText, icon:=MessageBoxIcon.Error, title:="Error")
             End If
         Else
             SendKeys.Send(itemText)
@@ -359,7 +379,7 @@ Partial Public Class KeyInsert
             reader.Read()
         Catch ex As XmlException
             reader.Close()
-            MsgBox("Reading config failed! The error was: " & ex.ToString, MsgBoxStyle.Critical)
+            MessageBox("Reading config failed! The error was: " & ex.ToString(), icon:=MessageBoxIcon.Error)
             Exit Sub
         End Try
         Dim attribute As String
