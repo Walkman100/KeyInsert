@@ -7,6 +7,7 @@ Partial Public Class KeyInsert
         Return WalkmanLib.CustomMsgBox(text, theme, title, buttons, icon, WinVersionStyle.Win10, Me)
     End Function
     Function GetInput(ByRef input As String, Optional header As String = Nothing, Optional windowTitle As String = Nothing, Optional content As String = Nothing) As DialogResult
+        If windowTitle Is Nothing Then windowTitle = Application.ProductName
         Return WalkmanLib.InputDialog(input, theme, header, windowTitle, content, ownerForm:=Me)
     End Function
 
@@ -102,15 +103,15 @@ Partial Public Class KeyInsert
         If lstKeyStrokes.SelectedItems.Count > 1 Then
             For Each item As ListViewItem In lstKeyStrokes.SelectedItems
                 inputBoxText = item.SubItems.Item(0).Text
-                If GetInput(inputBoxText, "Enter Keystroke:") = DialogResult.OK Then item.SubItems.Item(0).Text = inputBoxText
+                If GetInput(inputBoxText, "Enter Keystroke:", "Edit Entry") = DialogResult.OK Then item.SubItems.Item(0).Text = inputBoxText
                 inputBoxText = item.SubItems.Item(1).Text
-                If GetInput(inputBoxText, "Enter the time to wait after """ & item.Text & """ has been inserted:") = DialogResult.OK Then item.SubItems.Item(1).Text = inputBoxText
+                If GetInput(inputBoxText, "Enter the time to wait after """ & item.Text & """ has been inserted:", "Edit Entry") = DialogResult.OK Then item.SubItems.Item(1).Text = inputBoxText
             Next
         Else
             inputBoxText = lstKeyStrokes.FocusedItem.SubItems.Item(0).Text
-            If GetInput(inputBoxText, "Enter Keystroke:") = DialogResult.OK Then lstKeyStrokes.FocusedItem.SubItems.Item(0).Text = inputBoxText
+            If GetInput(inputBoxText, "Enter Keystroke:", "Edit Entry") = DialogResult.OK Then lstKeyStrokes.FocusedItem.SubItems.Item(0).Text = inputBoxText
             inputBoxText = lstKeyStrokes.FocusedItem.SubItems.Item(1).Text
-            If GetInput(inputBoxText, "Wait Time", content:="Enter the time to wait after """ & lstKeyStrokes.FocusedItem.Text & """ has been inserted:") = DialogResult.OK Then lstKeyStrokes.FocusedItem.SubItems.Item(1).Text = inputBoxText
+            If GetInput(inputBoxText, "Wait Time", "Edit Entry", "Enter the time to wait after """ & lstKeyStrokes.FocusedItem.Text & """ has been inserted:") = DialogResult.OK Then lstKeyStrokes.FocusedItem.SubItems.Item(1).Text = inputBoxText
         End If
     End Sub
 
@@ -134,7 +135,7 @@ Partial Public Class KeyInsert
 
     Sub btnAdd_Click() Handles btnAdd.Click
         Dim inputBoxText = "{ENTER}"
-        If GetInput(inputBoxText, "Enter Keystroke to add:") = DialogResult.OK Then
+        If GetInput(inputBoxText, "Enter Keystroke to add:", "Add Entry") = DialogResult.OK Then
             Dim tmpListViewItem As New ListViewItem(New String() {inputBoxText, "100"})
             lstKeyStrokes.FocusedItem = lstKeyStrokes.Items.Add(tmpListViewItem)
         End If
