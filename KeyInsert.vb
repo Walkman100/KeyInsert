@@ -18,13 +18,11 @@ Partial Public Class KeyInsert
         If WalkmanLib.GetDarkThemeEnabled() Then
             theme = WalkmanLib.Theme.Dark
         End If
-        AddHandler lstKeyStrokes.DrawItem, AddressOf WalkmanLib.CustomPaint.ListView_DrawDefaultItem
-        AddHandler lstKeyStrokes.DrawSubItem, AddressOf WalkmanLib.CustomPaint.ListView_DrawDefaultSubItem
-        AddHandler lstKeyStrokes.DrawColumnHeader, AddressOf WalkmanLib.CustomPaint.ListView_DrawCustomColumnHeader
-        lstKeyStrokes.Tag = theme.ListViewColumnColors
+        WalkmanLib.InitCustomRenderers(Me.Controls)
+        WalkmanLib.SetPreferredAppMode(theme.SystemAppMode)
+        WalkmanLib.ApplyThemeRenderer(theme, Me.Controls)
         WalkmanLib.ApplyTheme(theme, Me, True)
         WalkmanLib.ApplyTheme(theme, Me.components.Components, True)
-        If theme = WalkmanLib.Theme.Dark Then ToolStripManager.Renderer = New WalkmanLib.CustomPaint.ToolStripSystemRendererWithDisabled(theme.ToolStripItemDisabledText)
 
         lblVersion.Text = My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor & "." & My.Application.Info.Version.Build
         If WalkmanLib.IsAdmin Then

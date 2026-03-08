@@ -87,6 +87,7 @@
       <DependentUpon>CustomMsgBox.vb</DependentUpon>
     </Compile>
     <Compile Include="WalkmanLib\CustomMsgBox.vb" />
+    <Compile Include="WalkmanLib\NativeErrorCodes.vb" />
     <Compile Include="WalkmanLib\WalkmanLibDotNet.vb" />
     <Compile Include="WalkmanLib\WalkmanLibTheming.vb" />
     <Compile Include="WalkmanLib\WalkmanLibThemingMsgBox.vb" />
