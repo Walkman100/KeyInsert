@@ -1,4 +1,9 @@
+Imports System
+Imports System.Diagnostics
+Imports System.Drawing
+Imports System.Windows.Forms
 Imports System.Xml
+Imports Microsoft.VisualBasic
 
 Partial Public Class KeyInsert
     ReadOnly theme As WalkmanLib.Theme = WalkmanLib.Theme.Default
