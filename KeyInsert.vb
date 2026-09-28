@@ -19,18 +19,19 @@ Partial Public Class KeyInsert
         Me.InitializeComponent()
         lstKeyStrokes.DoubleBuffered(True)
 
-        If WalkmanLib.GetDarkThemeEnabled() Then
-            theme = WalkmanLib.Theme.Dark
-        End If
-        WalkmanLib.InitCustomRenderers(Me.Controls)
-        WalkmanLib.SetPreferredAppMode(theme.SystemAppMode)
-        WalkmanLib.ApplyThemeRenderer(theme, Me.Controls)
-        WalkmanLib.ApplyTheme(theme, Me, True)
-        WalkmanLib.ApplyTheme(theme, Me.components.Components, True)
-
         lblVersion.Text = My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor & "." & My.Application.Info.Version.Build
         If WalkmanLib.IsAdmin Then
             Me.Text = "[Admin] KeyInsert"
+        End If
+
+        If WalkmanLib.GetDarkThemeEnabled() Then
+            theme = WalkmanLib.Theme.Dark
+
+            WalkmanLib.InitCustomRenderers(Me.Controls)
+            WalkmanLib.SetPreferredAppMode(theme.SystemAppMode)
+            WalkmanLib.ApplyThemeRenderer(theme, Me.Controls)
+            WalkmanLib.ApplyTheme(theme, Me, True)
+            If Me.components IsNot Nothing Then WalkmanLib.ApplyTheme(theme, Me.components.Components, True)
         End If
         For Each s As String In My.Application.CommandLineArgs
             If IO.File.Exists(s) Then
@@ -41,6 +42,10 @@ Partial Public Class KeyInsert
                 MessageBox("""" & s & """ doesn't exist!", icon:=MessageBoxIcon.Exclamation)
             End If
         Next
+    End Sub
+
+    Private Sub btnExit_Click() Handles btnExit.Click
+        Application.Exit()
     End Sub
 
 
