@@ -192,7 +192,16 @@ Partial Public Class KeyInsert
         tmpString &= "XClick, XDown, XUp" & vbNewLine & vbNewLine
         tmpString &= "<Button>Down and <Button>Up are used to click-and-drag"
 
-        MessageBox(tmpString, icon:=MessageBoxIcon.Information, title:="Mouse Info")
+        Dim formToShow As New CustomMsgBoxForm() With {
+            .Prompt = tmpString,
+            .Title = "Mouse Info",
+            .Button3Text = "Close",
+            .FormLevel = MessageBoxIcon.Information,
+            .Owner = Me,
+            .ShowInTaskbar = False
+        } ' custom show method as all default methods use Form.ShowDialog()
+        formToShow.ApplyTheme(theme)
+        formToShow.Show()
     End Sub
 
     Sub chkStartMinimise_CheckedChanged() Handles chkStartMinimise.CheckedChanged
@@ -254,7 +263,7 @@ Partial Public Class KeyInsert
         Next
 
         Dim runCount As Integer = 0
-        Do Until DisableKeyPressed() Or runCount = numRunCountLimit.Value Or bwKeyInserter.CancellationPending Or e.Cancel
+        Do Until DisableKeyPressed() OrElse runCount = numRunCountLimit.Value OrElse bwKeyInserter.CancellationPending OrElse e.Cancel
             For Each item As ListViewItem In lstKeyStrokes.Items
                 lblStatus.Text = "Running: " & item.Index & "/" & lstKeyStrokes.Items.Count & ", Inserting."
 
@@ -265,9 +274,10 @@ Partial Public Class KeyInsert
                 progressBar.Value = item.Index / lstKeyStrokes.Items.Count * 100
 
                 Dim i As Integer
-                For i = 0 To item.SubItems.Item(1).Text Step 10
-                    lblStatus.Text = "Running: " & item.Index + 1 & "/" & lstKeyStrokes.Items.Count & ", Waiting: " & item.SubItems.Item(1).Text - i
-                    progressBar.Value = (item.Index + (i / item.SubItems.Item(1).Text)) / lstKeyStrokes.Items.Count * 100
+                Dim target As Integer = item.SubItems.Item(1).Text
+                For i = 0 To target Step 10
+                    lblStatus.Text = "Running: " & item.Index + 1 & "/" & lstKeyStrokes.Items.Count & ", Waiting: " & target - i
+                    progressBar.Value = (item.Index + (i / target)) / lstKeyStrokes.Items.Count * 100
 
                     Threading.Thread.Sleep(10)
                     If DisableKeyPressed() Then Exit Do
@@ -323,7 +333,7 @@ Partial Public Class KeyInsert
                 Cursor.Position = New Point(pointX, pointY)
             Else
                 bwKeyInserter.CancelAsync()
-                MessageBox("Error parsing $MOVETO at index " & e.ProgressPercentage & vbNewLine & vbNewLine & ""","" seperator not found in " & itemText, icon:=MessageBoxIcon.Error, title:="Error")
+                MessageBox("Error parsing $MOVETO at index " & e.ProgressPercentage & vbNewLine & vbNewLine & ""","" separator not found in " & itemText, icon:=MessageBoxIcon.Error, title:="Error")
             End If
 
         ElseIf itemText.StartsWith("$MOVE(", True, Nothing) Then '$MOVE(x, y) to move mouse relative to current position
@@ -354,7 +364,7 @@ Partial Public Class KeyInsert
                 Cursor.Position = New Point(Cursor.Position.X + pointX, Cursor.Position.Y + pointY)
             Else
                 bwKeyInserter.CancelAsync()
-                MessageBox("Error parsing $MOVE at index " & e.ProgressPercentage & vbNewLine & vbNewLine & ""","" seperator not found in " & itemText, icon:=MessageBoxIcon.Error, title:="Error")
+                MessageBox("Error parsing $MOVE at index " & e.ProgressPercentage & vbNewLine & vbNewLine & ""","" separator not found in " & itemText, icon:=MessageBoxIcon.Error, title:="Error")
             End If
 
         ElseIf itemText.StartsWith("$CLICK(", True, Nothing) Then '$CLICK(LeftClick) to click
