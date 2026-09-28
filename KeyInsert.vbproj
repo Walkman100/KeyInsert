@@ -1,55 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
   <PropertyGroup>
-    <ProjectGuid>{8DFE4FDE-2F56-48D8-A9CB-0B1ED35933A3}</ProjectGuid>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8DFE4FDE-2F56-48D8-A9CB-0B1ED35933A3}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <MyType>WindowsForms</MyType>
     <RootNamespace>KeyInsert</RootNamespace>
     <AssemblyName>KeyInsert</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <LangVersion>11</LangVersion>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
     <OptionInfer>On</OptionInfer>
-    <NoWin32Manifest>False</NoWin32Manifest>
-    <OptionStrict>Off</OptionStrict>
-    <OptionCompare>Binary</OptionCompare>
-    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
-    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
-    <WarningLevel>4</WarningLevel>
-    <OptionExplicit>On</OptionExplicit>
-    <RemoveIntegerChecks>True</RemoveIntegerChecks>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>Full</DebugType>
+    <DefineTrace>true</DefineTrace>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <BaseAddress>4194304</BaseAddress>
+    <Prefer32Bit>False</Prefer32Bit>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
     <ApplicationIcon>Properties\key_presser_5.ico</ApplicationIcon>
     <ApplicationManifest>Properties\App.manifest</ApplicationManifest>
-    <SignAssembly>False</SignAssembly>
-    <DelaySign>False</DelaySign>
-    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <BaseAddress>4194304</BaseAddress>
-    <RegisterForComInterop>False</RegisterForComInterop>
-    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
-    <FileAlignment>4096</FileAlignment>
-    <Prefer32Bit>False</Prefer32Bit>
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-    <OutputPath>bin\Debug\</OutputPath>
     <DebugSymbols>True</DebugSymbols>
-    <DebugType>Full</DebugType>
-    <Optimize>True</Optimize>
-    <DefineConstants>DEBUG=1,TRACE=1</DefineConstants>
-    <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
+    <DefineDebug>true</DefineDebug>
+    <OutputPath>bin\Debug\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-    <OutputPath>bin\Release\</OutputPath>
-    <DebugSymbols>False</DebugSymbols>
-    <DebugType>Full</DebugType>
     <Optimize>True</Optimize>
-    <DefineConstants>TRACE=1</DefineConstants>
-    <BaseIntermediateOutputPath>obj\</BaseIntermediateOutputPath>
+    <OutputPath>bin\Release\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System.Drawing" />
@@ -73,11 +54,15 @@
     <Compile Include="WalkmanLib\CustomInputDialog.Designer.vb">
       <DependentUpon>CustomInputDialog.vb</DependentUpon>
     </Compile>
-    <Compile Include="WalkmanLib\CustomInputDialog.vb" />
+    <Compile Include="WalkmanLib\CustomInputDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="WalkmanLib\CustomMsgBox.Designer.vb">
       <DependentUpon>CustomMsgBox.vb</DependentUpon>
     </Compile>
-    <Compile Include="WalkmanLib\CustomMsgBox.vb" />
+    <Compile Include="WalkmanLib\CustomMsgBox.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="WalkmanLib\NativeErrorCodes.vb" />
     <Compile Include="WalkmanLib\WalkmanLibDotNet.vb" />
     <Compile Include="WalkmanLib\WalkmanLibTheming.vb" />

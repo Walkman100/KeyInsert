@@ -3,7 +3,6 @@ Imports System.Diagnostics
 Imports System.Drawing
 Imports System.Windows.Forms
 Imports System.Xml
-Imports Microsoft.VisualBasic
 
 Partial Public Class KeyInsert
     ReadOnly theme As WalkmanLib.Theme = WalkmanLib.Theme.Default
@@ -73,8 +72,8 @@ Partial Public Class KeyInsert
     Sub lstKeyStrokes_DragDrop(sender As Object, e As DragEventArgs) Handles lstKeyStrokes.DragDrop
         If e.Data.GetDataPresent(DataFormats.Text) Then
             Dim data = e.Data.GetData(DataFormats.Text).ToString
-            If data.Contains(vbNewLine) Then
-                For Each line As String In data.Split(vbNewLine)
+            If data.Contains(Environment.NewLine) Then
+                For Each line As String In data.Split(Environment.NewLine)
                     Dim tmpListViewItem As New ListViewItem(New String() {line, "100"})
                     lstKeyStrokes.FocusedItem = lstKeyStrokes.Items.Add(tmpListViewItem)
                 Next
@@ -93,7 +92,7 @@ Partial Public Class KeyInsert
             Catch ex As XmlException
                 reader.Close()
                 ' File can't be read as XML
-                For Each line In System.IO.File.ReadAllLines(DroppedPath)
+                For Each line In IO.File.ReadAllLines(DroppedPath)
                     Dim tmpListViewItem As New ListViewItem(New String() {line, "100"})
                     lstKeyStrokes.FocusedItem = lstKeyStrokes.Items.Add(tmpListViewItem)
                 Next
@@ -119,7 +118,7 @@ Partial Public Class KeyInsert
     End Sub
 
     Sub CheckButtons() Handles lstKeyStrokes.Click, lstKeyStrokes.SelectedIndexChanged, lstKeyStrokes.AfterLabelEdit, lstKeyStrokes.ColumnReordered
-        If IsNothing(lstKeyStrokes.FocusedItem) Then
+        If lstKeyStrokes.FocusedItem Is Nothing Then
             btnRemove.Enabled = False
             btnGetMouse.Enabled = False
         Else
@@ -181,15 +180,15 @@ Partial Public Class KeyInsert
     End Sub
 
     Sub btnMouseInfo_Click() Handles btnMouseInfo.Click
-        Dim tmpString As String = "To move the mouse and click:" & vbNewLine & vbNewLine
-        tmpString &= "$MOVETO(x, y) to set mouse position" & vbNewLine
-        tmpString &= "$MOVE(x, y) to move mouse relative to current position" & vbNewLine & vbNewLine
-        tmpString &= "$CLICK(LeftClick) to click" & vbNewLine & vbNewLine
-        tmpString &= "Available CLICK arguments:" & vbNewLine
-        tmpString &= "LeftClick, LeftDown, LeftUp" & vbNewLine
-        tmpString &= "MiddleClick, MiddleDown, MiddleUp" & vbNewLine
-        tmpString &= "RightClick, RightDown, RightUp" & vbNewLine
-        tmpString &= "XClick, XDown, XUp" & vbNewLine & vbNewLine
+        Dim tmpString As String = "To move the mouse and click:" & Environment.NewLine & Environment.NewLine
+        tmpString &= "$MOVETO(x, y) to set mouse position" & Environment.NewLine
+        tmpString &= "$MOVE(x, y) to move mouse relative to current position" & Environment.NewLine & Environment.NewLine
+        tmpString &= "$CLICK(LeftClick) to click" & Environment.NewLine & Environment.NewLine
+        tmpString &= "Available CLICK arguments:" & Environment.NewLine
+        tmpString &= "LeftClick, LeftDown, LeftUp" & Environment.NewLine
+        tmpString &= "MiddleClick, MiddleDown, MiddleUp" & Environment.NewLine
+        tmpString &= "RightClick, RightDown, RightUp" & Environment.NewLine
+        tmpString &= "XClick, XDown, XUp" & Environment.NewLine & Environment.NewLine
         tmpString &= "<Button>Down and <Button>Up are used to click-and-drag"
 
         Dim formToShow As New CustomMsgBoxForm() With {
@@ -315,25 +314,25 @@ Partial Public Class KeyInsert
                 Dim pointX As Integer
                 Try
                     pointX = Integer.Parse(itemText.Split(",")(0))
-                Catch ex As System.FormatException
+                Catch ex As FormatException
                     bwKeyInserter.CancelAsync()
-                    MessageBox("Error parsing $MOVETO at index " & e.ProgressPercentage & vbNewLine & vbNewLine & "Invalid integer: " & itemText.Split(",")(0), icon:=MessageBoxIcon.Error, title:="Error")
+                    MessageBox("Error parsing $MOVETO at index " & e.ProgressPercentage & Environment.NewLine & Environment.NewLine & "Invalid integer: " & itemText.Split(",")(0), icon:=MessageBoxIcon.Error, title:="Error")
                     Exit Sub
                 End Try
 
                 Dim pointY As Integer
                 Try
                     pointY = Integer.Parse(itemText.Split(",")(1))
-                Catch ex As System.FormatException
+                Catch ex As FormatException
                     bwKeyInserter.CancelAsync()
-                    MessageBox("Error parsing $MOVETO at index " & e.ProgressPercentage & vbNewLine & vbNewLine & "Invalid integer: " & itemText.Split(",")(1), icon:=MessageBoxIcon.Error, title:="Error")
+                    MessageBox("Error parsing $MOVETO at index " & e.ProgressPercentage & Environment.NewLine & Environment.NewLine & "Invalid integer: " & itemText.Split(",")(1), icon:=MessageBoxIcon.Error, title:="Error")
                     Exit Sub
                 End Try
 
                 Cursor.Position = New Point(pointX, pointY)
             Else
                 bwKeyInserter.CancelAsync()
-                MessageBox("Error parsing $MOVETO at index " & e.ProgressPercentage & vbNewLine & vbNewLine & ""","" separator not found in " & itemText, icon:=MessageBoxIcon.Error, title:="Error")
+                MessageBox("Error parsing $MOVETO at index " & e.ProgressPercentage & Environment.NewLine & Environment.NewLine & ""","" separator not found in " & itemText, icon:=MessageBoxIcon.Error, title:="Error")
             End If
 
         ElseIf itemText.StartsWith("$MOVE(", True, Nothing) Then '$MOVE(x, y) to move mouse relative to current position
@@ -346,25 +345,25 @@ Partial Public Class KeyInsert
                 Dim pointX As Integer
                 Try
                     pointX = Integer.Parse(itemText.Split(",")(0))
-                Catch ex As System.FormatException
+                Catch ex As FormatException
                     bwKeyInserter.CancelAsync()
-                    MessageBox("Error parsing $MOVE at index " & e.ProgressPercentage & vbNewLine & vbNewLine & "Invalid integer: " & itemText.Split(",")(0), icon:=MessageBoxIcon.Error, title:="Error")
+                    MessageBox("Error parsing $MOVE at index " & e.ProgressPercentage & Environment.NewLine & Environment.NewLine & "Invalid integer: " & itemText.Split(",")(0), icon:=MessageBoxIcon.Error, title:="Error")
                     Exit Sub
                 End Try
 
                 Dim pointY As Integer
                 Try
                     pointY = Integer.Parse(itemText.Split(",")(1))
-                Catch ex As System.FormatException
+                Catch ex As FormatException
                     bwKeyInserter.CancelAsync()
-                    MessageBox("Error parsing $MOVE at index " & e.ProgressPercentage & vbNewLine & vbNewLine & "Invalid integer: " & itemText.Split(",")(1), icon:=MessageBoxIcon.Error, title:="Error")
+                    MessageBox("Error parsing $MOVE at index " & e.ProgressPercentage & Environment.NewLine & Environment.NewLine & "Invalid integer: " & itemText.Split(",")(1), icon:=MessageBoxIcon.Error, title:="Error")
                     Exit Sub
                 End Try
 
                 Cursor.Position = New Point(Cursor.Position.X + pointX, Cursor.Position.Y + pointY)
             Else
                 bwKeyInserter.CancelAsync()
-                MessageBox("Error parsing $MOVE at index " & e.ProgressPercentage & vbNewLine & vbNewLine & ""","" separator not found in " & itemText, icon:=MessageBoxIcon.Error, title:="Error")
+                MessageBox("Error parsing $MOVE at index " & e.ProgressPercentage & Environment.NewLine & Environment.NewLine & ""","" separator not found in " & itemText, icon:=MessageBoxIcon.Error, title:="Error")
             End If
 
         ElseIf itemText.StartsWith("$CLICK(", True, Nothing) Then '$CLICK(LeftClick) to click
@@ -374,11 +373,11 @@ Partial Public Class KeyInsert
             itemText = itemText.Remove(itemText.Length - 1)
 
             Dim resultMouseButton As MouseButton
-            If MouseButton.TryParse(itemText, True, resultMouseButton) Then
+            If [Enum].TryParse(itemText, True, resultMouseButton) Then
                 WalkmanLib.MouseClick(resultMouseButton)
             Else
                 bwKeyInserter.CancelAsync()
-                MessageBox("Error parsing $CLICK at index " & e.ProgressPercentage & vbNewLine & vbNewLine & "Invalid text: " & itemText, icon:=MessageBoxIcon.Error, title:="Error")
+                MessageBox("Error parsing $CLICK at index " & e.ProgressPercentage & Environment.NewLine & Environment.NewLine & "Invalid text: " & itemText, icon:=MessageBoxIcon.Error, title:="Error")
             End If
         Else
             SendKeys.Send(itemText)
