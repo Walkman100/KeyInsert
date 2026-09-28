@@ -517,9 +517,9 @@ Partial Class KeyInsert
         'btnMouseInfo
         '
         Me.btnMouseInfo.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnMouseInfo.Location = New System.Drawing.Point(659, 10)
+        Me.btnMouseInfo.Location = New System.Drawing.Point(657, 10)
         Me.btnMouseInfo.Name = "btnMouseInfo"
-        Me.btnMouseInfo.Size = New System.Drawing.Size(68, 23)
+        Me.btnMouseInfo.Size = New System.Drawing.Size(70, 23)
         Me.btnMouseInfo.TabIndex = 6
         Me.btnMouseInfo.Text = "Mouse Info"
         Me.btnMouseInfo.UseVisualStyleBackColor = True

@@ -17,7 +17,7 @@ Partial Public Class KeyInsert
 
     Public Sub New()
         Me.InitializeComponent()
-        lstKeyStrokes.DoubleBuffered(True)
+        lstKeyStrokes.SetDoubleBuffered(True)
 
         lblVersion.Text = My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor & "." & My.Application.Info.Version.Build
         If WalkmanLib.IsAdmin Then
@@ -567,11 +567,3 @@ Partial Public Class KeyInsert
         writer.Close()
     End Sub
 End Class
-
-Module Extensions
-    <Runtime.CompilerServices.Extension()>
-    Public Sub DoubleBuffered(control As Control, enable As Boolean) ' thanks to https://stackoverflow.com/a/15268338/2999220
-        Dim doubleBufferPropertyInfo = control.[GetType]().GetProperty("DoubleBuffered", Reflection.BindingFlags.Instance Or Reflection.BindingFlags.NonPublic)
-        doubleBufferPropertyInfo.SetValue(control, enable, Nothing)
-    End Sub
-End Module
