@@ -144,7 +144,13 @@ Partial Public Class KeyInsert
         Dim inputBoxText = "{ENTER}"
         If GetInput(inputBoxText, "Enter Keystroke to add:", "Add Entry") = DialogResult.OK Then
             Dim tmpListViewItem As New ListViewItem(New String() {inputBoxText, "100"})
-            lstKeyStrokes.FocusedItem = lstKeyStrokes.Items.Add(tmpListViewItem)
+            If lstKeyStrokes.SelectedItems.Count > 0 Then
+                lstKeyStrokes.FocusedItem = lstKeyStrokes.Items.Insert(lstKeyStrokes.SelectedIndices(0) + 1, tmpListViewItem)
+                lstKeyStrokes.SelectedItems.Clear()
+            Else
+                lstKeyStrokes.FocusedItem = lstKeyStrokes.Items.Add(tmpListViewItem)
+            End If
+            tmpListViewItem.Selected = True
         End If
         CheckButtons()
     End Sub
@@ -157,6 +163,7 @@ Partial Public Class KeyInsert
         Else
             lstKeyStrokes.FocusedItem.Remove()
         End If
+        lstKeyStrokes.FocusedItem = Nothing
         CheckButtons()
     End Sub
 
