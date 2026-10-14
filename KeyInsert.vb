@@ -180,6 +180,11 @@ Partial Public Class KeyInsert
 
         lstKeyStrokes.FocusedItem.SubItems.Item(0).Text = "$MOVETO(" & Cursor.Position.X & ", " & Cursor.Position.Y & ")"
         Me.BringToFront()
+
+        If chkKeepOnTop.Checked Then
+            Me.TopMost = False
+            Me.TopMost = True
+        End If
     End Sub
 
     Sub lnkInfo_LinkClicked() Handles lnkInfo.LinkClicked
@@ -306,6 +311,10 @@ Partial Public Class KeyInsert
             Me.Activate()
         End If
         If chkEndShow.Checked Then Me.Show()
+        If chkKeepOnTop.Checked Then
+            Me.TopMost = False
+            Me.TopMost = True
+        End If
 
         lblStatus.Text = "Not Running"
         progressBar.Value = 0
